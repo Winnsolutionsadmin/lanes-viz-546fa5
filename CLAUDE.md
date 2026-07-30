@@ -1,0 +1,4 @@
+# viz mirror
+
+## UPSTREAM SOURCE OF TRUTH
+Canonical upstream auto-loads via the operator's local ~/.claude registry; deliberately not committed here because this repo is public.
