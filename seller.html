@@ -1,0 +1,139 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hammerindex — seller dossier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,200..700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0B0E14;--bezel:#151A24;--bezel2:#1B2230;--hair:#242D3C;
+--parch:#E8E2D4;--parch2:#A8A296;--steel:#6B7A8F;--steel2:#3E4A5C;
+--amber:#E8A33D;--oxide:#C4442E;--verd:#4A8C7B;--pad:clamp(14px,2.6vw,36px)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--ink);color:var(--parch);font-family:Newsreader,serif;padding:var(--pad)}
+nav a{color:var(--amber);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:12px;border-bottom:1px dotted var(--amber)}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--amber);letter-spacing:.14em;text-transform:uppercase;margin:14px 0 8px}
+h1{font-family:Archivo,sans-serif;font-stretch:72%;font-weight:800;font-size:clamp(30px,5vw,54px);letter-spacing:-.01em}
+.window{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--steel);margin-top:6px}
+/* header stats */
+.stats{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0}
+.stat{background:var(--bezel);border:1px solid var(--hair);border-radius:10px;padding:12px 18px;min-width:118px}
+.stat b{font-family:Archivo,sans-serif;font-weight:700;font-size:22px;display:block}
+.stat span{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--steel);letter-spacing:.06em;text-transform:uppercase}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.chips i{font-style:normal;background:var(--bezel2);border-radius:99px;padding:5px 12px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--parch2)}
+.pips{margin:8px 0 2px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--parch2)}
+.pips span{display:inline-block;width:11px;height:11px;border-radius:50%;background:var(--bezel2);margin-right:4px;vertical-align:-1px}
+.pips span.on{background:var(--amber)}
+/* panels */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px;margin-top:18px}
+.panel{background:var(--bezel);border:1px solid var(--hair);border-radius:10px;padding:18px;display:flex;flex-direction:column}
+.panel h2{font-family:Archivo,sans-serif;font-stretch:80%;font-weight:700;font-size:16px;margin-bottom:4px}
+.panel .k{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--amber);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.big{font-family:Archivo,sans-serif;font-weight:800;font-size:30px;margin:2px 0}
+.pctbar{height:8px;background:var(--bezel2);border-radius:4px;margin:8px 0 4px;position:relative;overflow:hidden}
+.pctbar i{position:absolute;top:0;bottom:0;left:0;background:var(--amber);border-radius:4px}
+.pctlab{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--steel)}
+.confound{border-top:1px solid var(--hair);margin-top:auto;padding-top:10px;color:var(--parch2);font-size:13.5px;line-height:1.45}
+.confound b{color:var(--verd);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:3px}
+table{border-collapse:collapse;width:100%;font-family:'IBM Plex Mono',monospace;font-size:12px;margin:6px 0;display:block;overflow-x:auto}
+th{font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--steel);text-align:right;padding:5px 8px;border-bottom:1px solid var(--hair)}
+th.l,td.l{text-align:left}
+td{padding:6px 8px;border-bottom:1px solid var(--bezel2);text-align:right;white-space:nowrap}
+.zp{color:var(--amber);font-size:10px}
+.crit{color:var(--oxide);font-weight:600}
+.dim{color:var(--steel)}
+.empty{color:var(--steel);font-family:'IBM Plex Mono',monospace;font-size:12px;padding:8px 0}
+/* timeline */
+.tl{display:flex;align-items:flex-end;gap:4px;height:74px;margin:8px 0}
+.tl .m{flex:1;display:flex;flex-direction:column-reverse;gap:2px}
+.tl .sold{background:var(--verd);border-radius:2px 2px 0 0;opacity:.85}
+.tl .rnm{background:var(--steel2);border-radius:2px}
+.tl-lab{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--steel)}
+.legend{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--parch2);margin-top:6px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin:0 5px 0 12px;vertical-align:-1px}
+.counter{border-left:3px solid var(--verd);background:var(--bezel);border-radius:0 10px 10px 0;padding:16px 18px;margin-top:18px;color:var(--parch2);font-size:14.5px;line-height:1.5;max-width:100%}
+.counter b{color:var(--parch)}
+footer{margin-top:24px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--steel)}
+</style></head><body>
+<nav><a href="explorer.html">← seller ledger</a></nav>
+<div id="root"><div class="empty">loading dossier…</div></div>
+<footer>generated by engine/build_dossier_data.py · every figure computed from the warehouse at build time · descriptive signals only; nothing on this page asserts intent</footer>
+<script>
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt$=v=>v>=1e6?'$'+(v/1e6).toFixed(2)+'M':v>=1e3?'$'+Math.round(v/1e3).toLocaleString()+'k':'$'+Math.round(v);
+const slug=new URLSearchParams(location.search).get('s');
+if(!slug){document.getElementById('root').innerHTML='<div class="empty">No seller selected — pick one from the <a href="explorer.html" style="color:var(--amber)">ledger</a>.</div>';}
+else fetch(`data/sellers/shard-${slug[0]}.json`).then(r=>r.json()).then(sh=>{
+  const d=sh[slug];
+  if(!d){document.getElementById('root').innerHTML='<div class="empty">Seller not found. Return to the <a href="explorer.html" style="color:var(--amber)">ledger</a>.</div>';return;}
+  document.title=`hammerindex — ${d.name}`;
+  render(d);
+});
+function pctbar(p,lab){return p==null?'':`<div class="pctbar"><i style="width:${p}%"></i></div><div class="pctlab">${lab}</div>`}
+function render(d){
+  const sig=d.signals||{};
+  const sigNames={alpha_hi:'price premium ≥ P95',rnm_hi:'RNM elevation ≥ P95',conc:'≥2 concentrated zero-win repeat bidders',phantoms:'≥2 phantom prices',compwash:'comp-wash instance'};
+  const active=Object.keys(sig).filter(k=>sig[k]).map(k=>sigNames[k]);
+  const pips=[0,1,2,3,4].map(i=>`<span class="${i<d.priority?'on':''}"></span>`).join('');
+  const alpha=d.alpha?`<div class="big">${d.alpha.value>0?'+':''}${d.alpha.value}%</div>
+      <div class="pctlab">median premium vs cohort benchmark · n=${d.alpha.n} scored lots · MAD-z ${d.alpha.z>0?'+':''}${d.alpha.z}</div>
+      ${pctbar(d.alpha.pct,`P${d.alpha.pct} among sellers with ≥4 scored lots`)}`
+    :'<div class="empty">fewer than 4 benchmarkable sold lots — premium not scoreable at this volume</div>';
+  const rnmEl=d.rnm_elevation?`<div class="big">${d.rnm_elevation.value>0?'+':''}${d.rnm_elevation.value}%</div>
+      <div class="pctlab">median failed-high-bid vs cohort · n=${d.rnm_elevation.n} RNM lots</div>
+      ${pctbar(d.rnm_elevation.pct,`P${d.rnm_elevation.pct} among sellers with ≥3 RNM lots`)}`
+    :'<div class="empty">fewer than 3 benchmarkable RNM lots</div>';
+  const phantoms=d.phantoms.length?`<table><thead><tr><th class="l">lot</th><th>high bid</th><th>above cohort</th><th>date</th></tr></thead><tbody>${
+      d.phantoms.map(p=>`<tr><td class="l">${esc(p.title)}</td><td>${fmt$(p.high_bid)}</td><td class="crit">+${p.above_pct}%</td><td class="dim">${p.date}</td></tr>`).join('')}</tbody></table>`
+    :'<div class="empty">no failed high bids ≥50% above cohort median</div>';
+  const cw=d.compwash.hits.length?`<table><thead><tr><th class="l">failed lot</th><th>rnm high</th><th class="l">later sale</th><th>price</th><th>gap</th><th>days</th></tr></thead><tbody>${
+      d.compwash.hits.map(h=>`<tr><td class="l">${esc(h.rnm_title)}</td><td>${fmt$(h.rnm_high)}</td><td class="l">${esc(h.later_title)}</td><td>${fmt$(h.later_price)}</td><td class="crit">${h.gap_pct>0?'+':''}${h.gap_pct}%</td><td class="dim">${h.days}</td></tr>`).join('')}</tbody></table>
+      <div class="pctlab">market base rate for a ±2% landing: ${d.compwash.base_rate_pct}% of candidate pairs</div>`
+    :`<div class="empty">no same-seller sale landed within ±2% of a failed number (${d.compwash.opportunities} opportunit${d.compwash.opportunities===1?'y':'ies'})</div>`;
+  const repeat=d.repeat.length?`<table><thead><tr><th class="l">account</th><th>lots here</th><th>share of their bidding</th><th>wins here</th><th>wins anywhere</th><th>p</th></tr></thead><tbody>${
+      d.repeat.map(r=>`<tr><td class="l">${esc(r.account)}${r.zero_purchase?' <span class="zp">ZERO-PURCHASE</span>':''}</td><td>${r.lots_here}/${r.total}</td><td>${r.share}%</td><td>${r.wins_here}</td><td>${r.wins_anywhere}</td><td class="${r.p<0.01?'crit':'dim'}">${r.p}</td></tr>`).join('')}</tbody></table>`
+    :'<div class="empty">no account has bid on ≥3 of this seller’s lots</div>';
+  const actors=d.actors.length?`<table><thead><tr><th class="l">account</th><th>displacements</th><th>final underbidder</th><th>wins anywhere</th></tr></thead><tbody>${
+      d.actors.map(a=>`<tr><td class="l">${esc(a.account)}${a.zero_purchase?' <span class="zp">ZERO-PURCHASE</span>':''}</td><td>${a.displacements}</td><td>${a.final_underbidder}</td><td>${a.wins_anywhere}</td></tr>`).join('')}</tbody></table>`
+    :'<div class="empty">no ladder activity captured</div>';
+  const maxM=Math.max(1,...d.timeline.map(t=>t.sold+t.rnm));
+  const tl=d.timeline.length?`<div class="tl">${d.timeline.map(t=>`<div class="m" title="${t.m}: ${t.sold} sold, ${t.rnm} rnm">
+      <div class="sold" style="height:${t.sold/maxM*66}px"></div><div class="rnm" style="height:${t.rnm/maxM*66}px"></div></div>`).join('')}</div>
+      <div class="tl-lab"><span>${d.timeline[0].m}</span><span>${d.timeline[d.timeline.length-1].m}</span></div>
+      <div class="legend">monthly lots<i style="background:var(--verd)"></i>sold<i style="background:var(--steel2)"></i>reserve not met</div>`:'';
+  document.getElementById('root').innerHTML=`
+  <div class="eyebrow">seller dossier · window ${d.first??'—'} → ${d.last??'—'}</div>
+  <h1>${esc(d.name)}</h1>
+  <div class="pips">${pips} review priority ${d.priority}/5 — ${active.length?esc(active.join(' · ')):'no signals above the population 95th percentile'}</div>
+  <div class="stats">
+    <div class="stat"><b>${d.lots}</b><span>lots</span></div>
+    <div class="stat"><b>${d.sold}</b><span>sold</span></div>
+    <div class="stat"><b>${d.rnm}</b><span>reserve not met</span></div>
+    <div class="stat"><b>${d.sell_through}%</b><span>sell-through</span></div>
+    <div class="stat"><b>${fmt$(d.gmv)}</b><span>gmv</span></div>
+    <div class="stat"><b>${d.median_price?fmt$(d.median_price):'—'}</b><span>median sale</span></div>
+  </div>
+  <div class="chips">${d.cohorts.map(c=>`<i>${esc(c)}</i>`).join('')}</div>
+  ${tl}
+  <div class="grid">
+    <div class="panel"><div class="k">price signal</div><h2>Realization premium (alpha)</h2>${alpha}
+      <div class="confound"><b>the innocent explanation</b>Presentation, photography, and reputation earn genuine premiums. A high alpha alone is what a great consignor looks like — durability on re-trade is the tiebreaker.</div></div>
+    <div class="panel"><div class="k">price signal</div><h2>Failed-bid elevation</h2>${rnmEl}
+      <div class="confound"><b>the innocent explanation</b>Ambitious reserves on strong inventory produce elevated failed bids honestly. Elevation is a reading signal, not evidence of anything.</div></div>
+    <div class="panel"><div class="k">phantom prices</div><h2>High bids ≥50% above cohort that failed</h2>${phantoms}
+      <div class="confound"><b>the innocent explanation</b>Hot models with high reserves produce the identical shape. Market-wide, elevated failures cluster on exactly the cars enthusiasts chase.</div></div>
+    <div class="panel"><div class="k">anchoring</div><h2>Comp-wash instances (±2%)</h2>${cw}
+      <div class="confound"><b>the innocent explanation</b>A seller's own comparables are similar cars — same spec taste raises price agreement honestly. The market base rate is shown for calibration.</div></div>
+    <div class="panel"><div class="k">audience</div><h2>Repeat-bidder concentration</h2>${repeat}
+      <div class="confound"><b>the innocent explanation</b>Loyal brand-followers shop a favorite dealer's inventory repeatedly. Concentration p-values use market share, not taste-matched share, and overstate surprise for specialists. Zero-purchase is the platform base case (~86% of accounts).</div></div>
+    <div class="panel"><div class="k">ladder</div><h2>Most active ladder actors on these lots</h2>${actors}
+      <div class="confound"><b>the innocent explanation</b>Displacement counts are monotonic in lot activity; busy expensive lots generate more of everything. Marque specialists underbid honestly and often.</div></div>
+  </div>
+  <div class="counter"><b>Standing counter-case.</b> Every signal above has a benign twin, and in the
+  full-market causal test, heavy thin-account lots realized <b>lower</b> prices, not higher
+  (p=0.0004). Signals here order human attention; conclusions require the durability test —
+  does the premium survive re-trade, and does the winner pay.</div>`;
+}
+</script>
+</body></html>
