@@ -1,0 +1,969 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hammerindex — the editorial braid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,200..700;1,6..72,200..700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0B0E14;--bezel:#151A24;--bezel2:#1B2230;--hair:#242D3C;
+--parch:#E8E2D4;--parch2:#A8A296;--steel:#6B7A8F;--steel2:#3E4A5C;
+--amber:#E8A33D;--oxide:#C4442E;--verd:#4A8C7B;--pad:clamp(16px,3vw,44px)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--parch);font-family:Newsreader,serif;padding:var(--pad);max-width:1260px;margin:0 auto}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--amber);letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px}
+h1{font-family:Archivo,sans-serif;font-stretch:75%;font-weight:800;font-size:clamp(30px,4.6vw,54px);letter-spacing:-.012em;line-height:1.02}
+h2{font-family:Archivo,sans-serif;font-stretch:78%;font-weight:800;font-size:clamp(20px,2.6vw,28px);letter-spacing:-.008em}
+.kicker{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--steel);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+p.lede{max-width:76ch;color:var(--parch2);font-size:17.5px;line-height:1.58;margin-top:14px}
+p.lede b{color:var(--parch)}
+section{margin-top:64px;opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s ease}
+section.active{opacity:1;transform:none}
+.panel{background:var(--bezel);border:1px solid var(--hair);border-radius:12px;padding:24px;margin-top:20px;overflow-x:auto}
+svg{width:100%;height:auto;display:block}
+.tick{font-family:'IBM Plex Mono',monospace;font-size:10.5px;fill:var(--steel)}
+.evt{font-family:'IBM Plex Mono',monospace;font-size:10.5px;fill:var(--amber);font-weight:600}
+.ktag{font-family:'IBM Plex Mono',monospace;font-size:9.5px;fill:var(--amber);letter-spacing:.04em}
+.acct{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;fill:var(--parch)}
+.sub{font-family:'IBM Plex Mono',monospace;font-size:8.5px;fill:var(--steel)}
+/* braid grid: graphic + margin-notes rail */
+.braidwrap{display:grid;grid-template-columns:minmax(0,1fr) 296px;gap:22px;align-items:start}
+@media(max-width:980px){.braidwrap{grid-template-columns:1fr}}
+.braid svg{min-width:760px}
+.thread{fill:none;stroke:var(--steel);stroke-width:1.7;opacity:.85;stroke-dasharray:1;stroke-dashoffset:1}
+.thread.ghost{stroke:var(--steel2);stroke-dasharray:.004 .006;opacity:.9}
+section.active .thread{stroke-dashoffset:0;transition:stroke-dashoffset 4s cubic-bezier(.4,0,.3,1)}
+section.active .thread.ghost{transition:stroke-dashoffset 4s cubic-bezier(.4,0,.3,1)}
+.flare,.late,.kpip,.krule{opacity:0;transition:opacity .9s ease}
+section.active .flare{opacity:1;transition-delay:2.6s}
+section.active .late{opacity:1;transition-delay:1.4s}
+section.active .kpip,section.active .krule{opacity:1;transition-delay:3.2s}
+.notes{display:flex;flex-direction:column;gap:14px}
+.note{background:var(--bezel2);border:1px solid var(--hair);border-left:3px solid var(--amber);border-radius:8px;padding:14px 16px;opacity:0;transform:translateX(10px);transition:opacity .7s ease,transform .7s ease}
+section.active .note{opacity:1;transform:none}
+.note .num{font-family:'IBM Plex Mono',monospace;color:var(--amber);font-size:12px;letter-spacing:.08em}
+.note p{font-size:14px;line-height:1.5;color:var(--parch2);margin-top:5px}
+.note p b{color:var(--parch)}
+.note.innocent{border-left-color:var(--verd)}
+.note.innocent .num{color:var(--verd)}
+.note.wide{margin-top:18px}
+.note.wide p{max-width:96ch}
+/* pull-out */
+.pullout{border:1px solid var(--hair);border-top:2px solid var(--amber);border-radius:0 0 12px 12px;background:var(--bezel);padding:24px;margin-top:0;position:relative}
+.pulltab{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:var(--amber);border-radius:6px 6px 0 0;padding:6px 14px;margin-left:26px}
+.pullgrid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:26px;align-items:center}
+@media(max-width:900px){.pullgrid{grid-template-columns:1fr}}
+.bignum{font-family:Archivo,sans-serif;font-stretch:75%;font-weight:800;font-size:clamp(56px,7vw,86px);color:var(--amber);line-height:.9}
+.bignum small{display:block;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--steel);font-weight:400;letter-spacing:.04em;margin-top:12px;font-stretch:100%;line-height:1.6;max-width:290px}
+.pullgrid p{color:var(--parch2);font-size:15px;line-height:1.55;margin-top:12px}
+.pullgrid p b{color:var(--parch)}
+/* ladder */
+.chip{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600}
+.chipamt{font-family:'IBM Plex Mono',monospace;font-size:8.5px;fill:var(--steel)}
+.annhead{font-family:'IBM Plex Mono',monospace;font-size:11px;fill:var(--parch)}
+.annbody{font-family:'IBM Plex Mono',monospace;font-size:11px;fill:var(--parch2)}
+.chip,.chipamt,.annhead,.annbody,.acct{paint-order:stroke;stroke:var(--bezel);stroke-width:3px;stroke-linejoin:round}
+.step{opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease}
+section.active .step{opacity:1;transform:none}
+.ann{opacity:0;transition:opacity .9s ease}
+section.active .ann{opacity:1;transition-delay:2.8s}
+.wchips{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;font-family:'IBM Plex Mono',monospace;font-size:11.5px}
+.wchip{border:1px solid var(--hair);border-radius:999px;padding:5px 12px;color:var(--parch2)}
+.wchip.zero{border-color:var(--amber);color:var(--amber)}
+.wchip.won{border-color:var(--verd);color:var(--verd)}
+.leglab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--steel);margin-top:18px;letter-spacing:.08em;text-transform:uppercase}
+/* base rates */
+.sentence{font-size:clamp(21px,2.8vw,30px);line-height:1.5;max-width:66ch;margin-top:18px;color:var(--parch)}
+.sentence .n{font-family:Archivo,sans-serif;font-weight:800;font-stretch:78%;color:var(--amber);padding:0 3px}
+.sentence .n.grey{color:var(--steel)}
+.arrgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px;margin-top:22px}
+.arr h3{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.06em;margin-bottom:10px}
+.arr h3 i{font-style:normal}
+.iconarr{max-width:360px}
+.bandrow{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;font-family:'IBM Plex Mono',monospace;font-size:12px}
+.band{border:1px solid var(--hair);border-radius:8px;padding:10px 14px;color:var(--parch2)}
+.band b{color:var(--parch)} .band .x{color:var(--amber);font-weight:600}
+/* verdict board */
+.axis{height:5px;border-radius:3px;background:linear-gradient(90deg,var(--amber),var(--steel2) 55%,var(--hair));margin:26px 0 4px}
+.axends{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--steel);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+.axends b{color:var(--amber)}
+.board{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+@media(max-width:1080px){.board{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:640px){.board{grid-template-columns:1fr 1fr}}
+.zone{display:flex;flex-direction:column;gap:10px;border-top:2px solid var(--hair);padding-top:10px}
+.zone .zlab{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--parch)}
+.zone .zsub{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--steel);min-height:26px;line-height:1.35}
+.strat{background:var(--bezel2);border:1px solid var(--hair);border-radius:8px;padding:12px 13px;opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease}
+section.active .strat{opacity:1;transform:none}
+.strat b{font-family:Archivo,sans-serif;font-stretch:82%;font-weight:700;font-size:14.5px;display:block}
+.strat .tax{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--steel);letter-spacing:.06em}
+.strat p{font-size:12.5px;line-height:1.45;color:var(--parch2);margin-top:6px;font-family:'IBM Plex Mono',monospace}
+.z0{border-color:var(--amber);box-shadow:0 0 0 1px var(--amber) inset}
+.z1{border-color:var(--amber)} .z3{border-style:dashed}
+.z5{opacity:1} .zone:nth-child(1) .zlab{color:var(--amber)}
+.methodnote{border-left:3px solid var(--verd);padding:6px 0 6px 18px;color:var(--parch2);max-width:80ch;font-size:15px;line-height:1.55;margin-top:26px}
+.methodnote b{color:var(--parch)}
+footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--hair);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--steel);line-height:1.7}
+/* flat QA + reduced motion: everything visible, nothing animates */
+html.flat *,html.flat *::before{transition:none!important;animation:none!important}
+html.flat .thread{stroke-dashoffset:0}
+html.flat section,html.flat .flare,html.flat .late,html.flat .kpip,html.flat .krule,
+html.flat .note,html.flat .step,html.flat .ann,html.flat .strat{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+ *{transition:none!important;animation:none!important}
+ .thread{stroke-dashoffset:0}
+ section,.flare,.late,.kpip,.krule,.note,.step,.ann,.strat{opacity:1!important;transform:none!important}
+}
+</style>
+<script>
+(function(){
+  if (location.hash === '#flat') document.documentElement.classList.add('flat');
+  function activateAll(){document.querySelectorAll('section').forEach(function(s){s.classList.add('active')});}
+  function boot(){
+    if (document.documentElement.classList.contains('flat')) { activateAll(); return; }
+    if (!('IntersectionObserver' in window)) { activateAll(); return; }
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('active'); io.unobserve(e.target);} });
+    }, {threshold:0.12});
+    document.querySelectorAll('section').forEach(function(s){io.observe(s)});
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+  window.addEventListener('hashchange', function(){ if(location.hash==='#flat'){document.documentElement.classList.add('flat'); activateAll();} });
+})();
+</script>
+</head><body>
+
+<header>
+<div class="eyebrow">hammerindex · variant 4 · the long-read graphic</div>
+<h1>Ten threads, seven years,<br>four knots.</h1>
+<p class="lede">Every account that bid on lot 254,233 has a bidding life — most of it spent
+quietly, elsewhere, on other sellers. Drawn as threads across seven years, those lives are
+grey. They flare <b style="color:var(--amber)">amber</b> where they touch a lot consigned by
+the seller <b>wob</b>, and at four dates the threads pull together into knots. This page
+narrates the knots, the six-day ladder underneath them, and what the wider market says about
+the pattern — with the innocent reading carried inline, because loyal enthusiasts also
+converge. Nothing here asserts intent, identity, or coordination.</p>
+</header>
+
+<!-- ============================ 1 · THE BRAID ============================ -->
+<section id="braid">
+<div class="kicker">§01 · recurrence, drawn</div>
+<h2>The braid — where the threads pull together</h2>
+<div class="panel braid">
+<div class="braidwrap">
+<div><svg viewBox="0 0 880 702" role="img" aria-label="Ten account threads across seven years converging into four knots at the story dates">
+<line x1="139" y1="66" x2="139" y2="656" stroke="var(--hair)" stroke-width="1"/>
+<text x="139" y="672" class="tick" text-anchor="middle">2020</text>
+<line x1="190" y1="66" x2="190" y2="656" stroke="var(--hair)" stroke-width="1"/>
+<text x="190" y="672" class="tick" text-anchor="middle">2021</text>
+<line x1="241" y1="66" x2="241" y2="656" stroke="var(--hair)" stroke-width="1"/>
+<text x="241" y="672" class="tick" text-anchor="middle">2022</text>
+<line x1="291" y1="66" x2="291" y2="656" stroke="var(--hair)" stroke-width="1"/>
+<text x="291" y="672" class="tick" text-anchor="middle">2023</text>
+<line x1="342" y1="66" x2="342" y2="656" stroke="var(--hair)" stroke-width="1"/>
+<text x="342" y="672" class="tick" text-anchor="middle">2024</text>
+<line x1="393" y1="66" x2="393" y2="656" stroke="var(--hair)" stroke-width="1"/>
+<text x="393" y="672" class="tick" text-anchor="middle">2025</text>
+<line x1="516" y1="66" x2="516" y2="656" stroke="var(--hair)" stroke-width="1"/>
+<text x="516" y="672" class="tick" text-anchor="middle">Oct 25</text>
+<line x1="615" y1="66" x2="615" y2="656" stroke="var(--hair)" stroke-width="1"/>
+<text x="615" y="672" class="tick" text-anchor="middle">Jan 26</text>
+<line x1="711" y1="66" x2="711" y2="656" stroke="var(--hair)" stroke-width="1"/>
+<text x="711" y="672" class="tick" text-anchor="middle">Apr 26</text>
+<line x1="809" y1="66" x2="809" y2="656" stroke="var(--hair)" stroke-width="1"/>
+<text x="809" y="672" class="tick" text-anchor="middle">Jul 26</text>
+<line x1="418" y1="66" x2="418" y2="656" stroke="var(--steel2)" stroke-width="1" stroke-dasharray="1 3"/>
+<text x="418" y="686" class="tick" text-anchor="middle" fill="var(--steel)">← calendar · time scale expands ×8 →</text>
+<line class="krule" x1="450.1" y1="72" x2="450.1" y2="656" stroke="var(--amber)" stroke-width="1" stroke-dasharray="2 5" opacity="0.7"/>
+<g class="kpip"><circle cx="450.1" cy="62" r="9" fill="var(--ink)" stroke="var(--amber)" stroke-width="1.3"/><text x="450.1" y="65.6" class="evt" text-anchor="middle">1</text><text x="450.1" y="46" class="ktag" text-anchor="middle">Jul 31 ’25</text></g>
+<line class="krule" x1="531.4" y1="72" x2="531.4" y2="656" stroke="var(--amber)" stroke-width="1" stroke-dasharray="2 5" opacity="0.7"/>
+<g class="kpip"><circle cx="531.4" cy="62" r="9" fill="var(--ink)" stroke="var(--amber)" stroke-width="1.3"/><text x="531.4" y="65.6" class="evt" text-anchor="middle">2</text><text x="531.4" y="46" class="ktag" text-anchor="middle">Oct 15 ’25</text></g>
+<line class="krule" x1="749.7" y1="72" x2="749.7" y2="656" stroke="var(--amber)" stroke-width="1" stroke-dasharray="2 5" opacity="0.7"/>
+<g class="kpip"><circle cx="749.7" cy="62" r="9" fill="var(--ink)" stroke="var(--amber)" stroke-width="1.3"/><text x="749.7" y="65.6" class="evt" text-anchor="middle">3</text><text x="749.7" y="46" class="ktag" text-anchor="middle">May 07 ’26</text></g>
+<line class="krule" x1="839.5" y1="72" x2="839.5" y2="656" stroke="var(--amber)" stroke-width="1" stroke-dasharray="2 5" opacity="0.7"/>
+<g class="kpip"><circle cx="839.5" cy="62" r="9" fill="var(--ink)" stroke="var(--amber)" stroke-width="1.3"/><text x="839.5" y="65.6" class="evt" text-anchor="middle">4</text><text x="839.5" y="46" class="ktag" text-anchor="middle">Jul 30 ’26</text></g>
+<path class="thread ghost" d="M418.0 106.3L419.6 107.2L421.2 108.5L422.8 110.2L424.4 112.3L426.0 114.8L427.6 117.6L429.2 120.6L430.8 123.8L432.4 127.1L434.0 130.5L435.6 133.8L437.2 136.9L438.8 139.9L440.4 142.7L442.0 145.1L443.6 147.2L445.2 148.9L446.8 150.1L448.4 150.9L450.0 151.1L451.6 150.9L453.2 150.2L454.8 149.1L456.4 147.4L458.0 145.4L459.6 143.0L461.2 140.3L462.8 137.3L464.4 134.1L466.0 130.9L467.6 127.5L469.2 124.2L470.8 121.0L472.4 117.9L474.0 115.1L475.6 112.6L477.2 110.4L478.8 108.6L480.4 107.3L482.0 106.4L483.6 106.0L485.2 106.0L486.8 106.0L488.4 106.0L490.0 106.0L491.6 106.0L493.2 106.0L494.8 106.0L496.4 106.0L498.0 106.0L499.6 106.0L501.2 106.0L502.8 106.0L504.4 106.0L506.0 106.0L507.6 106.0L509.2 106.0L510.8 106.0L512.4 106.0L514.0 106.0L515.6 106.0L517.2 106.0L518.8 106.0L520.4 106.0L522.0 106.0L523.6 106.0L525.2 106.0L526.8 106.0L528.4 106.0L530.0 106.0L531.6 106.0L533.2 106.0L534.8 106.0L536.4 106.0L538.0 106.0L539.6 106.0L541.2 106.0L542.8 106.0L544.4 106.0L546.0 106.0L547.6 106.0L549.2 106.0L550.8 106.0L552.4 106.0L554.0 106.0L555.6 106.0L557.2 106.0L558.8 106.0L560.4 106.0L562.0 106.0L563.6 106.0L565.2 106.0L566.8 106.0L568.4 106.0L570.0 106.0L571.6 106.0L573.2 106.0L574.8 106.0L576.4 106.0L578.0 106.0L579.6 106.0L581.2 106.0L582.8 106.0L584.4 106.0L586.0 106.0L587.6 106.0L589.2 106.0L590.8 106.0L592.4 106.0L594.0 106.0L595.6 106.0L597.2 106.0L598.8 106.0L600.4 106.0L602.0 106.0L603.6 106.0L605.2 106.0L606.8 106.0L608.4 106.0L610.0 106.0L611.6 106.0L613.2 106.0L614.8 106.0L616.4 106.0L618.0 106.0L619.6 106.0L621.2 106.0L622.8 106.0L624.4 106.0L626.0 106.0L627.6 106.0L629.2 106.0L630.8 106.0L632.4 106.0L634.0 106.0L635.6 106.0L637.2 106.0L638.8 106.0L640.4 106.0L642.0 106.0L643.6 106.0L645.2 106.0L646.8 106.0L648.4 106.0L650.0 106.0L651.6 106.0L653.2 106.0L654.8 106.0L656.4 106.0L658.0 106.0L659.6 106.0L661.2 106.0L662.8 106.0L664.4 106.0L666.0 106.0L667.6 106.0L669.2 106.0L670.8 106.0L672.4 106.0L674.0 106.0L675.6 106.0L677.2 106.0L678.8 106.0L680.4 106.0L682.0 106.0L683.6 106.0L685.2 106.0L686.8 106.0L688.4 106.0L690.0 106.0L691.6 106.0L693.2 106.0L694.8 106.0L696.4 106.0L698.0 106.0L699.6 106.0L701.2 106.0L702.8 106.0L704.4 106.0L706.0 106.0L707.6 106.0L709.2 106.0L710.8 106.0L712.4 106.0L714.0 106.0L715.6 106.0L717.2 106.0L718.8 106.0L720.4 106.0L722.0 106.0L723.6 106.0L725.2 106.0L726.8 106.0L728.4 106.0L730.0 106.0L731.6 106.0L733.2 106.0L734.8 106.0L736.4 106.0L738.0 106.0L739.6 106.0L741.2 106.0L742.8 106.0L744.4 106.0L746.0 106.0L747.6 106.0L749.2 106.0L750.8 106.0L752.4 106.0L754.0 106.0L755.6 106.0L757.2 106.0L758.8 106.0L760.4 106.0L762.0 106.0L763.6 106.0L765.2 106.0L766.8 106.0L768.4 106.0L770.0 106.0L771.6 106.0L773.2 106.0L774.8 106.0L776.4 106.0L778.0 106.0L779.6 106.0L781.2 106.0L782.8 106.0L784.4 106.0L786.0 106.0L787.6 106.0L789.2 106.0L790.8 106.0L792.4 106.0L794.0 106.0L795.6 106.0L797.2 106.0L798.8 106.0L800.4 106.0L802.0 106.0L803.6 106.0L805.2 106.0L806.8 106.7L808.4 109.6L810.0 114.7L811.6 121.8L813.2 130.8L814.8 141.5L816.4 153.7L818.0 167.1L819.6 181.4L821.2 196.4L822.8 211.6L824.4 226.7L826.0 241.5L827.6 255.5L829.2 268.5L830.8 280.3L832.4 290.4L834.0 298.8L835.6 305.3L837.2 309.6L838.8 311.8L840.4 311.7L842.0 309.4L843.6 304.8L845.2 298.2L846.8 289.7L848.4 279.3L850.0 267.5L851.6 254.3L853.2 240.2L854.8 225.4L856.4 210.3L858.0 195.1L859.6 180.2L861.2 165.9L862.0 159.2" pathLength="1" style="transition-delay:0.00s"><title>TorqueOrCork — thread from Jul 2025</title></path>
+<line x1="418.0" y1="98" x2="418.0" y2="114" stroke="var(--steel)" stroke-width="1.6" class="late"/>
+<text x="112" y="109.5" class="acct" text-anchor="end">TorqueOrCork</text>
+<text x="112" y="121.5" class="sub" text-anchor="end">2/2 wob · 0 wins</text>
+<line x1="116" y1="106" x2="418.0" y2="106" stroke="var(--hair)" stroke-width="1" stroke-dasharray="1 4" class="late"/>
+<g class="flare"><circle cx="450.1" cy="151.2" r="6.5" fill="var(--oxide)" opacity="0.18"/><circle cx="450.1" cy="151.2" r="3.4" fill="var(--oxide)"/><title>TorqueOrCork — knot 1 (918 #1 · reserve not met) — $2,305,918</title></g>
+<g class="flare"><circle cx="839.5" cy="312.0" r="6.5" fill="var(--oxide)" opacity="0.18"/><circle cx="839.5" cy="312.0" r="3.4" fill="var(--oxide)"/><title>TorqueOrCork — knot 4 (lot 254,233 · closes) — $991,992</title></g>
+<path class="thread" d="M614.9 162.0L616.5 162.0L618.1 162.0L619.7 162.0L621.3 162.0L622.9 162.0L624.5 162.0L626.1 162.0L627.7 162.0L629.3 162.0L630.9 162.0L632.5 162.0L634.1 162.0L635.7 162.0L637.3 162.0L638.9 162.0L640.5 162.0L642.1 162.0L643.7 162.0L645.3 162.0L646.9 162.0L648.5 162.0L650.1 162.0L651.7 162.0L653.3 162.0L654.9 162.0L656.5 162.0L658.1 162.0L659.7 162.0L661.3 162.0L662.9 162.0L664.5 162.0L666.1 162.0L667.7 162.0L669.3 162.0L670.9 162.0L672.5 162.0L674.1 162.0L675.7 162.0L677.3 162.0L678.9 162.0L680.5 162.0L682.1 162.0L683.7 162.0L685.3 162.0L686.9 162.0L688.5 162.0L690.1 162.0L691.7 162.0L693.3 162.0L694.9 162.0L696.5 162.0L698.1 162.0L699.7 162.0L701.3 162.0L702.9 162.0L704.5 162.0L706.1 162.0L707.7 162.0L709.3 162.0L710.9 162.0L712.5 162.0L714.1 162.0L715.7 162.0L717.3 162.2L718.9 163.0L720.5 164.2L722.1 165.8L723.7 167.9L725.3 170.3L726.9 173.0L728.5 176.0L730.1 179.2L731.7 182.5L733.3 185.8L734.9 189.1L736.5 192.3L738.1 195.4L739.7 198.2L741.3 200.7L742.9 202.8L744.5 204.6L746.1 205.9L747.7 206.8L749.3 207.1L750.9 207.0L752.5 206.4L754.1 205.3L755.7 203.8L757.3 201.8L758.9 199.5L760.5 196.8L762.1 193.9L763.7 190.8L765.3 187.5L766.9 184.2L768.5 180.8L770.1 177.6L771.7 174.5L773.3 171.7L774.9 169.1L776.5 166.8L778.1 165.0L779.7 163.5L781.3 162.6L782.9 162.1L784.5 162.0L786.1 162.0L787.7 162.0L789.3 162.0L790.9 162.0L792.5 162.0L794.1 162.0L795.7 162.0L797.3 162.0L798.9 162.0L800.5 162.0L802.1 162.0L803.7 162.0L805.3 162.0L806.9 162.6L808.5 165.0L810.1 169.1L811.7 174.8L813.3 182.0L814.9 190.6L816.5 200.3L818.1 211.0L819.7 222.4L821.3 234.3L822.9 246.4L824.5 258.4L826.1 270.2L827.7 281.3L829.3 291.6L830.9 300.9L832.5 309.0L834.1 315.6L835.7 320.7L837.3 324.1L838.9 325.7L840.5 325.6L842.1 323.7L843.7 320.0L845.3 314.7L846.9 307.8L848.5 299.6L850.1 290.1L851.7 279.6L853.3 268.4L854.9 256.6L856.5 244.5L858.1 232.4L859.7 220.6L861.3 209.3L862.0 204.3" pathLength="1" style="transition-delay:0.15s"><title>AmeerH — thread from Jan 2026</title></path>
+<line x1="614.9" y1="154" x2="614.9" y2="170" stroke="var(--steel)" stroke-width="1.6" class="late"/>
+<text x="112" y="165.5" class="acct" text-anchor="end">AmeerH</text>
+<text x="112" y="177.5" class="sub" text-anchor="end">2/11 wob · 0 wins</text>
+<line x1="116" y1="162" x2="614.9" y2="162" stroke="var(--hair)" stroke-width="1" stroke-dasharray="1 4" class="late"/>
+<g class="late" fill="var(--steel)" opacity="0.42"><circle cx="831.0" cy="301.6" r="1.5"/><circle cx="828.8" cy="289.0" r="1.5"/><circle cx="822.4" cy="243.0" r="1.5"/><circle cx="811.7" cy="175.0" r="1.5"/><circle cx="809.6" cy="167.7" r="1.5"/><circle cx="747.5" cy="206.7" r="1.5"/><circle cx="716.5" cy="162.1" r="1.5"/><circle cx="716.5" cy="162.1" r="1.5"/><circle cx="699.4" cy="162.0" r="1.5"/></g>
+<g class="flare"><circle cx="749.7" cy="207.2" r="6.5" fill="var(--amber)" opacity="0.18"/><circle cx="749.7" cy="207.2" r="3.4" fill="var(--amber)"/><title>AmeerH — knot 3 (GT2 RS comp · sold) — $565,000</title></g>
+<g class="flare"><circle cx="839.5" cy="325.9" r="6.5" fill="var(--amber)" opacity="0.18"/><circle cx="839.5" cy="325.9" r="3.4" fill="var(--amber)"/><title>AmeerH — knot 4 (lot 254,233 · closes) — $525,000</title></g>
+<path class="thread" d="M312.2 218.0L313.8 218.0L315.4 218.0L317.0 218.0L318.6 218.0L320.2 218.0L321.8 218.0L323.4 218.0L325.0 218.0L326.6 218.0L328.2 218.0L329.8 218.0L331.4 218.0L333.0 218.0L334.6 218.0L336.2 218.0L337.8 218.0L339.4 218.0L341.0 218.0L342.6 218.0L344.2 218.0L345.8 218.0L347.4 218.0L349.0 218.0L350.6 218.0L352.2 218.0L353.8 218.0L355.4 218.0L357.0 218.0L358.6 218.0L360.2 218.0L361.8 218.0L363.4 218.0L365.0 218.0L366.6 218.0L368.2 218.0L369.8 218.0L371.4 218.0L373.0 218.0L374.6 218.0L376.2 218.0L377.8 218.0L379.4 218.0L381.0 218.0L382.6 218.0L384.2 218.0L385.8 218.0L387.4 218.0L389.0 218.0L390.6 218.0L392.2 218.0L393.8 218.0L395.4 218.0L397.0 218.0L398.6 218.0L400.2 218.0L401.8 218.0L403.4 218.0L405.0 218.0L406.6 218.0L408.2 218.0L409.8 218.0L411.4 218.0L413.0 218.0L414.6 218.0L416.2 218.0L417.8 217.7L419.4 216.9L421.0 215.7L422.6 214.0L424.2 211.9L425.8 209.4L427.4 206.7L429.0 203.7L430.6 200.5L432.2 197.2L433.8 193.9L435.4 190.6L437.0 187.4L438.6 184.3L440.2 181.6L441.8 179.1L443.4 177.0L445.0 175.3L446.6 174.0L448.2 173.2L449.8 172.9L451.4 173.0L453.0 173.7L454.6 174.8L456.2 176.4L457.8 178.4L459.4 180.8L461.0 183.5L462.6 186.4L464.2 189.5L465.8 192.8L467.4 196.2L469.0 199.5L470.6 202.7L472.2 205.8L473.8 208.6L475.4 211.2L477.0 213.4L478.6 215.2L480.2 216.6L481.8 217.5L483.4 218.0L485.0 218.0L486.6 218.0L488.2 218.0L489.8 218.0L491.4 218.0L493.0 218.0L494.6 218.0L496.2 218.0L497.8 218.0L499.4 218.0L501.0 218.0L502.6 218.0L504.2 218.0L505.8 218.0L507.4 218.0L509.0 218.0L510.6 218.0L512.2 218.0L513.8 218.0L515.4 218.0L517.0 218.0L518.6 218.0L520.2 218.0L521.8 218.0L523.4 218.0L525.0 218.0L526.6 218.0L528.2 218.0L529.8 218.0L531.4 218.0L533.0 218.0L534.6 218.0L536.2 218.0L537.8 218.0L539.4 218.0L541.0 218.0L542.6 218.0L544.2 218.0L545.8 218.0L547.4 218.0L549.0 218.0L550.6 218.0L552.2 218.0L553.8 218.0L555.4 218.0L557.0 218.0L558.6 218.0L560.2 218.0L561.8 218.0L563.4 218.0L565.0 218.0L566.6 218.0L568.2 218.0L569.8 218.0L571.4 218.0L573.0 218.0L574.6 218.0L576.2 218.0L577.8 218.0L579.4 218.0L581.0 218.0L582.6 218.0L584.2 218.0L585.8 218.0L587.4 218.0L589.0 218.0L590.6 218.0L592.2 218.0L593.8 218.0L595.4 218.0L597.0 218.0L598.6 218.0L600.2 218.0L601.8 218.0L603.4 218.0L605.0 218.0L606.6 218.0L608.2 218.0L609.8 218.0L611.4 218.0L613.0 218.0L614.6 218.0L616.2 218.0L617.8 218.0L619.4 218.0L621.0 218.0L622.6 218.0L624.2 218.0L625.8 218.0L627.4 218.0L629.0 218.0L630.6 218.0L632.2 218.0L633.8 218.0L635.4 218.0L637.0 218.0L638.6 218.0L640.2 218.0L641.8 218.0L643.4 218.0L645.0 218.0L646.6 218.0L648.2 218.0L649.8 218.0L651.4 218.0L653.0 218.0L654.6 218.0L656.2 218.0L657.8 218.0L659.4 218.0L661.0 218.0L662.6 218.0L664.2 218.0L665.8 218.0L667.4 218.0L669.0 218.0L670.6 218.0L672.2 218.0L673.8 218.0L675.4 218.0L677.0 218.0L678.6 218.0L680.2 218.0L681.8 218.0L683.4 218.0L685.0 218.0L686.6 218.0L688.2 218.0L689.8 218.0L691.4 218.0L693.0 218.0L694.6 218.0L696.2 218.0L697.8 218.0L699.4 218.0L701.0 218.0L702.6 218.0L704.2 218.0L705.8 218.0L707.4 218.0L709.0 218.0L710.6 218.0L712.2 218.0L713.8 218.0L715.4 218.0L717.0 218.0L718.6 218.0L720.2 218.0L721.8 218.0L723.4 218.0L725.0 218.0L726.6 218.0L728.2 218.0L729.8 218.0L731.4 218.0L733.0 218.0L734.6 218.0L736.2 218.0L737.8 218.0L739.4 218.0L741.0 218.0L742.6 218.0L744.2 218.0L745.8 218.0L747.4 218.0L749.0 218.0L750.6 218.0L752.2 218.0L753.8 218.0L755.4 218.0L757.0 218.0L758.6 218.0L760.2 218.0L761.8 218.0L763.4 218.0L765.0 218.0L766.6 218.0L768.2 218.0L769.8 218.0L771.4 218.0L773.0 218.0L774.6 218.0L776.2 218.0L777.8 218.0L779.4 218.0L781.0 218.0L782.6 218.0L784.2 218.0L785.8 218.0L787.4 218.0L789.0 218.0L790.6 218.0L792.2 218.0L793.8 218.0L795.4 218.0L797.0 218.0L798.6 218.0L800.2 218.0L801.8 218.0L803.4 218.0L805.0 218.0L806.6 218.0L808.2 218.0L809.8 218.0L811.4 218.0L813.0 218.0L814.6 218.0L816.2 218.0L817.8 218.0L819.4 218.0L821.0 218.0L822.6 218.0L824.2 218.0L825.8 218.0L827.4 218.0L829.0 218.0L830.6 218.0L832.2 218.0L833.8 218.0L835.4 218.0L837.0 218.0L838.6 218.0L840.2 218.0L841.8 218.0L843.4 218.0L845.0 218.0L846.6 218.0L848.2 218.0L849.8 218.0L851.4 218.0L853.0 218.0L854.6 218.0L856.2 218.0L857.8 218.0L859.4 218.0L861.0 218.0L862.0 218.0" pathLength="1" style="transition-delay:0.30s"><title>PORSCHE911STPTS — thread from Jun 2023</title></path>
+<line x1="312.2" y1="210" x2="312.2" y2="226" stroke="var(--steel)" stroke-width="1.6" class="late"/>
+<text x="112" y="221.5" class="acct" text-anchor="end">PORSCHE911STPTS</text>
+<text x="112" y="233.5" class="sub" text-anchor="end">7/76 wob · 0 wins</text>
+<line x1="116" y1="218" x2="312.2" y2="218" stroke="var(--hair)" stroke-width="1" stroke-dasharray="1 4" class="late"/>
+<g class="late" fill="var(--steel)" opacity="0.42"><circle cx="795.7" cy="218.0" r="1.5"/><circle cx="792.5" cy="218.0" r="1.5"/><circle cx="783.9" cy="218.0" r="1.5"/><circle cx="778.5" cy="218.0" r="1.5"/><circle cx="734.7" cy="218.0" r="1.5"/><circle cx="717.6" cy="218.0" r="1.5"/><circle cx="702.6" cy="218.0" r="1.5"/><circle cx="695.1" cy="218.0" r="1.5"/><circle cx="691.9" cy="218.0" r="1.5"/><circle cx="682.3" cy="218.0" r="1.5"/><circle cx="674.8" cy="218.0" r="1.5"/><circle cx="670.5" cy="218.0" r="1.5"/><circle cx="637.3" cy="218.0" r="1.5"/><circle cx="627.7" cy="218.0" r="1.5"/><circle cx="567.8" cy="218.0" r="1.5"/><circle cx="562.4" cy="218.0" r="1.5"/><circle cx="543.2" cy="218.0" r="1.5"/><circle cx="541.0" cy="218.0" r="1.5"/><circle cx="529.3" cy="218.0" r="1.5"/><circle cx="525.0" cy="218.0" r="1.5"/><circle cx="500.4" cy="218.0" r="1.5"/><circle cx="499.3" cy="218.0" r="1.5"/><circle cx="497.2" cy="218.0" r="1.5"/><circle cx="473.6" cy="208.2" r="1.5"/><circle cx="417.9" cy="217.7" r="1.5"/><circle cx="406.6" cy="218.0" r="1.5"/><circle cx="405.4" cy="218.0" r="1.5"/><circle cx="404.1" cy="218.0" r="1.5"/><circle cx="401.0" cy="218.0" r="1.5"/><circle cx="400.2" cy="218.0" r="1.5"/><circle cx="398.7" cy="218.0" r="1.5"/><circle cx="395.9" cy="218.0" r="1.5"/><circle cx="395.6" cy="218.0" r="1.5"/><circle cx="384.4" cy="218.0" r="1.5"/><circle cx="383.8" cy="218.0" r="1.5"/><circle cx="380.8" cy="218.0" r="1.5"/><circle cx="377.8" cy="218.0" r="1.5"/><circle cx="374.2" cy="218.0" r="1.5"/><circle cx="365.2" cy="218.0" r="1.5"/><circle cx="361.9" cy="218.0" r="1.5"/><circle cx="360.2" cy="218.0" r="1.5"/><circle cx="359.9" cy="218.0" r="1.5"/><circle cx="359.5" cy="218.0" r="1.5"/><circle cx="359.2" cy="218.0" r="1.5"/><circle cx="358.9" cy="218.0" r="1.5"/><circle cx="357.3" cy="218.0" r="1.5"/><circle cx="355.5" cy="218.0" r="1.5"/><circle cx="352.3" cy="218.0" r="1.5"/><circle cx="350.7" cy="218.0" r="1.5"/><circle cx="350.6" cy="218.0" r="1.5"/><circle cx="350.0" cy="218.0" r="1.5"/><circle cx="347.1" cy="218.0" r="1.5"/><circle cx="345.9" cy="218.0" r="1.5"/><circle cx="345.2" cy="218.0" r="1.5"/><circle cx="345.0" cy="218.0" r="1.5"/><circle cx="344.6" cy="218.0" r="1.5"/><circle cx="344.1" cy="218.0" r="1.5"/><circle cx="343.7" cy="218.0" r="1.5"/><circle cx="342.4" cy="218.0" r="1.5"/><circle cx="342.1" cy="218.0" r="1.5"/><circle cx="340.5" cy="218.0" r="1.5"/><circle cx="336.7" cy="218.0" r="1.5"/><circle cx="336.6" cy="218.0" r="1.5"/><circle cx="336.0" cy="218.0" r="1.5"/><circle cx="333.1" cy="218.0" r="1.5"/><circle cx="331.8" cy="218.0" r="1.5"/><circle cx="328.8" cy="218.0" r="1.5"/><circle cx="319.6" cy="218.0" r="1.5"/><circle cx="314.2" cy="218.0" r="1.5"/></g>
+<g class="flare"><path d="M712.6 218.0L714.0 218.0L715.4 218.0L716.8 218.0L718.2 218.0L719.6 218.0L721.0 218.0L722.4 218.0L722.6 218.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M712.6 218.0L714.0 218.0L715.4 218.0L716.8 218.0L718.2 218.0L719.6 218.0L721.0 218.0L722.4 218.0L722.6 218.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>PORSCHE911STPTS — Xblue 2024 Porsche 911 Targa 4 GTS 7-Speed — $204,000 — Apr 07, 2026</title></g>
+<g class="flare"><path d="M697.6 218.0L699.0 218.0L700.4 218.0L701.8 218.0L703.2 218.0L704.6 218.0L706.0 218.0L707.4 218.0L707.6 218.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M697.6 218.0L699.0 218.0L700.4 218.0L701.8 218.0L703.2 218.0L704.6 218.0L706.0 218.0L707.4 218.0L707.6 218.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>PORSCHE911STPTS — 88-Mile Forest Green Metallic 2019 Porsche 911 Speedster — $430,000 — Mar 24, 2026</title></g>
+<g class="flare"><path d="M667.6 218.0L669.0 218.0L670.4 218.0L671.8 218.0L673.2 218.0L674.6 218.0L676.0 218.0L677.4 218.0L677.6 218.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M667.6 218.0L669.0 218.0L670.4 218.0L671.8 218.0L673.2 218.0L674.6 218.0L676.0 218.0L677.4 218.0L677.6 218.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>PORSCHE911STPTS — 2024 Porsche 911 S/T Heritage Design — $521,000 — Feb 24, 2026</title></g>
+<g class="flare"><path d="M415.1 218.0L416.5 218.0L417.9 217.7L419.3 217.0L420.7 216.0L422.1 214.6L423.5 212.9L424.9 210.9L425.1 210.6" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M415.1 218.0L416.5 218.0L417.9 217.7L419.3 217.0L420.7 216.0L422.1 214.6L423.5 212.9L424.9 210.9L425.1 210.6" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>PORSCHE911STPTS — Racing Green Metallic 2024 Porsche 911 S/T — $705,000 — Jul 03, 2025</title></g>
+<g class="flare"><path d="M412.4 218.0L413.8 218.0L415.2 218.0L416.6 218.0L418.0 217.6L419.4 216.9L420.8 215.9L422.2 214.5L422.4 214.2" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M412.4 218.0L413.8 218.0L415.2 218.0L416.6 218.0L418.0 217.6L419.4 216.9L420.8 215.9L422.2 214.5L422.4 214.2" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>PORSCHE911STPTS — British Racing Green 2022 Porsche 911 GT3 Touring 6-Speed — $261,500 — Jun 27, 2025</title></g>
+<g class="flare"><circle cx="450.1" cy="172.8" r="6.5" fill="var(--oxide)" opacity="0.18"/><circle cx="450.1" cy="172.8" r="3.4" fill="var(--oxide)"/><title>PORSCHE911STPTS — knot 1 (918 #1 · reserve not met) — $2,300,000</title></g>
+<g class="flare"><circle cx="531.4" cy="218.0" r="6.5" fill="var(--amber)" opacity="0.18"/><circle cx="531.4" cy="218.0" r="3.4" fill="var(--amber)"/><title>PORSCHE911STPTS — knot 2 (918 #2 · sold) — $1,900,000</title></g>
+<path class="thread" d="M244.8 274.0L246.4 274.0L248.0 274.0L249.6 274.0L251.2 274.0L252.8 274.0L254.4 274.0L256.0 274.0L257.6 274.0L259.2 274.0L260.8 274.0L262.4 274.0L264.0 274.0L265.6 274.0L267.2 274.0L268.8 274.0L270.4 274.0L272.0 274.0L273.6 274.0L275.2 274.0L276.8 274.0L278.4 274.0L280.0 274.0L281.6 274.0L283.2 274.0L284.8 274.0L286.4 274.0L288.0 274.0L289.6 274.0L291.2 274.0L292.8 274.0L294.4 274.0L296.0 274.0L297.6 274.0L299.2 274.0L300.8 274.0L302.4 274.0L304.0 274.0L305.6 274.0L307.2 274.0L308.8 274.0L310.4 274.0L312.0 274.0L313.6 274.0L315.2 274.0L316.8 274.0L318.4 274.0L320.0 274.0L321.6 274.0L323.2 274.0L324.8 274.0L326.4 274.0L328.0 274.0L329.6 274.0L331.2 274.0L332.8 274.0L334.4 274.0L336.0 274.0L337.6 274.0L339.2 274.0L340.8 274.0L342.4 274.0L344.0 274.0L345.6 274.0L347.2 274.0L348.8 274.0L350.4 274.0L352.0 274.0L353.6 274.0L355.2 274.0L356.8 274.0L358.4 274.0L360.0 274.0L361.6 274.0L363.2 274.0L364.8 274.0L366.4 274.0L368.0 274.0L369.6 274.0L371.2 274.0L372.8 274.0L374.4 274.0L376.0 274.0L377.6 274.0L379.2 274.0L380.8 274.0L382.4 274.0L384.0 274.0L385.6 274.0L387.2 274.0L388.8 274.0L390.4 274.0L392.0 274.0L393.6 274.0L395.2 274.0L396.8 274.0L398.4 274.0L400.0 274.0L401.6 274.0L403.2 274.0L404.8 274.0L406.4 274.0L408.0 274.0L409.6 274.0L411.2 274.0L412.8 274.0L414.4 274.0L416.0 274.0L417.6 274.0L419.2 274.0L420.8 274.0L422.4 274.0L424.0 274.0L425.6 274.0L427.2 274.0L428.8 274.0L430.4 274.0L432.0 274.0L433.6 274.0L435.2 274.0L436.8 274.0L438.4 274.0L440.0 274.0L441.6 274.0L443.2 274.0L444.8 274.0L446.4 274.0L448.0 274.0L449.6 274.0L451.2 274.0L452.8 274.0L454.4 274.0L456.0 274.0L457.6 274.0L459.2 274.0L460.8 274.0L462.4 274.0L464.0 274.0L465.6 274.0L467.2 274.0L468.8 274.0L470.4 274.0L472.0 274.0L473.6 274.0L475.2 274.0L476.8 274.0L478.4 274.0L480.0 274.0L481.6 274.0L483.2 274.0L484.8 274.0L486.4 274.0L488.0 274.0L489.6 274.0L491.2 274.0L492.8 274.0L494.4 274.0L496.0 274.0L497.6 274.0L499.2 274.0L500.8 274.0L502.4 274.0L504.0 274.0L505.6 274.0L507.2 274.0L508.8 274.0L510.4 274.0L512.0 274.0L513.6 274.0L515.2 274.0L516.8 274.0L518.4 274.0L520.0 274.0L521.6 274.0L523.2 274.0L524.8 274.0L526.4 274.0L528.0 274.0L529.6 274.0L531.2 274.0L532.8 274.0L534.4 274.0L536.0 274.0L537.6 274.0L539.2 274.0L540.8 274.0L542.4 274.0L544.0 274.0L545.6 274.0L547.2 274.0L548.8 274.0L550.4 274.0L552.0 274.0L553.6 274.0L555.2 274.0L556.8 274.0L558.4 274.0L560.0 274.0L561.6 274.0L563.2 274.0L564.8 274.0L566.4 274.0L568.0 274.0L569.6 274.0L571.2 274.0L572.8 274.0L574.4 274.0L576.0 274.0L577.6 274.0L579.2 274.0L580.8 274.0L582.4 274.0L584.0 274.0L585.6 274.0L587.2 274.0L588.8 274.0L590.4 274.0L592.0 274.0L593.6 274.0L595.2 274.0L596.8 274.0L598.4 274.0L600.0 274.0L601.6 274.0L603.2 274.0L604.8 274.0L606.4 274.0L608.0 274.0L609.6 274.0L611.2 274.0L612.8 274.0L614.4 274.0L616.0 274.0L617.6 274.0L619.2 274.0L620.8 274.0L622.4 274.0L624.0 274.0L625.6 274.0L627.2 274.0L628.8 274.0L630.4 274.0L632.0 274.0L633.6 274.0L635.2 274.0L636.8 274.0L638.4 274.0L640.0 274.0L641.6 274.0L643.2 274.0L644.8 274.0L646.4 274.0L648.0 274.0L649.6 274.0L651.2 274.0L652.8 274.0L654.4 274.0L656.0 274.0L657.6 274.0L659.2 274.0L660.8 274.0L662.4 274.0L664.0 274.0L665.6 274.0L667.2 274.0L668.8 274.0L670.4 274.0L672.0 274.0L673.6 274.0L675.2 274.0L676.8 274.0L678.4 274.0L680.0 274.0L681.6 274.0L683.2 274.0L684.8 274.0L686.4 274.0L688.0 274.0L689.6 274.0L691.2 274.0L692.8 274.0L694.4 274.0L696.0 274.0L697.6 274.0L699.2 274.0L700.8 274.0L702.4 274.0L704.0 274.0L705.6 274.0L707.2 274.0L708.8 274.0L710.4 274.0L712.0 274.0L713.6 274.0L715.2 274.0L716.8 273.9L718.4 273.3L720.0 272.2L721.6 270.6L723.2 268.7L724.8 266.3L726.4 263.7L728.0 260.8L729.6 257.6L731.2 254.4L732.8 251.0L734.4 247.7L736.0 244.5L737.6 241.4L739.2 238.5L740.8 235.9L742.4 233.7L744.0 231.8L745.6 230.4L747.2 229.4L748.8 228.9L750.4 228.9L752.0 229.4L753.6 230.4L755.2 231.8L756.8 233.6L758.4 235.9L760.0 238.5L761.6 241.3L763.2 244.4L764.8 247.7L766.4 251.0L768.0 254.3L769.6 257.6L771.2 260.7L772.8 263.6L774.4 266.3L776.0 268.6L777.6 270.6L779.2 272.1L780.8 273.2L782.4 273.9L784.0 274.0L785.6 274.0L787.2 274.0L788.8 274.0L790.4 274.0L792.0 274.0L793.6 274.0L795.2 274.0L796.8 274.0L798.4 274.0L800.0 274.0L801.6 274.0L803.2 274.0L804.8 274.0L806.4 274.1L808.0 275.0L809.6 276.6L811.2 279.0L812.8 282.1L814.4 285.8L816.0 290.0L817.6 294.7L819.2 299.8L820.8 305.1L822.4 310.5L824.0 315.9L825.6 321.2L827.2 326.3L828.8 331.1L830.4 335.4L832.0 339.1L833.6 342.3L835.2 344.7L836.8 346.5L838.4 347.4L840.0 347.5L841.6 346.9L843.2 345.4L844.8 343.2L846.4 340.3L848.0 336.8L849.6 332.6L851.2 328.1L852.8 323.1L854.4 317.8L856.0 312.4L857.6 307.0L859.2 301.7L860.8 296.5L862.0 293.0" pathLength="1" style="transition-delay:0.45s"><title>Dcd0611 — thread from Feb 2022</title></path>
+<line x1="244.8" y1="266" x2="244.8" y2="282" stroke="var(--steel)" stroke-width="1.6" class="late"/>
+<text x="112" y="277.5" class="acct" text-anchor="end">Dcd0611</text>
+<text x="112" y="289.5" class="sub" text-anchor="end">14/183 wob · 0 wins</text>
+<line x1="116" y1="274" x2="244.8" y2="274" stroke="var(--hair)" stroke-width="1" stroke-dasharray="1 4" class="late"/>
+<g class="late" fill="var(--steel)" opacity="0.42"><circle cx="832.0" cy="339.1" r="1.5"/><circle cx="831.0" cy="336.7" r="1.5"/><circle cx="828.8" cy="331.0" r="1.5"/><circle cx="828.8" cy="331.0" r="1.5"/><circle cx="817.1" cy="293.0" r="1.5"/><circle cx="816.0" cy="289.9" r="1.5"/><circle cx="810.6" cy="278.0" r="1.5"/><circle cx="809.6" cy="276.5" r="1.5"/><circle cx="809.6" cy="276.5" r="1.5"/><circle cx="809.6" cy="276.5" r="1.5"/><circle cx="804.2" cy="274.0" r="1.5"/><circle cx="804.2" cy="274.0" r="1.5"/><circle cx="803.2" cy="274.0" r="1.5"/><circle cx="801.0" cy="274.0" r="1.5"/><circle cx="799.9" cy="274.0" r="1.5"/><circle cx="786.0" cy="274.0" r="1.5"/><circle cx="786.0" cy="274.0" r="1.5"/><circle cx="778.5" cy="271.5" r="1.5"/><circle cx="778.5" cy="271.5" r="1.5"/><circle cx="778.5" cy="271.5" r="1.5"/><circle cx="775.3" cy="267.6" r="1.5"/><circle cx="761.4" cy="240.9" r="1.5"/><circle cx="757.2" cy="234.0" r="1.5"/><circle cx="743.2" cy="232.7" r="1.5"/><circle cx="735.8" cy="245.1" r="1.5"/><circle cx="735.8" cy="245.1" r="1.5"/><circle cx="735.8" cy="245.1" r="1.5"/><circle cx="730.4" cy="256.1" r="1.5"/><circle cx="729.3" cy="258.3" r="1.5"/><circle cx="725.1" cy="266.0" r="1.5"/><circle cx="720.8" cy="271.5" r="1.5"/><circle cx="718.6" cy="273.2" r="1.5"/><circle cx="696.2" cy="274.0" r="1.5"/><circle cx="696.2" cy="274.0" r="1.5"/><circle cx="696.2" cy="274.0" r="1.5"/><circle cx="675.8" cy="274.0" r="1.5"/><circle cx="672.6" cy="274.0" r="1.5"/><circle cx="668.4" cy="274.0" r="1.5"/><circle cx="653.4" cy="274.0" r="1.5"/><circle cx="606.3" cy="274.0" r="1.5"/><circle cx="596.7" cy="274.0" r="1.5"/><circle cx="580.6" cy="274.0" r="1.5"/><circle cx="578.5" cy="274.0" r="1.5"/><circle cx="557.1" cy="274.0" r="1.5"/><circle cx="548.5" cy="274.0" r="1.5"/><circle cx="531.4" cy="274.0" r="1.5"/><circle cx="530.3" cy="274.0" r="1.5"/><circle cx="525.0" cy="274.0" r="1.5"/><circle cx="505.7" cy="274.0" r="1.5"/><circle cx="490.8" cy="274.0" r="1.5"/><circle cx="486.5" cy="274.0" r="1.5"/><circle cx="481.1" cy="274.0" r="1.5"/><circle cx="444.7" cy="274.0" r="1.5"/><circle cx="442.6" cy="274.0" r="1.5"/><circle cx="414.2" cy="274.0" r="1.5"/><circle cx="413.7" cy="274.0" r="1.5"/><circle cx="410.4" cy="274.0" r="1.5"/><circle cx="407.9" cy="274.0" r="1.5"/><circle cx="404.4" cy="274.0" r="1.5"/><circle cx="404.1" cy="274.0" r="1.5"/><circle cx="403.0" cy="274.0" r="1.5"/><circle cx="402.7" cy="274.0" r="1.5"/><circle cx="402.7" cy="274.0" r="1.5"/><circle cx="400.6" cy="274.0" r="1.5"/><circle cx="400.6" cy="274.0" r="1.5"/><circle cx="399.9" cy="274.0" r="1.5"/><circle cx="397.4" cy="274.0" r="1.5"/><circle cx="395.3" cy="274.0" r="1.5"/><circle cx="395.2" cy="274.0" r="1.5"/><circle cx="395.1" cy="274.0" r="1.5"/><circle cx="389.4" cy="274.0" r="1.5"/><circle cx="389.1" cy="274.0" r="1.5"/><circle cx="388.3" cy="274.0" r="1.5"/><circle cx="387.4" cy="274.0" r="1.5"/><circle cx="386.6" cy="274.0" r="1.5"/><circle cx="386.0" cy="274.0" r="1.5"/><circle cx="384.9" cy="274.0" r="1.5"/><circle cx="384.4" cy="274.0" r="1.5"/><circle cx="382.3" cy="274.0" r="1.5"/><circle cx="379.6" cy="274.0" r="1.5"/><circle cx="379.4" cy="274.0" r="1.5"/><circle cx="377.6" cy="274.0" r="1.5"/><circle cx="375.8" cy="274.0" r="1.5"/><circle cx="374.6" cy="274.0" r="1.5"/><circle cx="371.4" cy="274.0" r="1.5"/><circle cx="371.0" cy="274.0" r="1.5"/><circle cx="370.9" cy="274.0" r="1.5"/><circle cx="370.5" cy="274.0" r="1.5"/><circle cx="369.8" cy="274.0" r="1.5"/><circle cx="369.8" cy="274.0" r="1.5"/><circle cx="369.2" cy="274.0" r="1.5"/><circle cx="366.4" cy="274.0" r="1.5"/><circle cx="366.0" cy="274.0" r="1.5"/><circle cx="364.8" cy="274.0" r="1.5"/><circle cx="363.2" cy="274.0" r="1.5"/><circle cx="363.1" cy="274.0" r="1.5"/><circle cx="362.4" cy="274.0" r="1.5"/><circle cx="362.3" cy="274.0" r="1.5"/><circle cx="361.3" cy="274.0" r="1.5"/><circle cx="360.5" cy="274.0" r="1.5"/><circle cx="359.6" cy="274.0" r="1.5"/><circle cx="359.6" cy="274.0" r="1.5"/><circle cx="359.6" cy="274.0" r="1.5"/><circle cx="354.6" cy="274.0" r="1.5"/><circle cx="353.5" cy="274.0" r="1.5"/><circle cx="351.6" cy="274.0" r="1.5"/><circle cx="351.4" cy="274.0" r="1.5"/><circle cx="351.2" cy="274.0" r="1.5"/><circle cx="341.8" cy="274.0" r="1.5"/><circle cx="341.2" cy="274.0" r="1.5"/><circle cx="339.9" cy="274.0" r="1.5"/><circle cx="338.0" cy="274.0" r="1.5"/><circle cx="334.9" cy="274.0" r="1.5"/><circle cx="333.0" cy="274.0" r="1.5"/><circle cx="333.0" cy="274.0" r="1.5"/><circle cx="331.8" cy="274.0" r="1.5"/><circle cx="328.5" cy="274.0" r="1.5"/><circle cx="327.4" cy="274.0" r="1.5"/><circle cx="322.4" cy="274.0" r="1.5"/><circle cx="322.4" cy="274.0" r="1.5"/><circle cx="322.3" cy="274.0" r="1.5"/><circle cx="322.0" cy="274.0" r="1.5"/><circle cx="320.4" cy="274.0" r="1.5"/><circle cx="319.1" cy="274.0" r="1.5"/><circle cx="316.0" cy="274.0" r="1.5"/><circle cx="304.0" cy="274.0" r="1.5"/><circle cx="302.0" cy="274.0" r="1.5"/><circle cx="284.0" cy="274.0" r="1.5"/><circle cx="273.1" cy="274.0" r="1.5"/><circle cx="272.6" cy="274.0" r="1.5"/><circle cx="272.6" cy="274.0" r="1.5"/><circle cx="270.4" cy="274.0" r="1.5"/><circle cx="270.3" cy="274.0" r="1.5"/><circle cx="269.9" cy="274.0" r="1.5"/><circle cx="269.4" cy="274.0" r="1.5"/><circle cx="269.4" cy="274.0" r="1.5"/><circle cx="269.2" cy="274.0" r="1.5"/><circle cx="268.9" cy="274.0" r="1.5"/><circle cx="268.9" cy="274.0" r="1.5"/><circle cx="268.2" cy="274.0" r="1.5"/><circle cx="267.8" cy="274.0" r="1.5"/><circle cx="265.4" cy="274.0" r="1.5"/><circle cx="265.1" cy="274.0" r="1.5"/><circle cx="264.3" cy="274.0" r="1.5"/><circle cx="264.2" cy="274.0" r="1.5"/><circle cx="263.9" cy="274.0" r="1.5"/><circle cx="263.7" cy="274.0" r="1.5"/><circle cx="263.7" cy="274.0" r="1.5"/><circle cx="263.6" cy="274.0" r="1.5"/><circle cx="261.7" cy="274.0" r="1.5"/><circle cx="257.1" cy="274.0" r="1.5"/><circle cx="256.8" cy="274.0" r="1.5"/><circle cx="254.3" cy="274.0" r="1.5"/><circle cx="254.2" cy="274.0" r="1.5"/><circle cx="254.2" cy="274.0" r="1.5"/><circle cx="254.2" cy="274.0" r="1.5"/><circle cx="254.2" cy="274.0" r="1.5"/><circle cx="253.6" cy="274.0" r="1.5"/><circle cx="253.6" cy="274.0" r="1.5"/><circle cx="253.3" cy="274.0" r="1.5"/><circle cx="252.9" cy="274.0" r="1.5"/><circle cx="251.8" cy="274.0" r="1.5"/><circle cx="251.1" cy="274.0" r="1.5"/><circle cx="251.1" cy="274.0" r="1.5"/><circle cx="250.1" cy="274.0" r="1.5"/><circle cx="250.1" cy="274.0" r="1.5"/><circle cx="249.7" cy="274.0" r="1.5"/><circle cx="247.9" cy="274.0" r="1.5"/><circle cx="247.5" cy="274.0" r="1.5"/></g>
+<g class="flare"><path d="M781.0 273.3L782.4 273.9L783.8 274.0L785.2 274.0L786.6 274.0L788.0 274.0L789.4 274.0L790.8 274.0L791.0 274.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M781.0 273.3L782.4 273.9L783.8 274.0L785.2 274.0L786.6 274.0L788.0 274.0L789.4 274.0L790.8 274.0L791.0 274.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>Dcd0611 — 5k-Mile 2021 Ferrari 812 GTS — $525,000 — Jun 10, 2026</title></g>
+<g class="flare"><path d="M710.4 274.0L711.8 274.0L713.2 274.0L714.6 274.0L716.0 274.0L717.4 273.7L718.8 273.0L720.2 272.0L720.4 271.8" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M710.4 274.0L711.8 274.0L713.2 274.0L714.6 274.0L716.0 274.0L717.4 273.7L718.8 273.0L720.2 272.0L720.4 271.8" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>Dcd0611 — 583-Mile Urban Bamboo ChromaFlair 2021 Porsche 911 Turbo S Coupe — $302,000 — Apr 05, 2026</title></g>
+<g class="flare"><path d="M438.7 274.0L440.1 274.0L441.5 274.0L442.9 274.0L444.3 274.0L445.7 274.0L447.1 274.0L448.5 274.0L448.7 274.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M438.7 274.0L440.1 274.0L441.5 274.0L442.9 274.0L444.3 274.0L445.7 274.0L447.1 274.0L448.5 274.0L448.7 274.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>Dcd0611 — 683-Mile 2011 Porsche 911 GT3 RS — $451,000 — Jul 25, 2025</title></g>
+<g class="flare"><path d="M398.7 274.0L400.1 274.0L401.5 274.0L402.9 274.0L404.3 274.0L405.7 274.0L407.1 274.0L408.5 274.0L408.7 274.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M398.7 274.0L400.1 274.0L401.5 274.0L402.9 274.0L404.3 274.0L405.7 274.0L407.1 274.0L408.5 274.0L408.7 274.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>Dcd0611 — 14k-Mile 1994 Porsche 911 Turbo S 3.6 Package — $550,000 — Mar 20, 2025</title></g>
+<g class="flare"><path d="M364.2 274.0L365.6 274.0L367.0 274.0L368.4 274.0L369.8 274.0L371.2 274.0L372.6 274.0L374.0 274.0L374.2 274.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M364.2 274.0L365.6 274.0L367.0 274.0L368.4 274.0L369.8 274.0L371.2 274.0L372.6 274.0L374.0 274.0L374.2 274.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>Dcd0611 — 2024 Porsche 718 Cayman GT4 RS Weissach — $209,000 — Jul 15, 2024</title></g>
+<g class="flare"><path d="M362.8 274.0L364.2 274.0L365.6 274.0L367.0 274.0L368.4 274.0L369.8 274.0L371.2 274.0L372.6 274.0L372.8 274.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M362.8 274.0L364.2 274.0L365.6 274.0L367.0 274.0L368.4 274.0L369.8 274.0L371.2 274.0L372.6 274.0L372.8 274.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>Dcd0611 — 10k-Mile 2009 Ferrari 430 Scuderia — $259,000 — Jul 05, 2024</title></g>
+<g class="flare"><path d="M357.7 274.0L359.1 274.0L360.5 274.0L361.9 274.0L363.3 274.0L364.7 274.0L366.1 274.0L367.5 274.0L367.7 274.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M357.7 274.0L359.1 274.0L360.5 274.0L361.9 274.0L363.3 274.0L364.7 274.0L366.1 274.0L367.5 274.0L367.7 274.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>Dcd0611 — 3,200-Mile 2009 Ferrari 430 Scuderia Spider 16M — $377,000 — May 29, 2024</title></g>
+<g class="flare"><path d="M346.9 274.0L348.3 274.0L349.7 274.0L351.1 274.0L352.5 274.0L353.9 274.0L355.3 274.0L356.7 274.0L356.9 274.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M346.9 274.0L348.3 274.0L349.7 274.0L351.1 274.0L352.5 274.0L353.9 274.0L355.3 274.0L356.7 274.0L356.9 274.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>Dcd0611 — 12k-Mile 2010 Porsche 911 GT3 RS — $285,000 — Mar 12, 2024</title></g>
+<g class="flare"><path d="M342.5 274.0L343.9 274.0L345.3 274.0L346.7 274.0L348.1 274.0L349.5 274.0L350.9 274.0L352.3 274.0L352.5 274.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M342.5 274.0L343.9 274.0L345.3 274.0L346.7 274.0L348.1 274.0L349.5 274.0L350.9 274.0L352.3 274.0L352.5 274.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>Dcd0611 — 2013 Lamborghini Gallardo LP560-2 50th Anniversario 6-Speed — $210,000 — Feb 10, 2024</title></g>
+<g class="flare"><path d="M340.2 274.0L341.6 274.0L343.0 274.0L344.4 274.0L345.8 274.0L347.2 274.0L348.6 274.0L350.0 274.0L350.2 274.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M340.2 274.0L341.6 274.0L343.0 274.0L344.4 274.0L345.8 274.0L347.2 274.0L348.6 274.0L350.0 274.0L350.2 274.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>Dcd0611 — 14k-Mile 1994 Porsche 911 Turbo S 3.6 Package — $550,000 — Jan 24, 2024</title></g>
+<g class="flare"><path d="M318.6 274.0L320.0 274.0L321.4 274.0L322.8 274.0L324.2 274.0L325.6 274.0L327.0 274.0L328.4 274.0L328.6 274.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M318.6 274.0L320.0 274.0L321.4 274.0L322.8 274.0L324.2 274.0L325.6 274.0L327.0 274.0L328.4 274.0L328.6 274.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>Dcd0611 — 2021 Mercedes-AMG GT Black Series P One Edition — $575,000 — Aug 22, 2023</title></g>
+<g class="flare"><path d="M249.0 274.0L250.4 274.0L251.8 274.0L253.2 274.0L254.6 274.0L256.0 274.0L257.4 274.0L258.8 274.0L259.0 274.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M249.0 274.0L250.4 274.0L251.8 274.0L253.2 274.0L254.6 274.0L256.0 274.0L257.4 274.0L258.8 274.0L259.0 274.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>Dcd0611 — 2009 Mercedes-Benz SL65 AMG Black Series — $300,000 — Apr 08, 2022</title></g>
+<g class="flare"><circle cx="749.7" cy="228.8" r="6.5" fill="var(--amber)" opacity="0.18"/><circle cx="749.7" cy="228.8" r="3.4" fill="var(--amber)"/><title>Dcd0611 — knot 3 (GT2 RS comp · sold) — $576,000</title></g>
+<g class="flare"><circle cx="839.5" cy="347.6" r="6.5" fill="var(--amber)" opacity="0.18"/><circle cx="839.5" cy="347.6" r="3.4" fill="var(--amber)"/><title>Dcd0611 — knot 4 (lot 254,233 · closes) — $775,000</title></g>
+<path class="thread" d="M451.2 330.0L452.8 330.0L454.4 330.0L456.0 330.0L457.6 330.0L459.2 330.0L460.8 330.0L462.4 330.0L464.0 330.0L465.6 330.0L467.2 330.0L468.8 330.0L470.4 330.0L472.0 330.0L473.6 330.0L475.2 330.0L476.8 330.0L478.4 330.0L480.0 330.0L481.6 330.0L483.2 330.0L484.8 330.0L486.4 330.0L488.0 330.0L489.6 330.0L491.2 330.0L492.8 330.0L494.4 330.0L496.0 330.0L497.6 330.0L499.2 330.0L500.8 330.0L502.4 330.0L504.0 330.0L505.6 330.0L507.2 330.0L508.8 330.0L510.4 330.0L512.0 330.0L513.6 330.0L515.2 330.0L516.8 330.0L518.4 330.0L520.0 330.0L521.6 330.0L523.2 330.0L524.8 330.0L526.4 330.0L528.0 330.0L529.6 330.0L531.2 330.0L532.8 330.0L534.4 330.0L536.0 330.0L537.6 330.0L539.2 330.0L540.8 330.0L542.4 330.0L544.0 330.0L545.6 330.0L547.2 330.0L548.8 330.0L550.4 330.0L552.0 330.0L553.6 330.0L555.2 330.0L556.8 330.0L558.4 330.0L560.0 330.0L561.6 330.0L563.2 330.0L564.8 330.0L566.4 330.0L568.0 330.0L569.6 330.0L571.2 330.0L572.8 330.0L574.4 330.0L576.0 330.0L577.6 330.0L579.2 330.0L580.8 330.0L582.4 330.0L584.0 330.0L585.6 330.0L587.2 330.0L588.8 330.0L590.4 330.0L592.0 330.0L593.6 330.0L595.2 330.0L596.8 330.0L598.4 330.0L600.0 330.0L601.6 330.0L603.2 330.0L604.8 330.0L606.4 330.0L608.0 330.0L609.6 330.0L611.2 330.0L612.8 330.0L614.4 330.0L616.0 330.0L617.6 330.0L619.2 330.0L620.8 330.0L622.4 330.0L624.0 330.0L625.6 330.0L627.2 330.0L628.8 330.0L630.4 330.0L632.0 330.0L633.6 330.0L635.2 330.0L636.8 330.0L638.4 330.0L640.0 330.0L641.6 330.0L643.2 330.0L644.8 330.0L646.4 330.0L648.0 330.0L649.6 330.0L651.2 330.0L652.8 330.0L654.4 330.0L656.0 330.0L657.6 330.0L659.2 330.0L660.8 330.0L662.4 330.0L664.0 330.0L665.6 330.0L667.2 330.0L668.8 330.0L670.4 330.0L672.0 330.0L673.6 330.0L675.2 330.0L676.8 330.0L678.4 330.0L680.0 330.0L681.6 330.0L683.2 330.0L684.8 330.0L686.4 330.0L688.0 330.0L689.6 330.0L691.2 330.0L692.8 330.0L694.4 330.0L696.0 330.0L697.6 330.0L699.2 330.0L700.8 330.0L702.4 330.0L704.0 330.0L705.6 330.0L707.2 330.0L708.8 330.0L710.4 330.0L712.0 330.0L713.6 330.0L715.2 330.0L716.8 330.0L718.4 330.0L720.0 330.0L721.6 330.0L723.2 330.0L724.8 330.0L726.4 330.0L728.0 330.0L729.6 330.0L731.2 330.0L732.8 330.0L734.4 330.0L736.0 330.0L737.6 330.0L739.2 330.0L740.8 330.0L742.4 330.0L744.0 330.0L745.6 330.0L747.2 330.0L748.8 330.0L750.4 330.0L752.0 330.0L753.6 330.0L755.2 330.0L756.8 330.0L758.4 330.0L760.0 330.0L761.6 330.0L763.2 330.0L764.8 330.0L766.4 330.0L768.0 330.0L769.6 330.0L771.2 330.0L772.8 330.0L774.4 330.0L776.0 330.0L777.6 330.0L779.2 330.0L780.8 330.0L782.4 330.0L784.0 330.0L785.6 330.0L787.2 330.0L788.8 330.0L790.4 330.0L792.0 330.0L793.6 330.0L795.2 330.0L796.8 330.0L798.4 330.0L800.0 330.0L801.6 330.0L803.2 330.0L804.8 330.0L806.4 330.0L808.0 330.4L809.6 331.1L811.2 332.1L812.8 333.4L814.4 335.0L816.0 336.8L817.6 338.8L819.2 340.9L820.8 343.2L822.4 345.5L824.0 347.8L825.6 350.1L827.2 352.2L828.8 354.3L830.4 356.1L832.0 357.8L833.6 359.1L835.2 360.2L836.8 360.9L838.4 361.3L840.0 361.4L841.6 361.2L843.2 360.6L844.8 359.6L846.4 358.4L848.0 356.9L849.6 355.2L851.2 353.2L852.8 351.1L854.4 348.8L856.0 346.5L857.6 344.2L859.2 341.9L860.8 339.7L862.0 338.1" pathLength="1" style="transition-delay:0.60s"><title>Mancowerks — thread from Aug 2025</title></path>
+<line x1="451.2" y1="322" x2="451.2" y2="338" stroke="var(--steel)" stroke-width="1.6" class="late"/>
+<text x="112" y="333.5" class="acct" text-anchor="end">Mancowerks</text>
+<text x="112" y="345.5" class="sub" text-anchor="end">1/4 wob · 0 wins</text>
+<line x1="116" y1="330" x2="451.2" y2="330" stroke="var(--hair)" stroke-width="1" stroke-dasharray="1 4" class="late"/>
+<g class="late" fill="var(--steel)" opacity="0.42"><circle cx="834.2" cy="359.6" r="1.5"/><circle cx="834.2" cy="359.6" r="1.5"/><circle cx="828.8" cy="354.4" r="1.5"/></g>
+<g class="flare"><circle cx="839.5" cy="361.4" r="6.5" fill="var(--amber)" opacity="0.18"/><circle cx="839.5" cy="361.4" r="3.4" fill="var(--amber)"/><title>Mancowerks — knot 4 (lot 254,233 · closes) — $998,000</title></g>
+<path class="thread" d="M363.1 386.0L364.7 386.0L366.3 386.0L367.9 386.0L369.5 386.0L371.1 386.0L372.7 386.0L374.3 386.0L375.9 386.0L377.5 386.0L379.1 386.0L380.7 386.0L382.3 386.0L383.9 386.0L385.5 386.0L387.1 386.0L388.7 386.0L390.3 386.0L391.9 386.0L393.5 386.0L395.1 386.0L396.7 386.0L398.3 386.0L399.9 386.0L401.5 386.0L403.1 386.0L404.7 386.0L406.3 386.0L407.9 386.0L409.5 386.0L411.1 386.0L412.7 386.0L414.3 386.0L415.9 386.0L417.5 386.0L419.1 386.0L420.7 386.0L422.3 386.0L423.9 386.0L425.5 386.0L427.1 386.0L428.7 386.0L430.3 386.0L431.9 386.0L433.5 386.0L435.1 386.0L436.7 386.0L438.3 386.0L439.9 386.0L441.5 386.0L443.1 386.0L444.7 386.0L446.3 386.0L447.9 386.0L449.5 386.0L451.1 386.0L452.7 386.0L454.3 386.0L455.9 386.0L457.5 386.0L459.1 386.0L460.7 386.0L462.3 386.0L463.9 386.0L465.5 386.0L467.1 386.0L468.7 386.0L470.3 386.0L471.9 386.0L473.5 386.0L475.1 386.0L476.7 386.0L478.3 386.0L479.9 386.0L481.5 386.0L483.1 386.0L484.7 386.0L486.3 386.0L487.9 386.0L489.5 386.0L491.1 386.0L492.7 386.0L494.3 386.0L495.9 386.0L497.5 386.0L499.1 386.0L500.7 386.0L502.3 386.0L503.9 386.0L505.5 386.0L507.1 386.0L508.7 386.0L510.3 386.0L511.9 386.0L513.5 386.0L515.1 386.0L516.7 386.0L518.3 386.0L519.9 386.0L521.5 386.0L523.1 386.0L524.7 386.0L526.3 386.0L527.9 386.0L529.5 386.0L531.1 386.0L532.7 386.0L534.3 386.0L535.9 386.0L537.5 386.0L539.1 386.0L540.7 386.0L542.3 386.0L543.9 386.0L545.5 386.0L547.1 386.0L548.7 386.0L550.3 386.0L551.9 386.0L553.5 386.0L555.1 386.0L556.7 386.0L558.3 386.0L559.9 386.0L561.5 386.0L563.1 386.0L564.7 386.0L566.3 386.0L567.9 386.0L569.5 386.0L571.1 386.0L572.7 386.0L574.3 386.0L575.9 386.0L577.5 386.0L579.1 386.0L580.7 386.0L582.3 386.0L583.9 386.0L585.5 386.0L587.1 386.0L588.7 386.0L590.3 386.0L591.9 386.0L593.5 386.0L595.1 386.0L596.7 386.0L598.3 386.0L599.9 386.0L601.5 386.0L603.1 386.0L604.7 386.0L606.3 386.0L607.9 386.0L609.5 386.0L611.1 386.0L612.7 386.0L614.3 386.0L615.9 386.0L617.5 386.0L619.1 386.0L620.7 386.0L622.3 386.0L623.9 386.0L625.5 386.0L627.1 386.0L628.7 386.0L630.3 386.0L631.9 386.0L633.5 386.0L635.1 386.0L636.7 386.0L638.3 386.0L639.9 386.0L641.5 386.0L643.1 386.0L644.7 386.0L646.3 386.0L647.9 386.0L649.5 386.0L651.1 386.0L652.7 386.0L654.3 386.0L655.9 386.0L657.5 386.0L659.1 386.0L660.7 386.0L662.3 386.0L663.9 386.0L665.5 386.0L667.1 386.0L668.7 386.0L670.3 386.0L671.9 386.0L673.5 386.0L675.1 386.0L676.7 386.0L678.3 386.0L679.9 386.0L681.5 386.0L683.1 386.0L684.7 386.0L686.3 386.0L687.9 386.0L689.5 386.0L691.1 386.0L692.7 386.0L694.3 386.0L695.9 386.0L697.5 386.0L699.1 386.0L700.7 386.0L702.3 386.0L703.9 386.0L705.5 386.0L707.1 386.0L708.7 386.0L710.3 386.0L711.9 386.0L713.5 386.0L715.1 386.0L716.7 386.0L718.3 386.0L719.9 386.0L721.5 386.0L723.1 386.0L724.7 386.0L726.3 386.0L727.9 386.0L729.5 386.0L731.1 386.0L732.7 386.0L734.3 386.0L735.9 386.0L737.5 386.0L739.1 386.0L740.7 386.0L742.3 386.0L743.9 386.0L745.5 386.0L747.1 386.0L748.7 386.0L750.3 386.0L751.9 386.0L753.5 386.0L755.1 386.0L756.7 386.0L758.3 386.0L759.9 386.0L761.5 386.0L763.1 386.0L764.7 386.0L766.3 386.0L767.9 386.0L769.5 386.0L771.1 386.0L772.7 386.0L774.3 386.0L775.9 386.0L777.5 386.0L779.1 386.0L780.7 386.0L782.3 386.0L783.9 386.0L785.5 386.0L787.1 386.0L788.7 386.0L790.3 386.0L791.9 386.0L793.5 386.0L795.1 386.0L796.7 386.0L798.3 386.0L799.9 386.0L801.5 386.0L803.1 386.0L804.7 386.0L806.3 386.0L807.9 385.9L809.5 385.6L811.1 385.3L812.7 384.9L814.3 384.3L815.9 383.7L817.5 383.0L819.1 382.3L820.7 381.5L822.3 380.8L823.9 380.0L825.5 379.2L827.1 378.5L828.7 377.8L830.3 377.1L831.9 376.6L833.5 376.1L835.1 375.7L836.7 375.5L838.3 375.3L839.9 375.3L841.5 375.4L843.1 375.6L844.7 375.9L846.3 376.3L847.9 376.8L849.5 377.4L851.1 378.1L852.7 378.8L854.3 379.6L855.9 380.3L857.5 381.1L859.1 381.9L860.7 382.7L862.0 383.2" pathLength="1" style="transition-delay:0.75s"><title>mitchell996 — thread from Jun 2024</title></path>
+<line x1="363.1" y1="378" x2="363.1" y2="394" stroke="var(--steel)" stroke-width="1.6" class="late"/>
+<text x="112" y="389.5" class="acct" text-anchor="end">mitchell996</text>
+<text x="112" y="401.5" class="sub" text-anchor="end">4/29 wob · 2 wins</text>
+<line x1="116" y1="386" x2="363.1" y2="386" stroke="var(--hair)" stroke-width="1" stroke-dasharray="1 4" class="late"/>
+<g class="late" fill="var(--steel)" opacity="0.42"><circle cx="838.5" cy="375.3" r="1.5"/><circle cx="838.5" cy="375.3" r="1.5"/><circle cx="833.1" cy="376.2" r="1.5"/><circle cx="833.1" cy="376.2" r="1.5"/><circle cx="832.0" cy="376.5" r="1.5"/><circle cx="828.8" cy="377.7" r="1.5"/><circle cx="824.6" cy="379.7" r="1.5"/><circle cx="823.5" cy="380.2" r="1.5"/><circle cx="814.9" cy="384.1" r="1.5"/><circle cx="813.9" cy="384.5" r="1.5"/><circle cx="718.6" cy="386.0" r="1.5"/><circle cx="644.8" cy="386.0" r="1.5"/><circle cx="563.5" cy="386.0" r="1.5"/><circle cx="558.2" cy="386.0" r="1.5"/><circle cx="554.9" cy="386.0" r="1.5"/><circle cx="545.3" cy="386.0" r="1.5"/><circle cx="486.5" cy="386.0" r="1.5"/><circle cx="469.4" cy="386.0" r="1.5"/><circle cx="428.7" cy="386.0" r="1.5"/><circle cx="427.6" cy="386.0" r="1.5"/><circle cx="416.1" cy="386.0" r="1.5"/><circle cx="412.6" cy="386.0" r="1.5"/><circle cx="367.0" cy="386.0" r="1.5"/><circle cx="366.9" cy="386.0" r="1.5"/><circle cx="366.7" cy="386.0" r="1.5"/></g>
+<g class="flare"><path d="M827.0 378.5L828.4 377.9L829.8 377.3L831.2 376.8L832.6 376.3L834.0 376.0L835.4 375.7L836.8 375.5L837.0 375.4" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M827.0 378.5L828.4 377.9L829.8 377.3L831.2 376.8L832.6 376.3L834.0 376.0L835.4 375.7L836.8 375.5L837.0 375.4" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>mitchell996 — 6k-Mile 2018 Ferrari 488 Spider — $451,000 — Jul 23, 2026</title></g>
+<g class="flare"><path d="M824.9 379.5L826.3 378.8L827.7 378.2L829.1 377.6L830.5 377.1L831.9 376.6L833.3 376.2L834.7 375.8L834.9 375.8" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M824.9 379.5L826.3 378.8L827.7 378.2L829.1 377.6L830.5 377.1L831.9 376.6L833.3 376.2L834.7 375.8L834.9 375.8" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>mitchell996 — No Reserve: 5k-Mile 2019 Ferrari 488 Pista — $817,500 — Jul 21, 2026</title></g>
+<g class="flare"><path d="M692.2 386.0L693.6 386.0L695.0 386.0L696.4 386.0L697.8 386.0L699.2 386.0L700.6 386.0L702.0 386.0L702.2 386.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M692.2 386.0L693.6 386.0L695.0 386.0L696.4 386.0L697.8 386.0L699.2 386.0L700.6 386.0L702.0 386.0L702.2 386.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>mitchell996 — No Reserve: 1:1 Scale Ferrari SF Display Model — $501 — Mar 19, 2026</title></g>
+<g class="flare"><circle cx="839.5" cy="375.3" r="6.5" fill="var(--amber)" opacity="0.18"/><circle cx="839.5" cy="375.3" r="3.4" fill="var(--amber)"/><title>mitchell996 — knot 4 (lot 254,233 · closes) — $942,500</title></g>
+<path class="thread" d="M261.5 442.0L263.1 442.0L264.7 442.0L266.3 442.0L267.9 442.0L269.5 442.0L271.1 442.0L272.7 442.0L274.3 442.0L275.9 442.0L277.5 442.0L279.1 442.0L280.7 442.0L282.3 442.0L283.9 442.0L285.5 442.0L287.1 442.0L288.7 442.0L290.3 442.0L291.9 442.0L293.5 442.0L295.1 442.0L296.7 442.0L298.3 442.0L299.9 442.0L301.5 442.0L303.1 442.0L304.7 442.0L306.3 442.0L307.9 442.0L309.5 442.0L311.1 442.0L312.7 442.0L314.3 442.0L315.9 442.0L317.5 442.0L319.1 442.0L320.7 442.0L322.3 442.0L323.9 442.0L325.5 442.0L327.1 442.0L328.7 442.0L330.3 442.0L331.9 442.0L333.5 442.0L335.1 442.0L336.7 442.0L338.3 442.0L339.9 442.0L341.5 442.0L343.1 442.0L344.7 442.0L346.3 442.0L347.9 442.0L349.5 442.0L351.1 442.0L352.7 442.0L354.3 442.0L355.9 442.0L357.5 442.0L359.1 442.0L360.7 442.0L362.3 442.0L363.9 442.0L365.5 442.0L367.1 442.0L368.7 442.0L370.3 442.0L371.9 442.0L373.5 442.0L375.1 442.0L376.7 442.0L378.3 442.0L379.9 442.0L381.5 442.0L383.1 442.0L384.7 442.0L386.3 442.0L387.9 442.0L389.5 442.0L391.1 442.0L392.7 442.0L394.3 442.0L395.9 442.0L397.5 442.0L399.1 442.0L400.7 442.0L402.3 442.0L403.9 442.0L405.5 442.0L407.1 442.0L408.7 442.0L410.3 442.0L411.9 442.0L413.5 442.0L415.1 442.0L416.7 442.0L418.3 442.0L419.9 442.0L421.5 442.0L423.1 442.0L424.7 442.0L426.3 442.0L427.9 442.0L429.5 442.0L431.1 442.0L432.7 442.0L434.3 442.0L435.9 442.0L437.5 442.0L439.1 442.0L440.7 442.0L442.3 442.0L443.9 442.0L445.5 442.0L447.1 442.0L448.7 442.0L450.3 442.0L451.9 442.0L453.5 442.0L455.1 442.0L456.7 442.0L458.3 442.0L459.9 442.0L461.5 442.0L463.1 442.0L464.7 442.0L466.3 442.0L467.9 442.0L469.5 442.0L471.1 442.0L472.7 442.0L474.3 442.0L475.9 442.0L477.5 442.0L479.1 442.0L480.7 442.0L482.3 442.0L483.9 442.0L485.5 442.0L487.1 442.0L488.7 442.0L490.3 442.0L491.9 442.0L493.5 442.0L495.1 442.0L496.7 442.0L498.3 442.0L499.9 442.0L501.5 442.0L503.1 442.0L504.7 442.0L506.3 442.0L507.9 442.0L509.5 442.0L511.1 442.0L512.7 442.0L514.3 442.0L515.9 442.0L517.5 442.0L519.1 442.0L520.7 442.0L522.3 442.0L523.9 442.0L525.5 442.0L527.1 442.0L528.7 442.0L530.3 442.0L531.9 442.0L533.5 442.0L535.1 442.0L536.7 442.0L538.3 442.0L539.9 442.0L541.5 442.0L543.1 442.0L544.7 442.0L546.3 442.0L547.9 442.0L549.5 442.0L551.1 442.0L552.7 442.0L554.3 442.0L555.9 442.0L557.5 442.0L559.1 442.0L560.7 442.0L562.3 442.0L563.9 442.0L565.5 442.0L567.1 442.0L568.7 442.0L570.3 442.0L571.9 442.0L573.5 442.0L575.1 442.0L576.7 442.0L578.3 442.0L579.9 442.0L581.5 442.0L583.1 442.0L584.7 442.0L586.3 442.0L587.9 442.0L589.5 442.0L591.1 442.0L592.7 442.0L594.3 442.0L595.9 442.0L597.5 442.0L599.1 442.0L600.7 442.0L602.3 442.0L603.9 442.0L605.5 442.0L607.1 442.0L608.7 442.0L610.3 442.0L611.9 442.0L613.5 442.0L615.1 442.0L616.7 442.0L618.3 442.0L619.9 442.0L621.5 442.0L623.1 442.0L624.7 442.0L626.3 442.0L627.9 442.0L629.5 442.0L631.1 442.0L632.7 442.0L634.3 442.0L635.9 442.0L637.5 442.0L639.1 442.0L640.7 442.0L642.3 442.0L643.9 442.0L645.5 442.0L647.1 442.0L648.7 442.0L650.3 442.0L651.9 442.0L653.5 442.0L655.1 442.0L656.7 442.0L658.3 442.0L659.9 442.0L661.5 442.0L663.1 442.0L664.7 442.0L666.3 442.0L667.9 442.0L669.5 442.0L671.1 442.0L672.7 442.0L674.3 442.0L675.9 442.0L677.5 442.0L679.1 442.0L680.7 442.0L682.3 442.0L683.9 442.0L685.5 442.0L687.1 442.0L688.7 442.0L690.3 442.0L691.9 442.0L693.5 442.0L695.1 442.0L696.7 442.0L698.3 442.0L699.9 442.0L701.5 442.0L703.1 442.0L704.7 442.0L706.3 442.0L707.9 442.0L709.5 442.0L711.1 442.0L712.7 442.0L714.3 442.0L715.9 442.0L717.5 442.0L719.1 442.0L720.7 442.0L722.3 442.0L723.9 442.0L725.5 442.0L727.1 442.0L728.7 442.0L730.3 442.0L731.9 442.0L733.5 442.0L735.1 442.0L736.7 442.0L738.3 442.0L739.9 442.0L741.5 442.0L743.1 442.0L744.7 442.0L746.3 442.0L747.9 442.0L749.5 442.0L751.1 442.0L752.7 442.0L754.3 442.0L755.9 442.0L757.5 442.0L759.1 442.0L760.7 442.0L762.3 442.0L763.9 442.0L765.5 442.0L767.1 442.0L768.7 442.0L770.3 442.0L771.9 442.0L773.5 442.0L775.1 442.0L776.7 442.0L778.3 442.0L779.9 442.0L781.5 442.0L783.1 442.0L784.7 442.0L786.3 442.0L787.9 442.0L789.5 442.0L791.1 442.0L792.7 442.0L794.3 442.0L795.9 442.0L797.5 442.0L799.1 442.0L800.7 442.0L802.3 442.0L803.9 442.0L805.5 442.0L807.1 441.7L808.7 440.9L810.3 439.5L811.9 437.5L813.5 435.1L815.1 432.3L816.7 429.1L818.3 425.6L819.9 421.9L821.5 418.0L823.1 414.1L824.7 410.3L826.3 406.5L827.9 403.0L829.5 399.7L831.1 396.7L832.7 394.2L834.3 392.2L835.9 390.6L837.5 389.6L839.1 389.2L840.7 389.3L842.3 390.0L843.9 391.3L845.5 393.1L847.1 395.4L848.7 398.1L850.3 401.2L851.9 404.7L853.5 408.3L855.1 412.1L856.7 416.0L858.3 419.9L859.9 423.7L861.5 427.3L862.0 428.4" pathLength="1" style="transition-delay:0.90s"><title>David_22 — thread from Jun 2022</title></path>
+<line x1="261.5" y1="434" x2="261.5" y2="450" stroke="var(--steel)" stroke-width="1.6" class="late"/>
+<text x="112" y="445.5" class="acct" text-anchor="end">David_22</text>
+<text x="112" y="457.5" class="sub" text-anchor="end">1/13 wob · 0 wins</text>
+<line x1="116" y1="442" x2="261.5" y2="442" stroke="var(--hair)" stroke-width="1" stroke-dasharray="1 4" class="late"/>
+<g class="late" fill="var(--steel)" opacity="0.42"><circle cx="817.1" cy="428.4" r="1.5"/><circle cx="792.5" cy="442.0" r="1.5"/><circle cx="740.0" cy="442.0" r="1.5"/><circle cx="693.0" cy="442.0" r="1.5"/><circle cx="633.0" cy="442.0" r="1.5"/><circle cx="376.7" cy="442.0" r="1.5"/><circle cx="367.4" cy="442.0" r="1.5"/><circle cx="326.4" cy="442.0" r="1.5"/><circle cx="325.4" cy="442.0" r="1.5"/><circle cx="309.9" cy="442.0" r="1.5"/><circle cx="309.9" cy="442.0" r="1.5"/><circle cx="305.7" cy="442.0" r="1.5"/></g>
+<g class="flare"><circle cx="839.5" cy="389.2" r="6.5" fill="var(--amber)" opacity="0.18"/><circle cx="839.5" cy="389.2" r="3.4" fill="var(--amber)"/><title>David_22 — knot 4 (lot 254,233 · closes) — $666,666</title></g>
+<path class="thread" d="M206.5 498.0L208.1 498.0L209.7 498.0L211.3 498.0L212.9 498.0L214.5 498.0L216.1 498.0L217.7 498.0L219.3 498.0L220.9 498.0L222.5 498.0L224.1 498.0L225.7 498.0L227.3 498.0L228.9 498.0L230.5 498.0L232.1 498.0L233.7 498.0L235.3 498.0L236.9 498.0L238.5 498.0L240.1 498.0L241.7 498.0L243.3 498.0L244.9 498.0L246.5 498.0L248.1 498.0L249.7 498.0L251.3 498.0L252.9 498.0L254.5 498.0L256.1 498.0L257.7 498.0L259.3 498.0L260.9 498.0L262.5 498.0L264.1 498.0L265.7 498.0L267.3 498.0L268.9 498.0L270.5 498.0L272.1 498.0L273.7 498.0L275.3 498.0L276.9 498.0L278.5 498.0L280.1 498.0L281.7 498.0L283.3 498.0L284.9 498.0L286.5 498.0L288.1 498.0L289.7 498.0L291.3 498.0L292.9 498.0L294.5 498.0L296.1 498.0L297.7 498.0L299.3 498.0L300.9 498.0L302.5 498.0L304.1 498.0L305.7 498.0L307.3 498.0L308.9 498.0L310.5 498.0L312.1 498.0L313.7 498.0L315.3 498.0L316.9 498.0L318.5 498.0L320.1 498.0L321.7 498.0L323.3 498.0L324.9 498.0L326.5 498.0L328.1 498.0L329.7 498.0L331.3 498.0L332.9 498.0L334.5 498.0L336.1 498.0L337.7 498.0L339.3 498.0L340.9 498.0L342.5 498.0L344.1 498.0L345.7 498.0L347.3 498.0L348.9 498.0L350.5 498.0L352.1 498.0L353.7 498.0L355.3 498.0L356.9 498.0L358.5 498.0L360.1 498.0L361.7 498.0L363.3 498.0L364.9 498.0L366.5 498.0L368.1 498.0L369.7 498.0L371.3 498.0L372.9 498.0L374.5 498.0L376.1 498.0L377.7 498.0L379.3 498.0L380.9 498.0L382.5 498.0L384.1 498.0L385.7 498.0L387.3 498.0L388.9 498.0L390.5 498.0L392.1 498.0L393.7 498.0L395.3 498.0L396.9 498.0L398.5 498.0L400.1 498.0L401.7 498.0L403.3 498.0L404.9 498.0L406.5 498.0L408.1 498.0L409.7 498.0L411.3 498.0L412.9 498.0L414.5 498.0L416.1 498.0L417.7 498.0L419.3 498.0L420.9 498.0L422.5 498.0L424.1 498.0L425.7 498.0L427.3 498.0L428.9 498.0L430.5 498.0L432.1 498.0L433.7 498.0L435.3 498.0L436.9 498.0L438.5 498.0L440.1 498.0L441.7 498.0L443.3 498.0L444.9 498.0L446.5 498.0L448.1 498.0L449.7 498.0L451.3 498.0L452.9 498.0L454.5 498.0L456.1 498.0L457.7 498.0L459.3 498.0L460.9 498.0L462.5 498.0L464.1 498.0L465.7 498.0L467.3 498.0L468.9 498.0L470.5 498.0L472.1 498.0L473.7 498.0L475.3 498.0L476.9 498.0L478.5 498.0L480.1 498.0L481.7 498.0L483.3 498.0L484.9 498.0L486.5 498.0L488.1 498.0L489.7 498.0L491.3 498.0L492.9 498.0L494.5 498.0L496.1 498.0L497.7 498.0L499.3 498.0L500.9 498.0L502.5 498.0L504.1 498.0L505.7 498.0L507.3 498.0L508.9 498.0L510.5 498.0L512.1 498.0L513.7 498.0L515.3 498.0L516.9 498.0L518.5 498.0L520.1 498.0L521.7 498.0L523.3 498.0L524.9 498.0L526.5 498.0L528.1 498.0L529.7 498.0L531.3 498.0L532.9 498.0L534.5 498.0L536.1 498.0L537.7 498.0L539.3 498.0L540.9 498.0L542.5 498.0L544.1 498.0L545.7 498.0L547.3 498.0L548.9 498.0L550.5 498.0L552.1 498.0L553.7 498.0L555.3 498.0L556.9 498.0L558.5 498.0L560.1 498.0L561.7 498.0L563.3 498.0L564.9 498.0L566.5 498.0L568.1 498.0L569.7 498.0L571.3 498.0L572.9 498.0L574.5 498.0L576.1 498.0L577.7 498.0L579.3 498.0L580.9 498.0L582.5 498.0L584.1 498.0L585.7 498.0L587.3 498.0L588.9 498.0L590.5 498.0L592.1 498.0L593.7 498.0L595.3 498.0L596.9 498.0L598.5 498.0L600.1 498.0L601.7 498.0L603.3 498.0L604.9 498.0L606.5 498.0L608.1 498.0L609.7 498.0L611.3 498.0L612.9 498.0L614.5 498.0L616.1 498.0L617.7 498.0L619.3 498.0L620.9 498.0L622.5 498.0L624.1 498.0L625.7 498.0L627.3 498.0L628.9 498.0L630.5 498.0L632.1 498.0L633.7 498.0L635.3 498.0L636.9 498.0L638.5 498.0L640.1 498.0L641.7 498.0L643.3 498.0L644.9 498.0L646.5 498.0L648.1 498.0L649.7 498.0L651.3 498.0L652.9 498.0L654.5 498.0L656.1 498.0L657.7 498.0L659.3 498.0L660.9 498.0L662.5 498.0L664.1 498.0L665.7 498.0L667.3 498.0L668.9 498.0L670.5 498.0L672.1 498.0L673.7 498.0L675.3 498.0L676.9 498.0L678.5 498.0L680.1 498.0L681.7 498.0L683.3 498.0L684.9 498.0L686.5 498.0L688.1 498.0L689.7 498.0L691.3 498.0L692.9 498.0L694.5 498.0L696.1 498.0L697.7 498.0L699.3 498.0L700.9 498.0L702.5 498.0L704.1 498.0L705.7 498.0L707.3 498.0L708.9 498.0L710.5 498.0L712.1 498.0L713.7 498.0L715.3 498.0L716.9 498.0L718.5 498.0L720.1 498.0L721.7 498.0L723.3 498.0L724.9 498.0L726.5 498.0L728.1 498.0L729.7 498.0L731.3 498.0L732.9 498.0L734.5 498.0L736.1 498.0L737.7 498.0L739.3 498.0L740.9 498.0L742.5 498.0L744.1 498.0L745.7 498.0L747.3 498.0L748.9 498.0L750.5 498.0L752.1 498.0L753.7 498.0L755.3 498.0L756.9 498.0L758.5 498.0L760.1 498.0L761.7 498.0L763.3 498.0L764.9 498.0L766.5 498.0L768.1 498.0L769.7 498.0L771.3 498.0L772.9 498.0L774.5 498.0L776.1 498.0L777.7 498.0L779.3 498.0L780.9 498.0L782.5 498.0L784.1 498.0L785.7 498.0L787.3 498.0L788.9 498.0L790.5 498.0L792.1 498.0L793.7 498.0L795.3 498.0L796.9 498.0L798.5 498.0L800.1 498.0L801.7 498.0L803.3 498.0L804.9 498.0L806.5 497.8L808.1 496.7L809.7 494.5L811.3 491.4L812.9 487.4L814.5 482.6L816.1 477.1L817.7 471.0L819.3 464.5L820.9 457.7L822.5 450.7L824.1 443.7L825.7 436.8L827.3 430.3L828.9 424.2L830.5 418.6L832.1 413.8L833.7 409.8L835.3 406.6L836.9 404.4L838.5 403.2L840.1 403.1L841.7 404.0L843.3 405.9L844.9 408.7L846.5 412.5L848.1 417.1L849.7 422.5L851.3 428.4L852.9 434.8L854.5 441.6L856.1 448.6L857.7 455.6L859.3 462.5L860.9 469.1L862.0 473.5" pathLength="1" style="transition-delay:1.05s"><title>rda1987 — thread from May 2021</title></path>
+<line x1="206.5" y1="490" x2="206.5" y2="506" stroke="var(--steel)" stroke-width="1.6" class="late"/>
+<text x="112" y="501.5" class="acct" text-anchor="end">rda1987</text>
+<text x="112" y="513.5" class="sub" text-anchor="end">2/29 wob · 1 wins</text>
+<line x1="116" y1="498" x2="206.5" y2="498" stroke="var(--hair)" stroke-width="1" stroke-dasharray="1 4" class="late"/>
+<g class="late" fill="var(--steel)" opacity="0.42"><circle cx="831.0" cy="417.1" r="1.5"/><circle cx="756.1" cy="498.0" r="1.5"/><circle cx="551.7" cy="498.0" r="1.5"/><circle cx="546.4" cy="498.0" r="1.5"/><circle cx="532.5" cy="498.0" r="1.5"/><circle cx="532.5" cy="498.0" r="1.5"/><circle cx="530.3" cy="498.0" r="1.5"/><circle cx="520.7" cy="498.0" r="1.5"/><circle cx="516.4" cy="498.0" r="1.5"/><circle cx="515.4" cy="498.0" r="1.5"/><circle cx="515.4" cy="498.0" r="1.5"/><circle cx="502.5" cy="498.0" r="1.5"/><circle cx="490.8" cy="498.0" r="1.5"/><circle cx="486.5" cy="498.0" r="1.5"/><circle cx="484.3" cy="498.0" r="1.5"/><circle cx="477.9" cy="498.0" r="1.5"/><circle cx="474.7" cy="498.0" r="1.5"/><circle cx="411.3" cy="498.0" r="1.5"/><circle cx="397.7" cy="498.0" r="1.5"/><circle cx="393.5" cy="498.0" r="1.5"/><circle cx="390.8" cy="498.0" r="1.5"/><circle cx="389.4" cy="498.0" r="1.5"/><circle cx="387.8" cy="498.0" r="1.5"/><circle cx="387.6" cy="498.0" r="1.5"/><circle cx="386.9" cy="498.0" r="1.5"/><circle cx="386.0" cy="498.0" r="1.5"/><circle cx="385.8" cy="498.0" r="1.5"/></g>
+<g class="flare"><path d="M527.5 498.0L528.9 498.0L530.3 498.0L531.7 498.0L533.1 498.0L534.5 498.0L535.9 498.0L537.3 498.0L537.5 498.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M527.5 498.0L528.9 498.0L530.3 498.0L531.7 498.0L533.1 498.0L534.5 498.0L535.9 498.0L537.3 498.0L537.5 498.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>rda1987 — 61-Mile 2024 Ariel Atom 4 — $98,000 — Oct 16, 2025</title></g>
+<g class="flare"><circle cx="839.5" cy="403.0" r="6.5" fill="var(--oxide)" opacity="0.18"/><circle cx="839.5" cy="403.0" r="3.4" fill="var(--oxide)"/><title>rda1987 — knot 4 (lot 254,233 · closes) — $1,000,000</title></g>
+<path class="thread" d="M130.5 554.0L132.1 554.0L133.7 554.0L135.3 554.0L136.9 554.0L138.5 554.0L140.1 554.0L141.7 554.0L143.3 554.0L144.9 554.0L146.5 554.0L148.1 554.0L149.7 554.0L151.3 554.0L152.9 554.0L154.5 554.0L156.1 554.0L157.7 554.0L159.3 554.0L160.9 554.0L162.5 554.0L164.1 554.0L165.7 554.0L167.3 554.0L168.9 554.0L170.5 554.0L172.1 554.0L173.7 554.0L175.3 554.0L176.9 554.0L178.5 554.0L180.1 554.0L181.7 554.0L183.3 554.0L184.9 554.0L186.5 554.0L188.1 554.0L189.7 554.0L191.3 554.0L192.9 554.0L194.5 554.0L196.1 554.0L197.7 554.0L199.3 554.0L200.9 554.0L202.5 554.0L204.1 554.0L205.7 554.0L207.3 554.0L208.9 554.0L210.5 554.0L212.1 554.0L213.7 554.0L215.3 554.0L216.9 554.0L218.5 554.0L220.1 554.0L221.7 554.0L223.3 554.0L224.9 554.0L226.5 554.0L228.1 554.0L229.7 554.0L231.3 554.0L232.9 554.0L234.5 554.0L236.1 554.0L237.7 554.0L239.3 554.0L240.9 554.0L242.5 554.0L244.1 554.0L245.7 554.0L247.3 554.0L248.9 554.0L250.5 554.0L252.1 554.0L253.7 554.0L255.3 554.0L256.9 554.0L258.5 554.0L260.1 554.0L261.7 554.0L263.3 554.0L264.9 554.0L266.5 554.0L268.1 554.0L269.7 554.0L271.3 554.0L272.9 554.0L274.5 554.0L276.1 554.0L277.7 554.0L279.3 554.0L280.9 554.0L282.5 554.0L284.1 554.0L285.7 554.0L287.3 554.0L288.9 554.0L290.5 554.0L292.1 554.0L293.7 554.0L295.3 554.0L296.9 554.0L298.5 554.0L300.1 554.0L301.7 554.0L303.3 554.0L304.9 554.0L306.5 554.0L308.1 554.0L309.7 554.0L311.3 554.0L312.9 554.0L314.5 554.0L316.1 554.0L317.7 554.0L319.3 554.0L320.9 554.0L322.5 554.0L324.1 554.0L325.7 554.0L327.3 554.0L328.9 554.0L330.5 554.0L332.1 554.0L333.7 554.0L335.3 554.0L336.9 554.0L338.5 554.0L340.1 554.0L341.7 554.0L343.3 554.0L344.9 554.0L346.5 554.0L348.1 554.0L349.7 554.0L351.3 554.0L352.9 554.0L354.5 554.0L356.1 554.0L357.7 554.0L359.3 554.0L360.9 554.0L362.5 554.0L364.1 554.0L365.7 554.0L367.3 554.0L368.9 554.0L370.5 554.0L372.1 554.0L373.7 554.0L375.3 554.0L376.9 554.0L378.5 554.0L380.1 554.0L381.7 554.0L383.3 554.0L384.9 554.0L386.5 554.0L388.1 554.0L389.7 554.0L391.3 554.0L392.9 554.0L394.5 554.0L396.1 554.0L397.7 554.0L399.3 554.0L400.9 554.0L402.5 554.0L404.1 554.0L405.7 554.0L407.3 554.0L408.9 554.0L410.5 554.0L412.1 554.0L413.7 554.0L415.3 554.0L416.9 554.0L418.5 554.0L420.1 554.0L421.7 554.0L423.3 554.0L424.9 554.0L426.5 554.0L428.1 554.0L429.7 554.0L431.3 554.0L432.9 554.0L434.5 554.0L436.1 554.0L437.7 554.0L439.3 554.0L440.9 554.0L442.5 554.0L444.1 554.0L445.7 554.0L447.3 554.0L448.9 554.0L450.5 554.0L452.1 554.0L453.7 554.0L455.3 554.0L456.9 554.0L458.5 554.0L460.1 554.0L461.7 554.0L463.3 554.0L464.9 554.0L466.5 554.0L468.1 554.0L469.7 554.0L471.3 554.0L472.9 554.0L474.5 554.0L476.1 554.0L477.7 554.0L479.3 554.0L480.9 554.0L482.5 554.0L484.1 554.0L485.7 554.0L487.3 554.0L488.9 554.0L490.5 554.0L492.1 554.0L493.7 554.0L495.3 554.0L496.9 554.0L498.5 554.0L500.1 554.0L501.7 554.0L503.3 554.0L504.9 554.0L506.5 554.0L508.1 554.0L509.7 554.0L511.3 554.0L512.9 554.0L514.5 554.0L516.1 554.0L517.7 554.0L519.3 554.0L520.9 554.0L522.5 554.0L524.1 554.0L525.7 554.0L527.3 554.0L528.9 554.0L530.5 554.0L532.1 554.0L533.7 554.0L535.3 554.0L536.9 554.0L538.5 554.0L540.1 554.0L541.7 554.0L543.3 554.0L544.9 554.0L546.5 554.0L548.1 554.0L549.7 554.0L551.3 554.0L552.9 554.0L554.5 554.0L556.1 554.0L557.7 554.0L559.3 554.0L560.9 554.0L562.5 554.0L564.1 554.0L565.7 554.0L567.3 554.0L568.9 554.0L570.5 554.0L572.1 554.0L573.7 554.0L575.3 554.0L576.9 554.0L578.5 554.0L580.1 554.0L581.7 554.0L583.3 554.0L584.9 554.0L586.5 554.0L588.1 554.0L589.7 554.0L591.3 554.0L592.9 554.0L594.5 554.0L596.1 554.0L597.7 554.0L599.3 554.0L600.9 554.0L602.5 554.0L604.1 554.0L605.7 554.0L607.3 554.0L608.9 554.0L610.5 554.0L612.1 554.0L613.7 554.0L615.3 554.0L616.9 554.0L618.5 554.0L620.1 554.0L621.7 554.0L623.3 554.0L624.9 554.0L626.5 554.0L628.1 554.0L629.7 554.0L631.3 554.0L632.9 554.0L634.5 554.0L636.1 554.0L637.7 554.0L639.3 554.0L640.9 554.0L642.5 554.0L644.1 554.0L645.7 554.0L647.3 554.0L648.9 554.0L650.5 554.0L652.1 554.0L653.7 554.0L655.3 554.0L656.9 554.0L658.5 554.0L660.1 554.0L661.7 554.0L663.3 554.0L664.9 554.0L666.5 554.0L668.1 554.0L669.7 554.0L671.3 554.0L672.9 554.0L674.5 554.0L676.1 554.0L677.7 554.0L679.3 554.0L680.9 554.0L682.5 554.0L684.1 554.0L685.7 554.0L687.3 554.0L688.9 554.0L690.5 554.0L692.1 554.0L693.7 554.0L695.3 554.0L696.9 554.0L698.5 554.0L700.1 554.0L701.7 554.0L703.3 554.0L704.9 554.0L706.5 554.0L708.1 554.0L709.7 554.0L711.3 554.0L712.9 554.0L714.5 554.0L716.1 554.0L717.7 554.0L719.3 554.0L720.9 554.0L722.5 554.0L724.1 554.0L725.7 554.0L727.3 554.0L728.9 554.0L730.5 554.0L732.1 554.0L733.7 554.0L735.3 554.0L736.9 554.0L738.5 554.0L740.1 554.0L741.7 554.0L743.3 554.0L744.9 554.0L746.5 554.0L748.1 554.0L749.7 554.0L751.3 554.0L752.9 554.0L754.5 554.0L756.1 554.0L757.7 554.0L759.3 554.0L760.9 554.0L762.5 554.0L764.1 554.0L765.7 554.0L767.3 554.0L768.9 554.0L770.5 554.0L772.1 554.0L773.7 554.0L775.3 554.0L776.9 554.0L778.5 554.0L780.1 554.0L781.7 554.0L783.3 554.0L784.9 554.0L786.5 554.0L788.1 554.0L789.7 554.0L791.3 554.0L792.9 554.0L794.5 554.0L796.1 554.0L797.7 554.0L799.3 554.0L800.9 554.0L802.5 554.0L804.1 554.0L805.7 554.0L807.3 553.1L808.9 550.8L810.5 547.0L812.1 541.8L813.7 535.5L815.3 528.0L816.9 519.7L818.5 510.5L820.1 500.9L821.7 490.9L823.3 480.7L824.9 470.7L826.5 461.0L828.1 451.8L829.7 443.4L831.3 435.9L832.9 429.4L834.5 424.2L836.1 420.3L837.7 417.9L839.3 416.9L840.9 417.4L842.5 419.4L844.1 422.8L845.7 427.6L847.3 433.7L848.9 440.9L850.5 449.0L852.1 458.0L853.7 467.6L855.3 477.5L856.9 487.6L858.5 497.7L860.1 507.5L861.7 516.8L862.0 518.6" pathLength="1" style="transition-delay:1.20s"><title>BOOOM — thread from Nov 2019</title></path>
+<line x1="130.5" y1="546" x2="130.5" y2="562" stroke="var(--steel)" stroke-width="1.6" class="late"/>
+<text x="112" y="557.5" class="acct" text-anchor="end">BOOOM</text>
+<text x="112" y="569.5" class="sub" text-anchor="end">10/420 wob · 5 wins</text>
+<line x1="116" y1="554" x2="130.5" y2="554" stroke="var(--hair)" stroke-width="1" stroke-dasharray="1 4" class="late"/>
+<g class="late" fill="var(--steel)" opacity="0.42"><circle cx="837.4" cy="418.2" r="1.5"/><circle cx="837.4" cy="418.2" r="1.5"/><circle cx="836.3" cy="419.9" r="1.5"/><circle cx="833.1" cy="428.6" r="1.5"/><circle cx="832.0" cy="432.6" r="1.5"/><circle cx="831.0" cy="437.2" r="1.5"/><circle cx="829.9" cy="442.3" r="1.5"/><circle cx="827.8" cy="453.6" r="1.5"/><circle cx="825.6" cy="466.1" r="1.5"/><circle cx="822.4" cy="486.2" r="1.5"/><circle cx="818.1" cy="512.5" r="1.5"/><circle cx="811.7" cy="543.1" r="1.5"/><circle cx="809.6" cy="549.3" r="1.5"/><circle cx="808.5" cy="551.4" r="1.5"/><circle cx="796.7" cy="554.0" r="1.5"/><circle cx="796.7" cy="554.0" r="1.5"/><circle cx="793.5" cy="554.0" r="1.5"/><circle cx="793.5" cy="554.0" r="1.5"/><circle cx="791.4" cy="554.0" r="1.5"/><circle cx="791.4" cy="554.0" r="1.5"/><circle cx="791.4" cy="554.0" r="1.5"/><circle cx="788.2" cy="554.0" r="1.5"/><circle cx="787.1" cy="554.0" r="1.5"/><circle cx="785.0" cy="554.0" r="1.5"/><circle cx="785.0" cy="554.0" r="1.5"/><circle cx="782.8" cy="554.0" r="1.5"/><circle cx="780.7" cy="554.0" r="1.5"/><circle cx="780.7" cy="554.0" r="1.5"/><circle cx="779.6" cy="554.0" r="1.5"/><circle cx="779.6" cy="554.0" r="1.5"/><circle cx="777.5" cy="554.0" r="1.5"/><circle cx="775.3" cy="554.0" r="1.5"/><circle cx="773.2" cy="554.0" r="1.5"/><circle cx="772.1" cy="554.0" r="1.5"/><circle cx="767.9" cy="554.0" r="1.5"/><circle cx="764.6" cy="554.0" r="1.5"/><circle cx="763.6" cy="554.0" r="1.5"/><circle cx="762.5" cy="554.0" r="1.5"/><circle cx="761.4" cy="554.0" r="1.5"/><circle cx="759.3" cy="554.0" r="1.5"/><circle cx="758.2" cy="554.0" r="1.5"/><circle cx="758.2" cy="554.0" r="1.5"/><circle cx="750.7" cy="554.0" r="1.5"/><circle cx="749.7" cy="554.0" r="1.5"/><circle cx="747.5" cy="554.0" r="1.5"/><circle cx="746.5" cy="554.0" r="1.5"/><circle cx="744.3" cy="554.0" r="1.5"/><circle cx="743.2" cy="554.0" r="1.5"/><circle cx="743.2" cy="554.0" r="1.5"/><circle cx="739.0" cy="554.0" r="1.5"/><circle cx="737.9" cy="554.0" r="1.5"/><circle cx="735.8" cy="554.0" r="1.5"/><circle cx="727.2" cy="554.0" r="1.5"/><circle cx="715.4" cy="554.0" r="1.5"/><circle cx="705.8" cy="554.0" r="1.5"/><circle cx="704.7" cy="554.0" r="1.5"/><circle cx="695.1" cy="554.0" r="1.5"/><circle cx="694.0" cy="554.0" r="1.5"/><circle cx="685.5" cy="554.0" r="1.5"/><circle cx="685.5" cy="554.0" r="1.5"/><circle cx="675.8" cy="554.0" r="1.5"/><circle cx="675.8" cy="554.0" r="1.5"/><circle cx="675.8" cy="554.0" r="1.5"/><circle cx="670.5" cy="554.0" r="1.5"/><circle cx="666.2" cy="554.0" r="1.5"/><circle cx="649.1" cy="554.0" r="1.5"/><circle cx="644.8" cy="554.0" r="1.5"/><circle cx="644.8" cy="554.0" r="1.5"/><circle cx="644.8" cy="554.0" r="1.5"/><circle cx="638.4" cy="554.0" r="1.5"/><circle cx="636.3" cy="554.0" r="1.5"/><circle cx="635.2" cy="554.0" r="1.5"/><circle cx="625.6" cy="554.0" r="1.5"/><circle cx="620.2" cy="554.0" r="1.5"/><circle cx="606.3" cy="554.0" r="1.5"/><circle cx="603.1" cy="554.0" r="1.5"/><circle cx="599.9" cy="554.0" r="1.5"/><circle cx="599.9" cy="554.0" r="1.5"/><circle cx="598.8" cy="554.0" r="1.5"/><circle cx="592.4" cy="554.0" r="1.5"/><circle cx="592.4" cy="554.0" r="1.5"/><circle cx="590.3" cy="554.0" r="1.5"/><circle cx="582.8" cy="554.0" r="1.5"/><circle cx="582.8" cy="554.0" r="1.5"/><circle cx="567.8" cy="554.0" r="1.5"/><circle cx="566.7" cy="554.0" r="1.5"/><circle cx="565.6" cy="554.0" r="1.5"/><circle cx="557.1" cy="554.0" r="1.5"/><circle cx="554.9" cy="554.0" r="1.5"/><circle cx="553.9" cy="554.0" r="1.5"/><circle cx="553.9" cy="554.0" r="1.5"/><circle cx="552.8" cy="554.0" r="1.5"/><circle cx="550.7" cy="554.0" r="1.5"/><circle cx="550.7" cy="554.0" r="1.5"/><circle cx="548.5" cy="554.0" r="1.5"/><circle cx="548.5" cy="554.0" r="1.5"/><circle cx="546.4" cy="554.0" r="1.5"/><circle cx="546.4" cy="554.0" r="1.5"/><circle cx="546.4" cy="554.0" r="1.5"/><circle cx="545.3" cy="554.0" r="1.5"/><circle cx="543.2" cy="554.0" r="1.5"/><circle cx="542.1" cy="554.0" r="1.5"/><circle cx="540.0" cy="554.0" r="1.5"/><circle cx="537.8" cy="554.0" r="1.5"/><circle cx="537.8" cy="554.0" r="1.5"/><circle cx="532.5" cy="554.0" r="1.5"/><circle cx="527.1" cy="554.0" r="1.5"/><circle cx="525.0" cy="554.0" r="1.5"/><circle cx="523.9" cy="554.0" r="1.5"/><circle cx="519.6" cy="554.0" r="1.5"/><circle cx="518.6" cy="554.0" r="1.5"/><circle cx="518.6" cy="554.0" r="1.5"/><circle cx="511.1" cy="554.0" r="1.5"/><circle cx="508.9" cy="554.0" r="1.5"/><circle cx="500.4" cy="554.0" r="1.5"/><circle cx="488.6" cy="554.0" r="1.5"/><circle cx="487.5" cy="554.0" r="1.5"/><circle cx="486.5" cy="554.0" r="1.5"/><circle cx="484.3" cy="554.0" r="1.5"/><circle cx="479.0" cy="554.0" r="1.5"/><circle cx="476.8" cy="554.0" r="1.5"/><circle cx="462.9" cy="554.0" r="1.5"/><circle cx="446.9" cy="554.0" r="1.5"/><circle cx="445.8" cy="554.0" r="1.5"/><circle cx="444.7" cy="554.0" r="1.5"/><circle cx="443.7" cy="554.0" r="1.5"/><circle cx="431.9" cy="554.0" r="1.5"/><circle cx="430.8" cy="554.0" r="1.5"/><circle cx="424.4" cy="554.0" r="1.5"/><circle cx="423.3" cy="554.0" r="1.5"/><circle cx="415.8" cy="554.0" r="1.5"/><circle cx="415.6" cy="554.0" r="1.5"/><circle cx="414.7" cy="554.0" r="1.5"/><circle cx="409.5" cy="554.0" r="1.5"/><circle cx="408.4" cy="554.0" r="1.5"/><circle cx="408.4" cy="554.0" r="1.5"/><circle cx="408.0" cy="554.0" r="1.5"/><circle cx="407.2" cy="554.0" r="1.5"/><circle cx="405.8" cy="554.0" r="1.5"/><circle cx="405.6" cy="554.0" r="1.5"/><circle cx="404.9" cy="554.0" r="1.5"/><circle cx="404.7" cy="554.0" r="1.5"/><circle cx="404.1" cy="554.0" r="1.5"/><circle cx="403.8" cy="554.0" r="1.5"/><circle cx="403.8" cy="554.0" r="1.5"/><circle cx="403.7" cy="554.0" r="1.5"/><circle cx="403.0" cy="554.0" r="1.5"/><circle cx="402.6" cy="554.0" r="1.5"/><circle cx="402.3" cy="554.0" r="1.5"/><circle cx="402.3" cy="554.0" r="1.5"/><circle cx="402.3" cy="554.0" r="1.5"/><circle cx="401.9" cy="554.0" r="1.5"/><circle cx="401.9" cy="554.0" r="1.5"/><circle cx="401.9" cy="554.0" r="1.5"/><circle cx="401.9" cy="554.0" r="1.5"/><circle cx="401.7" cy="554.0" r="1.5"/><circle cx="401.3" cy="554.0" r="1.5"/><circle cx="400.9" cy="554.0" r="1.5"/><circle cx="400.9" cy="554.0" r="1.5"/><circle cx="399.8" cy="554.0" r="1.5"/><circle cx="399.5" cy="554.0" r="1.5"/><circle cx="398.7" cy="554.0" r="1.5"/><circle cx="398.3" cy="554.0" r="1.5"/><circle cx="398.3" cy="554.0" r="1.5"/><circle cx="398.1" cy="554.0" r="1.5"/><circle cx="397.6" cy="554.0" r="1.5"/><circle cx="396.9" cy="554.0" r="1.5"/><circle cx="392.7" cy="554.0" r="1.5"/><circle cx="391.9" cy="554.0" r="1.5"/><circle cx="389.0" cy="554.0" r="1.5"/><circle cx="388.1" cy="554.0" r="1.5"/><circle cx="388.1" cy="554.0" r="1.5"/><circle cx="388.0" cy="554.0" r="1.5"/><circle cx="387.7" cy="554.0" r="1.5"/><circle cx="385.6" cy="554.0" r="1.5"/><circle cx="385.6" cy="554.0" r="1.5"/><circle cx="384.9" cy="554.0" r="1.5"/><circle cx="384.6" cy="554.0" r="1.5"/><circle cx="384.5" cy="554.0" r="1.5"/><circle cx="384.5" cy="554.0" r="1.5"/><circle cx="384.1" cy="554.0" r="1.5"/><circle cx="384.0" cy="554.0" r="1.5"/><circle cx="383.5" cy="554.0" r="1.5"/><circle cx="383.3" cy="554.0" r="1.5"/><circle cx="383.0" cy="554.0" r="1.5"/><circle cx="382.8" cy="554.0" r="1.5"/><circle cx="382.8" cy="554.0" r="1.5"/><circle cx="382.8" cy="554.0" r="1.5"/><circle cx="382.8" cy="554.0" r="1.5"/><circle cx="382.6" cy="554.0" r="1.5"/><circle cx="382.6" cy="554.0" r="1.5"/><circle cx="382.4" cy="554.0" r="1.5"/><circle cx="382.4" cy="554.0" r="1.5"/><circle cx="381.7" cy="554.0" r="1.5"/><circle cx="381.7" cy="554.0" r="1.5"/><circle cx="381.6" cy="554.0" r="1.5"/><circle cx="381.6" cy="554.0" r="1.5"/><circle cx="381.3" cy="554.0" r="1.5"/><circle cx="381.3" cy="554.0" r="1.5"/><circle cx="381.3" cy="554.0" r="1.5"/><circle cx="381.2" cy="554.0" r="1.5"/><circle cx="381.2" cy="554.0" r="1.5"/><circle cx="381.0" cy="554.0" r="1.5"/><circle cx="381.0" cy="554.0" r="1.5"/><circle cx="380.9" cy="554.0" r="1.5"/><circle cx="380.9" cy="554.0" r="1.5"/><circle cx="380.8" cy="554.0" r="1.5"/><circle cx="380.8" cy="554.0" r="1.5"/><circle cx="380.3" cy="554.0" r="1.5"/><circle cx="380.3" cy="554.0" r="1.5"/><circle cx="379.8" cy="554.0" r="1.5"/><circle cx="379.6" cy="554.0" r="1.5"/><circle cx="379.6" cy="554.0" r="1.5"/><circle cx="379.5" cy="554.0" r="1.5"/><circle cx="379.4" cy="554.0" r="1.5"/><circle cx="379.2" cy="554.0" r="1.5"/><circle cx="379.2" cy="554.0" r="1.5"/><circle cx="379.0" cy="554.0" r="1.5"/><circle cx="379.0" cy="554.0" r="1.5"/><circle cx="378.8" cy="554.0" r="1.5"/><circle cx="378.8" cy="554.0" r="1.5"/><circle cx="378.7" cy="554.0" r="1.5"/><circle cx="378.4" cy="554.0" r="1.5"/><circle cx="378.4" cy="554.0" r="1.5"/><circle cx="377.7" cy="554.0" r="1.5"/><circle cx="377.7" cy="554.0" r="1.5"/><circle cx="377.4" cy="554.0" r="1.5"/><circle cx="377.4" cy="554.0" r="1.5"/><circle cx="377.3" cy="554.0" r="1.5"/><circle cx="377.3" cy="554.0" r="1.5"/><circle cx="377.3" cy="554.0" r="1.5"/><circle cx="377.0" cy="554.0" r="1.5"/><circle cx="376.9" cy="554.0" r="1.5"/><circle cx="376.9" cy="554.0" r="1.5"/><circle cx="376.9" cy="554.0" r="1.5"/><circle cx="376.7" cy="554.0" r="1.5"/><circle cx="376.4" cy="554.0" r="1.5"/><circle cx="376.3" cy="554.0" r="1.5"/><circle cx="376.2" cy="554.0" r="1.5"/><circle cx="376.2" cy="554.0" r="1.5"/><circle cx="375.9" cy="554.0" r="1.5"/><circle cx="375.8" cy="554.0" r="1.5"/><circle cx="375.8" cy="554.0" r="1.5"/><circle cx="375.6" cy="554.0" r="1.5"/><circle cx="375.6" cy="554.0" r="1.5"/><circle cx="375.3" cy="554.0" r="1.5"/><circle cx="375.1" cy="554.0" r="1.5"/><circle cx="374.8" cy="554.0" r="1.5"/><circle cx="374.8" cy="554.0" r="1.5"/><circle cx="374.6" cy="554.0" r="1.5"/><circle cx="374.6" cy="554.0" r="1.5"/><circle cx="374.4" cy="554.0" r="1.5"/><circle cx="374.2" cy="554.0" r="1.5"/><circle cx="374.1" cy="554.0" r="1.5"/><circle cx="373.9" cy="554.0" r="1.5"/><circle cx="373.9" cy="554.0" r="1.5"/><circle cx="373.3" cy="554.0" r="1.5"/><circle cx="373.3" cy="554.0" r="1.5"/><circle cx="372.7" cy="554.0" r="1.5"/><circle cx="369.5" cy="554.0" r="1.5"/><circle cx="369.4" cy="554.0" r="1.5"/><circle cx="369.4" cy="554.0" r="1.5"/><circle cx="369.4" cy="554.0" r="1.5"/><circle cx="368.9" cy="554.0" r="1.5"/><circle cx="368.9" cy="554.0" r="1.5"/><circle cx="368.8" cy="554.0" r="1.5"/><circle cx="368.8" cy="554.0" r="1.5"/><circle cx="368.5" cy="554.0" r="1.5"/><circle cx="368.5" cy="554.0" r="1.5"/><circle cx="368.1" cy="554.0" r="1.5"/><circle cx="367.7" cy="554.0" r="1.5"/><circle cx="367.6" cy="554.0" r="1.5"/><circle cx="366.3" cy="554.0" r="1.5"/><circle cx="366.2" cy="554.0" r="1.5"/><circle cx="365.6" cy="554.0" r="1.5"/><circle cx="365.2" cy="554.0" r="1.5"/><circle cx="364.5" cy="554.0" r="1.5"/><circle cx="364.4" cy="554.0" r="1.5"/><circle cx="364.4" cy="554.0" r="1.5"/><circle cx="364.1" cy="554.0" r="1.5"/><circle cx="363.7" cy="554.0" r="1.5"/><circle cx="363.1" cy="554.0" r="1.5"/><circle cx="363.0" cy="554.0" r="1.5"/><circle cx="362.3" cy="554.0" r="1.5"/><circle cx="362.3" cy="554.0" r="1.5"/><circle cx="361.9" cy="554.0" r="1.5"/><circle cx="361.9" cy="554.0" r="1.5"/><circle cx="361.9" cy="554.0" r="1.5"/><circle cx="361.4" cy="554.0" r="1.5"/><circle cx="361.2" cy="554.0" r="1.5"/><circle cx="360.9" cy="554.0" r="1.5"/><circle cx="359.8" cy="554.0" r="1.5"/><circle cx="358.5" cy="554.0" r="1.5"/><circle cx="358.4" cy="554.0" r="1.5"/><circle cx="357.5" cy="554.0" r="1.5"/><circle cx="356.6" cy="554.0" r="1.5"/><circle cx="355.0" cy="554.0" r="1.5"/><circle cx="355.0" cy="554.0" r="1.5"/><circle cx="354.5" cy="554.0" r="1.5"/><circle cx="354.4" cy="554.0" r="1.5"/><circle cx="354.2" cy="554.0" r="1.5"/><circle cx="354.1" cy="554.0" r="1.5"/><circle cx="353.8" cy="554.0" r="1.5"/><circle cx="353.8" cy="554.0" r="1.5"/><circle cx="353.1" cy="554.0" r="1.5"/><circle cx="353.0" cy="554.0" r="1.5"/><circle cx="352.8" cy="554.0" r="1.5"/><circle cx="352.3" cy="554.0" r="1.5"/><circle cx="352.1" cy="554.0" r="1.5"/><circle cx="352.0" cy="554.0" r="1.5"/><circle cx="351.9" cy="554.0" r="1.5"/><circle cx="351.7" cy="554.0" r="1.5"/><circle cx="351.7" cy="554.0" r="1.5"/><circle cx="351.2" cy="554.0" r="1.5"/><circle cx="351.0" cy="554.0" r="1.5"/><circle cx="350.9" cy="554.0" r="1.5"/><circle cx="350.9" cy="554.0" r="1.5"/><circle cx="350.9" cy="554.0" r="1.5"/><circle cx="350.7" cy="554.0" r="1.5"/><circle cx="350.7" cy="554.0" r="1.5"/><circle cx="350.5" cy="554.0" r="1.5"/><circle cx="348.8" cy="554.0" r="1.5"/><circle cx="348.7" cy="554.0" r="1.5"/><circle cx="348.1" cy="554.0" r="1.5"/><circle cx="347.8" cy="554.0" r="1.5"/><circle cx="347.4" cy="554.0" r="1.5"/><circle cx="347.0" cy="554.0" r="1.5"/><circle cx="342.8" cy="554.0" r="1.5"/><circle cx="335.3" cy="554.0" r="1.5"/><circle cx="335.2" cy="554.0" r="1.5"/><circle cx="335.2" cy="554.0" r="1.5"/><circle cx="332.8" cy="554.0" r="1.5"/><circle cx="332.4" cy="554.0" r="1.5"/><circle cx="329.1" cy="554.0" r="1.5"/><circle cx="329.1" cy="554.0" r="1.5"/><circle cx="326.3" cy="554.0" r="1.5"/><circle cx="325.3" cy="554.0" r="1.5"/><circle cx="322.8" cy="554.0" r="1.5"/><circle cx="322.4" cy="554.0" r="1.5"/><circle cx="321.8" cy="554.0" r="1.5"/><circle cx="321.3" cy="554.0" r="1.5"/><circle cx="313.1" cy="554.0" r="1.5"/><circle cx="313.1" cy="554.0" r="1.5"/><circle cx="312.1" cy="554.0" r="1.5"/><circle cx="311.4" cy="554.0" r="1.5"/><circle cx="305.6" cy="554.0" r="1.5"/><circle cx="305.6" cy="554.0" r="1.5"/><circle cx="305.2" cy="554.0" r="1.5"/><circle cx="304.5" cy="554.0" r="1.5"/><circle cx="298.1" cy="554.0" r="1.5"/><circle cx="294.3" cy="554.0" r="1.5"/><circle cx="293.5" cy="554.0" r="1.5"/><circle cx="293.1" cy="554.0" r="1.5"/><circle cx="282.9" cy="554.0" r="1.5"/><circle cx="282.2" cy="554.0" r="1.5"/><circle cx="282.2" cy="554.0" r="1.5"/><circle cx="281.7" cy="554.0" r="1.5"/><circle cx="281.7" cy="554.0" r="1.5"/><circle cx="281.3" cy="554.0" r="1.5"/><circle cx="276.4" cy="554.0" r="1.5"/><circle cx="276.4" cy="554.0" r="1.5"/><circle cx="270.1" cy="554.0" r="1.5"/><circle cx="266.8" cy="554.0" r="1.5"/><circle cx="241.1" cy="554.0" r="1.5"/><circle cx="240.7" cy="554.0" r="1.5"/><circle cx="240.7" cy="554.0" r="1.5"/><circle cx="240.1" cy="554.0" r="1.5"/><circle cx="240.1" cy="554.0" r="1.5"/><circle cx="239.8" cy="554.0" r="1.5"/><circle cx="238.3" cy="554.0" r="1.5"/><circle cx="234.1" cy="554.0" r="1.5"/><circle cx="226.6" cy="554.0" r="1.5"/><circle cx="226.6" cy="554.0" r="1.5"/><circle cx="225.3" cy="554.0" r="1.5"/><circle cx="223.0" cy="554.0" r="1.5"/><circle cx="223.0" cy="554.0" r="1.5"/><circle cx="221.2" cy="554.0" r="1.5"/><circle cx="221.1" cy="554.0" r="1.5"/><circle cx="220.9" cy="554.0" r="1.5"/><circle cx="220.5" cy="554.0" r="1.5"/><circle cx="201.9" cy="554.0" r="1.5"/><circle cx="201.9" cy="554.0" r="1.5"/><circle cx="201.9" cy="554.0" r="1.5"/><circle cx="198.0" cy="554.0" r="1.5"/><circle cx="193.2" cy="554.0" r="1.5"/><circle cx="190.0" cy="554.0" r="1.5"/><circle cx="189.3" cy="554.0" r="1.5"/><circle cx="189.1" cy="554.0" r="1.5"/><circle cx="189.0" cy="554.0" r="1.5"/><circle cx="189.0" cy="554.0" r="1.5"/><circle cx="188.7" cy="554.0" r="1.5"/><circle cx="188.6" cy="554.0" r="1.5"/><circle cx="188.6" cy="554.0" r="1.5"/><circle cx="186.5" cy="554.0" r="1.5"/><circle cx="178.3" cy="554.0" r="1.5"/><circle cx="166.3" cy="554.0" r="1.5"/><circle cx="159.5" cy="554.0" r="1.5"/><circle cx="159.2" cy="554.0" r="1.5"/><circle cx="158.0" cy="554.0" r="1.5"/><circle cx="158.0" cy="554.0" r="1.5"/><circle cx="158.0" cy="554.0" r="1.5"/><circle cx="156.9" cy="554.0" r="1.5"/><circle cx="156.6" cy="554.0" r="1.5"/><circle cx="155.5" cy="554.0" r="1.5"/><circle cx="155.2" cy="554.0" r="1.5"/><circle cx="155.2" cy="554.0" r="1.5"/><circle cx="154.9" cy="554.0" r="1.5"/><circle cx="154.2" cy="554.0" r="1.5"/><circle cx="154.2" cy="554.0" r="1.5"/><circle cx="152.6" cy="554.0" r="1.5"/></g>
+<g class="flare"><path d="M556.4 554.0L557.8 554.0L559.2 554.0L560.6 554.0L562.0 554.0L563.4 554.0L564.8 554.0L566.2 554.0L566.4 554.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M556.4 554.0L557.8 554.0L559.2 554.0L560.6 554.0L562.0 554.0L563.4 554.0L564.8 554.0L566.2 554.0L566.4 554.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>BOOOM — 2025 Ferrari 296 GTB Assetto Fiorano — $100,000 — Nov 12, 2025</title></g>
+<g class="flare"><path d="M408.6 554.0L410.0 554.0L411.4 554.0L412.8 554.0L414.2 554.0L415.6 554.0L417.0 554.0L418.4 554.0L418.6 554.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M408.6 554.0L410.0 554.0L411.4 554.0L412.8 554.0L414.2 554.0L415.6 554.0L417.0 554.0L418.4 554.0L418.6 554.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>BOOOM — 2024 Ferrari 296 GTB Assetto Fiorano — $209,999 — May 30, 2025</title></g>
+<g class="flare"><path d="M380.9 554.0L382.3 554.0L383.7 554.0L385.1 554.0L386.5 554.0L387.9 554.0L389.3 554.0L390.7 554.0L390.9 554.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M380.9 554.0L382.3 554.0L383.7 554.0L385.1 554.0L386.5 554.0L387.9 554.0L389.3 554.0L390.7 554.0L390.9 554.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>BOOOM — Twin-Turbocharged 2015 Dodge Viper GTC TA 2.0 — $181,000 — Nov 12, 2024</title></g>
+<g class="flare"><path d="M373.1 554.0L374.5 554.0L375.9 554.0L377.3 554.0L378.7 554.0L380.1 554.0L381.5 554.0L382.9 554.0L383.1 554.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M373.1 554.0L374.5 554.0L375.9 554.0L377.3 554.0L378.7 554.0L380.1 554.0L381.5 554.0L382.9 554.0L383.1 554.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>BOOOM — Supercharged Coyote-Powered 1966 Ford Mustang GT350CR by Classic Recreations — $108,000 — Sep 17, 2024</title></g>
+<g class="flare"><path d="M372.3 554.0L373.7 554.0L375.1 554.0L376.5 554.0L377.9 554.0L379.3 554.0L380.7 554.0L382.1 554.0L382.3 554.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M372.3 554.0L373.7 554.0L375.1 554.0L376.5 554.0L377.9 554.0L379.3 554.0L380.7 554.0L382.1 554.0L382.3 554.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>BOOOM — 1999 Ferrari F355 GTS 6-Speed — $126,355 — Sep 11, 2024</title></g>
+<g class="flare"><path d="M371.7 554.0L373.1 554.0L374.5 554.0L375.9 554.0L377.3 554.0L378.7 554.0L380.1 554.0L381.5 554.0L381.7 554.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M371.7 554.0L373.1 554.0L374.5 554.0L375.9 554.0L377.3 554.0L378.7 554.0L380.1 554.0L381.5 554.0L381.7 554.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>BOOOM — 2021 Mercedes-Benz Sprinter 3500XD Mobile Office Van — $50,000 — Sep 07, 2024</title></g>
+<g class="flare"><path d="M364.1 554.0L365.5 554.0L366.9 554.0L368.3 554.0L369.7 554.0L371.1 554.0L372.5 554.0L373.9 554.0L374.1 554.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M364.1 554.0L365.5 554.0L366.9 554.0L368.3 554.0L369.7 554.0L371.1 554.0L372.5 554.0L373.9 554.0L374.1 554.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>BOOOM — Supercharged Coyote-Powered 1970 Ford Bronco — $85,500 — Jul 14, 2024</title></g>
+<g class="flare"><path d="M348.8 554.0L350.2 554.0L351.6 554.0L353.0 554.0L354.4 554.0L355.8 554.0L357.2 554.0L358.6 554.0L358.8 554.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M348.8 554.0L350.2 554.0L351.6 554.0L353.0 554.0L354.4 554.0L355.8 554.0L357.2 554.0L358.6 554.0L358.8 554.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>BOOOM — 3,300-Mile 2010 Ferrari 599 GTB Fiorano — $161,000 — Mar 26, 2024</title></g>
+<g class="flare"><path d="M346.9 554.0L348.3 554.0L349.7 554.0L351.1 554.0L352.5 554.0L353.9 554.0L355.3 554.0L356.7 554.0L356.9 554.0" stroke="var(--amber)" stroke-width="7" fill="none" opacity="0.16"/><path d="M346.9 554.0L348.3 554.0L349.7 554.0L351.1 554.0L352.5 554.0L353.9 554.0L355.3 554.0L356.7 554.0L356.9 554.0" stroke="var(--amber)" stroke-width="2.6" fill="none" opacity="0.95"/><title>BOOOM — No Reserve: Modified 1990 Porsche 911 Carrera 2 Coupe — $68,569 — Mar 12, 2024</title></g>
+<g class="flare"><circle cx="839.5" cy="416.9" r="6.5" fill="var(--amber)" opacity="0.18"/><circle cx="839.5" cy="416.9" r="3.4" fill="var(--amber)"/><title>BOOOM — knot 4 (lot 254,233 · closes) — $348,340</title></g>
+<path class="thread" d="M363.1 610.0L364.7 610.0L366.3 610.0L367.9 610.0L369.5 610.0L371.1 610.0L372.7 610.0L374.3 610.0L375.9 610.0L377.5 610.0L379.1 610.0L380.7 610.0L382.3 610.0L383.9 610.0L385.5 610.0L387.1 610.0L388.7 610.0L390.3 610.0L391.9 610.0L393.5 610.0L395.1 610.0L396.7 610.0L398.3 610.0L399.9 610.0L401.5 610.0L403.1 610.0L404.7 610.0L406.3 610.0L407.9 610.0L409.5 610.0L411.1 610.0L412.7 610.0L414.3 610.0L415.9 610.0L417.5 610.0L419.1 610.0L420.7 610.0L422.3 610.0L423.9 610.0L425.5 610.0L427.1 610.0L428.7 610.0L430.3 610.0L431.9 610.0L433.5 610.0L435.1 610.0L436.7 610.0L438.3 610.0L439.9 610.0L441.5 610.0L443.1 610.0L444.7 610.0L446.3 610.0L447.9 610.0L449.5 610.0L451.1 610.0L452.7 610.0L454.3 610.0L455.9 610.0L457.5 610.0L459.1 610.0L460.7 610.0L462.3 610.0L463.9 610.0L465.5 610.0L467.1 610.0L468.7 610.0L470.3 610.0L471.9 610.0L473.5 610.0L475.1 610.0L476.7 610.0L478.3 610.0L479.9 610.0L481.5 610.0L483.1 610.0L484.7 610.0L486.3 610.0L487.9 610.0L489.5 610.0L491.1 610.0L492.7 610.0L494.3 610.0L495.9 610.0L497.5 610.0L499.1 610.0L500.7 610.0L502.3 610.0L503.9 610.0L505.5 610.0L507.1 610.0L508.7 610.0L510.3 610.0L511.9 610.0L513.5 610.0L515.1 610.0L516.7 610.0L518.3 610.0L519.9 610.0L521.5 610.0L523.1 610.0L524.7 610.0L526.3 610.0L527.9 610.0L529.5 610.0L531.1 610.0L532.7 610.0L534.3 610.0L535.9 610.0L537.5 610.0L539.1 610.0L540.7 610.0L542.3 610.0L543.9 610.0L545.5 610.0L547.1 610.0L548.7 610.0L550.3 610.0L551.9 610.0L553.5 610.0L555.1 610.0L556.7 610.0L558.3 610.0L559.9 610.0L561.5 610.0L563.1 610.0L564.7 610.0L566.3 610.0L567.9 610.0L569.5 610.0L571.1 610.0L572.7 610.0L574.3 610.0L575.9 610.0L577.5 610.0L579.1 610.0L580.7 610.0L582.3 610.0L583.9 610.0L585.5 610.0L587.1 610.0L588.7 610.0L590.3 610.0L591.9 610.0L593.5 610.0L595.1 610.0L596.7 610.0L598.3 610.0L599.9 610.0L601.5 610.0L603.1 610.0L604.7 610.0L606.3 610.0L607.9 610.0L609.5 610.0L611.1 610.0L612.7 610.0L614.3 610.0L615.9 610.0L617.5 610.0L619.1 610.0L620.7 610.0L622.3 610.0L623.9 610.0L625.5 610.0L627.1 610.0L628.7 610.0L630.3 610.0L631.9 610.0L633.5 610.0L635.1 610.0L636.7 610.0L638.3 610.0L639.9 610.0L641.5 610.0L643.1 610.0L644.7 610.0L646.3 610.0L647.9 610.0L649.5 610.0L651.1 610.0L652.7 610.0L654.3 610.0L655.9 610.0L657.5 610.0L659.1 610.0L660.7 610.0L662.3 610.0L663.9 610.0L665.5 610.0L667.1 610.0L668.7 610.0L670.3 610.0L671.9 610.0L673.5 610.0L675.1 610.0L676.7 610.0L678.3 610.0L679.9 610.0L681.5 610.0L683.1 610.0L684.7 610.0L686.3 610.0L687.9 610.0L689.5 610.0L691.1 610.0L692.7 610.0L694.3 610.0L695.9 610.0L697.5 610.0L699.1 610.0L700.7 610.0L702.3 610.0L703.9 610.0L705.5 610.0L707.1 610.0L708.7 610.0L710.3 610.0L711.9 610.0L713.5 610.0L715.1 610.0L716.7 610.0L718.3 610.0L719.9 610.0L721.5 610.0L723.1 610.0L724.7 610.0L726.3 610.0L727.9 610.0L729.5 610.0L731.1 610.0L732.7 610.0L734.3 610.0L735.9 610.0L737.5 610.0L739.1 610.0L740.7 610.0L742.3 610.0L743.9 610.0L745.5 610.0L747.1 610.0L748.7 610.0L750.3 610.0L751.9 610.0L753.5 610.0L755.1 610.0L756.7 610.0L758.3 610.0L759.9 610.0L761.5 610.0L763.1 610.0L764.7 610.0L766.3 610.0L767.9 610.0L769.5 610.0L771.1 610.0L772.7 610.0L774.3 610.0L775.9 610.0L777.5 610.0L779.1 610.0L780.7 610.0L782.3 610.0L783.9 610.0L785.5 610.0L787.1 610.0L788.7 610.0L790.3 610.0L791.9 610.0L793.5 610.0L795.1 610.0L796.7 610.0L798.3 610.0L799.9 610.0L801.5 610.0L803.1 610.0L804.7 610.0L806.3 609.8L807.9 607.8L809.5 604.0L811.1 598.4L812.7 591.0L814.3 582.1L815.9 571.9L817.5 560.5L819.1 548.3L820.7 535.4L822.3 522.2L823.9 509.0L825.5 496.0L827.1 483.6L828.7 472.0L830.3 461.4L831.9 452.1L833.5 444.3L835.1 438.1L836.7 433.8L838.3 431.3L839.9 430.8L841.5 432.2L843.1 435.6L844.7 440.8L846.3 447.7L847.9 456.3L849.5 466.2L851.1 477.3L852.7 489.3L854.3 502.1L855.9 515.2L857.5 528.4L859.1 541.5L860.7 554.1L862.0 563.7" pathLength="1" style="transition-delay:1.35s"><title>Prostockbenji — thread from Jun 2024</title></path>
+<line x1="363.1" y1="602" x2="363.1" y2="618" stroke="var(--steel)" stroke-width="1.6" class="late"/>
+<text x="112" y="613.5" class="acct" text-anchor="end">Prostockbenji</text>
+<text x="112" y="625.5" class="sub" text-anchor="end">1/45 wob · 4 wins</text>
+<line x1="116" y1="610" x2="363.1" y2="610" stroke="var(--hair)" stroke-width="1" stroke-dasharray="1 4" class="late"/>
+<g class="late" fill="var(--steel)" opacity="0.42"><circle cx="836.3" cy="434.7" r="1.5"/><circle cx="831.0" cy="457.3" r="1.5"/><circle cx="813.9" cy="584.8" r="1.5"/><circle cx="809.6" cy="603.8" r="1.5"/><circle cx="795.7" cy="610.0" r="1.5"/><circle cx="792.5" cy="610.0" r="1.5"/><circle cx="787.1" cy="610.0" r="1.5"/><circle cx="786.0" cy="610.0" r="1.5"/><circle cx="766.8" cy="610.0" r="1.5"/><circle cx="763.6" cy="610.0" r="1.5"/><circle cx="762.5" cy="610.0" r="1.5"/><circle cx="750.7" cy="610.0" r="1.5"/><circle cx="748.6" cy="610.0" r="1.5"/><circle cx="748.6" cy="610.0" r="1.5"/><circle cx="740.0" cy="610.0" r="1.5"/><circle cx="667.3" cy="610.0" r="1.5"/><circle cx="649.1" cy="610.0" r="1.5"/><circle cx="624.5" cy="610.0" r="1.5"/><circle cx="605.2" cy="610.0" r="1.5"/><circle cx="561.4" cy="610.0" r="1.5"/><circle cx="550.7" cy="610.0" r="1.5"/><circle cx="535.7" cy="610.0" r="1.5"/><circle cx="515.4" cy="610.0" r="1.5"/><circle cx="513.2" cy="610.0" r="1.5"/><circle cx="512.1" cy="610.0" r="1.5"/><circle cx="508.9" cy="610.0" r="1.5"/><circle cx="499.3" cy="610.0" r="1.5"/><circle cx="498.2" cy="610.0" r="1.5"/><circle cx="497.2" cy="610.0" r="1.5"/><circle cx="496.1" cy="610.0" r="1.5"/><circle cx="491.8" cy="610.0" r="1.5"/><circle cx="491.8" cy="610.0" r="1.5"/><circle cx="489.7" cy="610.0" r="1.5"/><circle cx="489.7" cy="610.0" r="1.5"/><circle cx="489.7" cy="610.0" r="1.5"/><circle cx="433.0" cy="610.0" r="1.5"/><circle cx="426.6" cy="610.0" r="1.5"/><circle cx="416.7" cy="610.0" r="1.5"/><circle cx="410.2" cy="610.0" r="1.5"/><circle cx="409.1" cy="610.0" r="1.5"/><circle cx="406.6" cy="610.0" r="1.5"/><circle cx="404.1" cy="610.0" r="1.5"/><circle cx="399.1" cy="610.0" r="1.5"/><circle cx="377.6" cy="610.0" r="1.5"/></g>
+<g class="flare"><circle cx="839.5" cy="430.7" r="6.5" fill="var(--amber)" opacity="0.18"/><circle cx="839.5" cy="430.7" r="3.4" fill="var(--amber)"/><title>Prostockbenji — knot 4 (lot 254,233 · closes) — $500,000</title></g>
+</svg></div>
+<aside class="notes">
+<div class="note" style="transition-delay:.3s"><span class="num">① Jul 31, 2025</span>
+<p>wob’s first 918 Spyder ends <b>reserve not met at $2,305,918</b>. The high bid belongs to
+<b>TorqueOrCork</b> — an account created that same month — with <b>PORSCHE911STPTS</b> the
+underbidder at $2,300,000. Neither account has a recorded purchase.</p></div>
+<div class="note" style="transition-delay:.6s"><span class="num">② Oct 2025</span>
+<p>A second 918 Spyder from the same seller <b>sells for $2,301,000</b> — within
+0.2% of the unconsummated number. <b>PORSCHE911STPTS</b> appears in its roster at
+$1,900,000. The pull-out below puts that 0.2% in market context.</p></div>
+<div class="note" style="transition-delay:.9s"><span class="num">③ May 07, 2026</span>
+<p>The 293-mile GT2 RS later cited in support of the case lot’s price is <b>wob’s own sale at
+$733,420</b> — with <b>AmeerH</b> and <b>Dcd0611</b> in its bidder roster.</p></div>
+<div class="note" style="transition-delay:1.2s"><span class="num">④ Jul 30, 2026</span>
+<p>Lot 254,233. <b>9 of the ten threads converge.</b> TorqueOrCork carries $991,992 —
+the account’s entire platform existence is 2 of 2 auctions, both on
+this seller — and rda1987 holds the $1,000,000 closing bid. Whether winners pay remains
+the decisive open question.</p></div>
+</aside>
+</div>
+<div class="note innocent wide" style="transition-delay:1.5s"><span class="num">ⓘ the innocent reading</span>
+<p>A 2,214-listing consignor accrues loyal followers, and convergence is also what
+enthusiasts do. 6 of these 10 accounts have zero lifetime wins — and a
+zero-win record is the platform’s base case, not an accusation. Across the ten, 44
+of 812 lifetime auctions (5%) touch this one seller. The braid
+shows described activity aligned in time so the pattern and its innocent explanation can
+be weighed together.</p></div>
+</div>
+
+<!-- ================= 2 · ANCHOR PULL-OUT (knots ① → ②) ================= -->
+<div class="pulltab">pull-out · knot ① → knot ②</div>
+<div class="pullout">
+<div class="pullgrid">
+<div>
+<div class="bignum">0.2%<small>gap between the failed $2,305,918<br>and the $2,301,000 sale, 2½ months later</small></div>
+</div>
+<div>
+<svg viewBox="0 0 640 150" role="img" aria-label="Gap between failed number and later comparable sale for 463 high-tier pairs; the 2 percent zone is empty except the 918 pair">
+<rect x="46" y="26" width="11.6" height="82" fill="var(--amber)" opacity="0.10"/>
+<line x1="57.6" y1="26" x2="57.6" y2="108" stroke="var(--amber)" stroke-width="1" stroke-dasharray="2 3" opacity="0.8"/>
+<line x1="383.9" y1="38.0" x2="383.9" y2="46.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="532.0" y1="40.1" x2="532.0" y2="48.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="584.2" y1="42.3" x2="584.2" y2="50.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="586.0" y1="44.4" x2="586.0" y2="52.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="596.4" y1="46.5" x2="596.4" y2="54.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="588.0" y1="48.7" x2="588.0" y2="56.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="620.2" y1="50.8" x2="620.2" y2="58.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="613.1" y1="53.0" x2="613.1" y2="61.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="590.6" y1="55.1" x2="590.6" y2="63.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="604.8" y1="57.2" x2="604.8" y2="65.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="611.1" y1="59.4" x2="611.1" y2="67.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="586.7" y1="61.5" x2="586.7" y2="69.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="605.9" y1="63.6" x2="605.9" y2="71.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="589.8" y1="65.8" x2="589.8" y2="73.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="587.5" y1="67.9" x2="587.5" y2="75.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="616.9" y1="70.1" x2="616.9" y2="78.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="382.1" y1="72.2" x2="382.1" y2="80.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="556.0" y1="74.3" x2="556.0" y2="82.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="577.0" y1="76.5" x2="577.0" y2="84.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="366.0" y1="78.6" x2="366.0" y2="86.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="394.1" y1="80.7" x2="394.1" y2="88.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="430.5" y1="82.9" x2="430.5" y2="90.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="502.7" y1="85.0" x2="502.7" y2="93.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="543.4" y1="87.2" x2="543.4" y2="95.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="575.3" y1="89.3" x2="575.3" y2="97.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="511.1" y1="91.4" x2="511.1" y2="99.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="616.9" y1="93.6" x2="616.9" y2="101.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="609.8" y1="95.7" x2="609.8" y2="103.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="623.1" y1="39.8" x2="623.1" y2="47.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="597.2" y1="42.0" x2="597.2" y2="50.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="606.7" y1="44.1" x2="606.7" y2="52.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="604.4" y1="46.3" x2="604.4" y2="54.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="605.2" y1="48.4" x2="605.2" y2="56.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="612.2" y1="50.5" x2="612.2" y2="58.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="594.5" y1="52.7" x2="594.5" y2="60.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="594.2" y1="54.8" x2="594.2" y2="62.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="594.8" y1="56.9" x2="594.8" y2="64.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="617.4" y1="59.1" x2="617.4" y2="67.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="621.9" y1="61.2" x2="621.9" y2="69.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="623.4" y1="63.3" x2="623.4" y2="71.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="622.3" y1="65.5" x2="622.3" y2="73.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="617.0" y1="67.6" x2="617.0" y2="75.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="619.5" y1="69.8" x2="619.5" y2="77.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="620.1" y1="71.9" x2="620.1" y2="79.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="617.5" y1="74.0" x2="617.5" y2="82.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="618.9" y1="76.2" x2="618.9" y2="84.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="622.0" y1="78.3" x2="622.0" y2="86.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="610.1" y1="80.4" x2="610.1" y2="88.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="606.9" y1="82.6" x2="606.9" y2="90.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="616.3" y1="84.7" x2="616.3" y2="92.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="575.0" y1="86.9" x2="575.0" y2="94.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="596.0" y1="89.0" x2="596.0" y2="97.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="572.0" y1="91.1" x2="572.0" y2="99.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="622.6" y1="93.3" x2="622.6" y2="101.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="622.8" y1="95.4" x2="622.8" y2="103.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="620.4" y1="39.5" x2="620.4" y2="47.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="620.7" y1="41.7" x2="620.7" y2="49.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="615.0" y1="43.8" x2="615.0" y2="51.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="610.4" y1="46.0" x2="610.4" y2="54.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="609.5" y1="48.1" x2="609.5" y2="56.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="606.7" y1="50.2" x2="606.7" y2="58.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="608.0" y1="52.4" x2="608.0" y2="60.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="614.5" y1="54.5" x2="614.5" y2="62.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="592.6" y1="56.6" x2="592.6" y2="64.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="564.7" y1="58.8" x2="564.7" y2="66.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="617.5" y1="60.9" x2="617.5" y2="68.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="617.2" y1="63.1" x2="617.2" y2="71.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="618.3" y1="65.2" x2="618.3" y2="73.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="620.3" y1="67.3" x2="620.3" y2="75.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="620.5" y1="69.5" x2="620.5" y2="77.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="602.1" y1="71.6" x2="602.1" y2="79.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="602.3" y1="73.7" x2="602.3" y2="81.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="606.5" y1="75.9" x2="606.5" y2="83.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="603.6" y1="78.0" x2="603.6" y2="86.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="601.1" y1="80.1" x2="601.1" y2="88.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="610.7" y1="82.3" x2="610.7" y2="90.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="613.8" y1="84.4" x2="613.8" y2="92.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="597.6" y1="86.6" x2="597.6" y2="94.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="614.0" y1="88.7" x2="614.0" y2="96.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="581.8" y1="90.8" x2="581.8" y2="98.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="618.4" y1="93.0" x2="618.4" y2="101.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="598.2" y1="95.1" x2="598.2" y2="103.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="614.9" y1="39.2" x2="614.9" y2="47.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="613.2" y1="41.4" x2="613.2" y2="49.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="615.3" y1="43.5" x2="615.3" y2="51.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="620.1" y1="45.7" x2="620.1" y2="53.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="615.7" y1="47.8" x2="615.7" y2="55.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="605.2" y1="49.9" x2="605.2" y2="57.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="600.5" y1="52.1" x2="600.5" y2="60.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="595.7" y1="54.2" x2="595.7" y2="62.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="585.4" y1="56.3" x2="585.4" y2="64.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="613.5" y1="58.5" x2="613.5" y2="66.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="543.3" y1="60.6" x2="543.3" y2="68.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="618.0" y1="62.8" x2="618.0" y2="70.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="584.4" y1="64.9" x2="584.4" y2="72.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="544.6" y1="67.0" x2="544.6" y2="75.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="619.3" y1="69.2" x2="619.3" y2="77.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="474.8" y1="71.3" x2="474.8" y2="79.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="527.3" y1="73.4" x2="527.3" y2="81.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="514.7" y1="75.6" x2="514.7" y2="83.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="518.9" y1="77.7" x2="518.9" y2="85.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="558.3" y1="79.9" x2="558.3" y2="87.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="459.4" y1="82.0" x2="459.4" y2="90.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="457.4" y1="84.1" x2="457.4" y2="92.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="461.1" y1="86.3" x2="461.1" y2="94.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="587.2" y1="88.4" x2="587.2" y2="96.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="612.4" y1="90.5" x2="612.4" y2="98.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="620.8" y1="92.7" x2="620.8" y2="100.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="614.2" y1="94.8" x2="614.2" y2="102.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="585.1" y1="38.9" x2="585.1" y2="46.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="598.9" y1="41.1" x2="598.9" y2="49.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="601.9" y1="43.2" x2="601.9" y2="51.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="587.5" y1="45.4" x2="587.5" y2="53.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="595.7" y1="47.5" x2="595.7" y2="55.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="613.2" y1="49.6" x2="613.2" y2="57.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="546.3" y1="51.8" x2="546.3" y2="59.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="528.9" y1="53.9" x2="528.9" y2="61.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="563.0" y1="56.0" x2="563.0" y2="64.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="580.9" y1="58.2" x2="580.9" y2="66.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="513.7" y1="60.3" x2="513.7" y2="68.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="350.8" y1="62.5" x2="350.8" y2="70.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="467.4" y1="64.6" x2="467.4" y2="72.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="334.0" y1="66.7" x2="334.0" y2="74.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="616.2" y1="68.9" x2="616.2" y2="76.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="617.4" y1="71.0" x2="617.4" y2="79.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="604.1" y1="73.1" x2="604.1" y2="81.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="605.6" y1="75.3" x2="605.6" y2="83.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="573.8" y1="77.4" x2="573.8" y2="85.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="547.8" y1="79.6" x2="547.8" y2="87.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="560.9" y1="81.7" x2="560.9" y2="89.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="543.1" y1="83.8" x2="543.1" y2="91.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="527.3" y1="86.0" x2="527.3" y2="94.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="534.7" y1="88.1" x2="534.7" y2="96.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="571.2" y1="90.2" x2="571.2" y2="98.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="538.3" y1="92.4" x2="538.3" y2="100.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="448.5" y1="94.5" x2="448.5" y2="102.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="293.0" y1="38.7" x2="293.0" y2="46.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="587.8" y1="40.8" x2="587.8" y2="48.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="586.1" y1="42.9" x2="586.1" y2="50.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="592.5" y1="45.1" x2="592.5" y2="53.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="603.5" y1="47.2" x2="603.5" y2="55.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="604.2" y1="49.3" x2="604.2" y2="57.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="501.6" y1="51.5" x2="501.6" y2="59.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="502.6" y1="53.6" x2="502.6" y2="61.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="500.0" y1="55.8" x2="500.0" y2="63.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="526.4" y1="57.9" x2="526.4" y2="65.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="510.0" y1="60.0" x2="510.0" y2="68.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="496.3" y1="62.2" x2="496.3" y2="70.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="549.9" y1="64.3" x2="549.9" y2="72.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="567.2" y1="66.4" x2="567.2" y2="74.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="476.9" y1="68.6" x2="476.9" y2="76.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="568.0" y1="70.7" x2="568.0" y2="78.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="388.6" y1="72.8" x2="388.6" y2="80.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="592.6" y1="75.0" x2="592.6" y2="83.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="598.8" y1="77.1" x2="598.8" y2="85.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="480.0" y1="79.3" x2="480.0" y2="87.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="573.0" y1="81.4" x2="573.0" y2="89.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="564.1" y1="83.5" x2="564.1" y2="91.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="575.4" y1="85.7" x2="575.4" y2="93.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="602.4" y1="87.8" x2="602.4" y2="95.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="577.5" y1="89.9" x2="577.5" y2="97.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="518.9" y1="92.1" x2="518.9" y2="100.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="492.6" y1="94.2" x2="492.6" y2="102.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="466.4" y1="38.4" x2="466.4" y2="46.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="408.6" y1="40.5" x2="408.6" y2="48.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="565.2" y1="42.6" x2="565.2" y2="50.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="173.2" y1="44.8" x2="173.2" y2="52.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="590.4" y1="46.9" x2="590.4" y2="54.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="490.0" y1="49.0" x2="490.0" y2="57.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="528.3" y1="51.2" x2="528.3" y2="59.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="483.9" y1="53.3" x2="483.9" y2="61.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="430.6" y1="55.5" x2="430.6" y2="63.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="571.5" y1="57.6" x2="571.5" y2="65.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="556.7" y1="59.7" x2="556.7" y2="67.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="557.2" y1="61.9" x2="557.2" y2="69.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="570.3" y1="64.0" x2="570.3" y2="72.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="561.3" y1="66.1" x2="561.3" y2="74.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="553.8" y1="68.3" x2="553.8" y2="76.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="583.3" y1="70.4" x2="583.3" y2="78.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="592.8" y1="72.6" x2="592.8" y2="80.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="543.1" y1="74.7" x2="543.1" y2="82.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="593.2" y1="76.8" x2="593.2" y2="84.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="494.5" y1="79.0" x2="494.5" y2="87.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="606.7" y1="81.1" x2="606.7" y2="89.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="544.8" y1="83.2" x2="544.8" y2="91.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="596.0" y1="85.4" x2="596.0" y2="93.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="591.1" y1="87.5" x2="591.1" y2="95.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="597.2" y1="89.6" x2="597.2" y2="97.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="612.2" y1="91.8" x2="612.2" y2="99.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="598.4" y1="93.9" x2="598.4" y2="101.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="566.2" y1="38.1" x2="566.2" y2="46.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="551.8" y1="40.2" x2="551.8" y2="48.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="537.3" y1="42.3" x2="537.3" y2="50.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="505.5" y1="44.5" x2="505.5" y2="52.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="591.6" y1="46.6" x2="591.6" y2="54.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="376.0" y1="48.7" x2="376.0" y2="56.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="605.5" y1="50.9" x2="605.5" y2="58.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="550.3" y1="53.0" x2="550.3" y2="61.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="571.4" y1="55.2" x2="571.4" y2="63.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="517.6" y1="57.3" x2="517.6" y2="65.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="595.1" y1="59.4" x2="595.1" y2="67.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="577.5" y1="61.6" x2="577.5" y2="69.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="570.8" y1="63.7" x2="570.8" y2="71.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="548.9" y1="65.8" x2="548.9" y2="73.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="576.6" y1="68.0" x2="576.6" y2="76.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="551.8" y1="70.1" x2="551.8" y2="78.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="426.9" y1="72.3" x2="426.9" y2="80.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="450.6" y1="74.4" x2="450.6" y2="82.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="598.3" y1="76.5" x2="598.3" y2="84.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="553.5" y1="78.7" x2="553.5" y2="86.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="580.4" y1="80.8" x2="580.4" y2="88.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="581.8" y1="82.9" x2="581.8" y2="90.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="570.8" y1="85.1" x2="570.8" y2="93.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="571.7" y1="87.2" x2="571.7" y2="95.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="526.3" y1="89.4" x2="526.3" y2="97.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="598.2" y1="91.5" x2="598.2" y2="99.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="573.0" y1="93.6" x2="573.0" y2="101.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="508.6" y1="95.8" x2="508.6" y2="103.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="479.8" y1="39.9" x2="479.8" y2="47.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="450.9" y1="42.0" x2="450.9" y2="50.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="387.5" y1="44.2" x2="387.5" y2="52.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="559.4" y1="46.3" x2="559.4" y2="54.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="129.1" y1="48.4" x2="129.1" y2="56.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="519.0" y1="50.6" x2="519.0" y2="58.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="566.3" y1="52.7" x2="566.3" y2="60.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="517.9" y1="54.9" x2="517.9" y2="62.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="474.0" y1="57.0" x2="474.0" y2="65.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="529.4" y1="59.1" x2="529.4" y2="67.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="479.8" y1="61.3" x2="479.8" y2="69.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="539.8" y1="63.4" x2="539.8" y2="71.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="519.6" y1="65.5" x2="519.6" y2="73.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="572.4" y1="67.7" x2="572.4" y2="75.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="496.3" y1="69.8" x2="496.3" y2="77.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="500.5" y1="72.0" x2="500.5" y2="80.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="524.6" y1="74.1" x2="524.6" y2="82.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="523.3" y1="76.2" x2="523.3" y2="84.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="372.2" y1="78.4" x2="372.2" y2="86.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="408.8" y1="80.5" x2="408.8" y2="88.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="396.3" y1="82.6" x2="396.3" y2="90.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="554.1" y1="84.8" x2="554.1" y2="92.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="483.0" y1="86.9" x2="483.0" y2="94.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="537.4" y1="89.1" x2="537.4" y2="97.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="550.2" y1="91.2" x2="550.2" y2="99.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="434.8" y1="93.3" x2="434.8" y2="101.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="476.4" y1="95.5" x2="476.4" y2="103.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="531.6" y1="39.6" x2="531.6" y2="47.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="435.7" y1="41.7" x2="435.7" y2="49.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="575.2" y1="43.9" x2="575.2" y2="51.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="549.4" y1="46.0" x2="549.4" y2="54.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="507.2" y1="48.2" x2="507.2" y2="56.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="569.5" y1="50.3" x2="569.5" y2="58.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="505.3" y1="52.4" x2="505.3" y2="60.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="514.6" y1="54.6" x2="514.6" y2="62.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="319.5" y1="56.7" x2="319.5" y2="64.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="386.6" y1="58.8" x2="386.6" y2="66.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="464.0" y1="61.0" x2="464.0" y2="69.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="475.4" y1="63.1" x2="475.4" y2="71.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="321.1" y1="65.2" x2="321.1" y2="73.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="545.6" y1="67.4" x2="545.6" y2="75.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="536.3" y1="69.5" x2="536.3" y2="77.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="267.9" y1="71.7" x2="267.9" y2="79.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="503.9" y1="73.8" x2="503.9" y2="81.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="453.7" y1="75.9" x2="453.7" y2="83.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="436.2" y1="78.1" x2="436.2" y2="86.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="536.3" y1="80.2" x2="536.3" y2="88.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="123.4" y1="82.3" x2="123.4" y2="90.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="172.9" y1="84.5" x2="172.9" y2="92.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="456.3" y1="86.6" x2="456.3" y2="94.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="414.5" y1="88.8" x2="414.5" y2="96.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="433.0" y1="90.9" x2="433.0" y2="98.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="392.8" y1="93.0" x2="392.8" y2="101.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="616.8" y1="95.2" x2="616.8" y2="103.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="618.3" y1="39.3" x2="618.3" y2="47.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="609.4" y1="41.4" x2="609.4" y2="49.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="619.5" y1="43.6" x2="619.5" y2="51.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="618.6" y1="45.7" x2="618.6" y2="53.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="621.0" y1="47.9" x2="621.0" y2="55.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="614.3" y1="50.0" x2="614.3" y2="58.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="591.7" y1="52.1" x2="591.7" y2="60.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="617.5" y1="54.3" x2="617.5" y2="62.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="596.3" y1="56.4" x2="596.3" y2="64.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="616.7" y1="58.5" x2="616.7" y2="66.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="617.5" y1="60.7" x2="617.5" y2="68.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="615.9" y1="62.8" x2="615.9" y2="70.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="620.0" y1="65.0" x2="620.0" y2="73.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="621.1" y1="67.1" x2="621.1" y2="75.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="618.7" y1="69.2" x2="618.7" y2="77.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="552.8" y1="71.4" x2="552.8" y2="79.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="609.8" y1="73.5" x2="609.8" y2="81.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="618.6" y1="75.6" x2="618.6" y2="83.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="620.0" y1="77.8" x2="620.0" y2="85.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="620.2" y1="79.9" x2="620.2" y2="87.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="614.1" y1="82.0" x2="614.1" y2="90.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="620.8" y1="84.2" x2="620.8" y2="92.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="619.5" y1="86.3" x2="619.5" y2="94.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="619.4" y1="88.5" x2="619.4" y2="96.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="620.3" y1="90.6" x2="620.3" y2="98.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="621.6" y1="92.7" x2="621.6" y2="100.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="563.4" y1="94.9" x2="563.4" y2="102.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="603.8" y1="39.0" x2="603.8" y2="47.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="614.7" y1="41.1" x2="614.7" y2="49.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="574.7" y1="43.3" x2="574.7" y2="51.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="616.0" y1="45.4" x2="616.0" y2="53.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="601.3" y1="47.6" x2="601.3" y2="55.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="615.1" y1="49.7" x2="615.1" y2="57.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="620.6" y1="51.8" x2="620.6" y2="59.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="617.7" y1="54.0" x2="617.7" y2="62.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="606.6" y1="56.1" x2="606.6" y2="64.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="609.8" y1="58.2" x2="609.8" y2="66.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="615.5" y1="60.4" x2="615.5" y2="68.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="615.7" y1="62.5" x2="615.7" y2="70.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="613.5" y1="64.7" x2="613.5" y2="72.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="607.0" y1="66.8" x2="607.0" y2="74.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="609.0" y1="68.9" x2="609.0" y2="76.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="608.2" y1="71.1" x2="608.2" y2="79.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="617.5" y1="73.2" x2="617.5" y2="81.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="617.2" y1="75.3" x2="617.2" y2="83.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="620.5" y1="77.5" x2="620.5" y2="85.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="581.6" y1="79.6" x2="581.6" y2="87.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="618.3" y1="81.8" x2="618.3" y2="89.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="594.9" y1="83.9" x2="594.9" y2="91.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="603.0" y1="86.0" x2="603.0" y2="94.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="620.8" y1="88.2" x2="620.8" y2="96.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="622.1" y1="90.3" x2="622.1" y2="98.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="409.3" y1="92.4" x2="409.3" y2="100.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="479.2" y1="94.6" x2="479.2" y2="102.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="529.7" y1="38.7" x2="529.7" y2="46.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="395.2" y1="40.8" x2="395.2" y2="48.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="404.8" y1="43.0" x2="404.8" y2="51.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="539.7" y1="45.1" x2="539.7" y2="53.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="493.4" y1="47.3" x2="493.4" y2="55.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="486.0" y1="49.4" x2="486.0" y2="57.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="378.7" y1="51.5" x2="378.7" y2="59.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="531.2" y1="53.7" x2="531.2" y2="61.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="336.6" y1="55.8" x2="336.6" y2="63.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="404.8" y1="57.9" x2="404.8" y2="65.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="555.8" y1="60.1" x2="555.8" y2="68.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="593.8" y1="62.2" x2="593.8" y2="70.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="594.1" y1="64.4" x2="594.1" y2="72.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="603.6" y1="66.5" x2="603.6" y2="74.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="520.1" y1="68.6" x2="520.1" y2="76.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="597.6" y1="70.8" x2="597.6" y2="78.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="565.6" y1="72.9" x2="565.6" y2="80.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="595.4" y1="75.0" x2="595.4" y2="83.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="525.3" y1="77.2" x2="525.3" y2="85.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="600.8" y1="79.3" x2="600.8" y2="87.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="578.7" y1="81.5" x2="578.7" y2="89.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="596.8" y1="83.6" x2="596.8" y2="91.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="579.8" y1="85.7" x2="579.8" y2="93.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="570.4" y1="87.9" x2="570.4" y2="95.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="570.7" y1="90.0" x2="570.7" y2="98.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="609.0" y1="92.1" x2="609.0" y2="100.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="610.4" y1="94.3" x2="610.4" y2="102.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="600.6" y1="38.4" x2="600.6" y2="46.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="590.6" y1="40.6" x2="590.6" y2="48.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="557.8" y1="42.7" x2="557.8" y2="50.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="618.5" y1="44.8" x2="618.5" y2="52.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="610.1" y1="47.0" x2="610.1" y2="55.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="562.7" y1="49.1" x2="562.7" y2="57.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="581.5" y1="51.2" x2="581.5" y2="59.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="594.8" y1="53.4" x2="594.8" y2="61.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="548.8" y1="55.5" x2="548.8" y2="63.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="556.4" y1="57.6" x2="556.4" y2="65.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="500.9" y1="59.8" x2="500.9" y2="67.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="610.2" y1="61.9" x2="610.2" y2="69.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="621.8" y1="64.1" x2="621.8" y2="72.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="548.5" y1="66.2" x2="548.5" y2="74.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="514.4" y1="68.3" x2="514.4" y2="76.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="478.8" y1="70.5" x2="478.8" y2="78.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="529.8" y1="72.6" x2="529.8" y2="80.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="485.5" y1="74.7" x2="485.5" y2="82.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="492.7" y1="76.9" x2="492.7" y2="84.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="414.8" y1="79.0" x2="414.8" y2="87.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="426.8" y1="81.2" x2="426.8" y2="89.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="429.7" y1="83.3" x2="429.7" y2="91.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="511.5" y1="85.4" x2="511.5" y2="93.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="545.2" y1="87.6" x2="545.2" y2="95.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="449.9" y1="89.7" x2="449.9" y2="97.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="526.8" y1="91.8" x2="526.8" y2="99.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="407.6" y1="94.0" x2="407.6" y2="102.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="402.8" y1="38.1" x2="402.8" y2="46.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="289.3" y1="40.3" x2="289.3" y2="48.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="343.1" y1="42.4" x2="343.1" y2="50.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="337.4" y1="44.5" x2="337.4" y2="52.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="296.0" y1="46.7" x2="296.0" y2="54.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="470.1" y1="48.8" x2="470.1" y2="56.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="434.5" y1="50.9" x2="434.5" y2="58.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="400.9" y1="53.1" x2="400.9" y2="61.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="351.4" y1="55.2" x2="351.4" y2="63.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="497.1" y1="57.4" x2="497.1" y2="65.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="557.6" y1="59.5" x2="557.6" y2="67.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="562.9" y1="61.6" x2="562.9" y2="69.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="569.7" y1="63.8" x2="569.7" y2="71.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="554.4" y1="65.9" x2="554.4" y2="73.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="541.1" y1="68.0" x2="541.1" y2="76.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="471.1" y1="70.2" x2="471.1" y2="78.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="522.0" y1="72.3" x2="522.0" y2="80.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="501.9" y1="74.5" x2="501.9" y2="82.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="496.1" y1="76.6" x2="496.1" y2="84.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="493.2" y1="78.7" x2="493.2" y2="86.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="500.0" y1="80.9" x2="500.0" y2="88.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="270.3" y1="83.0" x2="270.3" y2="91.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="378.8" y1="85.1" x2="378.8" y2="93.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="465.3" y1="87.3" x2="465.3" y2="95.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="544.2" y1="89.4" x2="544.2" y2="97.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="530.5" y1="91.5" x2="530.5" y2="99.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="518.2" y1="93.7" x2="518.2" y2="101.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="435.5" y1="95.8" x2="435.5" y2="103.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="441.3" y1="40.0" x2="441.3" y2="48.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="467.7" y1="42.1" x2="467.7" y2="50.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="239.3" y1="44.2" x2="239.3" y2="52.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="172.0" y1="46.4" x2="172.0" y2="54.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="420.1" y1="48.5" x2="420.1" y2="56.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="428.8" y1="50.6" x2="428.8" y2="58.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="339.3" y1="52.8" x2="339.3" y2="60.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="405.7" y1="54.9" x2="405.7" y2="62.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="409.6" y1="57.1" x2="409.6" y2="65.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="377.8" y1="59.2" x2="377.8" y2="67.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="514.4" y1="61.3" x2="514.4" y2="69.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="520.1" y1="63.5" x2="520.1" y2="71.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="476.8" y1="65.6" x2="476.8" y2="73.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="295.2" y1="67.7" x2="295.2" y2="75.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="91.1" y1="69.9" x2="91.1" y2="77.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="359.2" y1="72.0" x2="359.2" y2="80.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="410.7" y1="74.2" x2="410.7" y2="82.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="430.3" y1="76.3" x2="430.3" y2="84.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="515.9" y1="78.4" x2="515.9" y2="86.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="377.8" y1="80.6" x2="377.8" y2="88.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="251.5" y1="82.7" x2="251.5" y2="90.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="311.5" y1="84.8" x2="311.5" y2="92.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="305.0" y1="87.0" x2="305.0" y2="95.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="259.0" y1="89.1" x2="259.0" y2="97.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="452.7" y1="91.3" x2="452.7" y2="99.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="413.1" y1="93.4" x2="413.1" y2="101.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="375.7" y1="95.5" x2="375.7" y2="103.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="320.6" y1="39.7" x2="320.6" y2="47.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="482.7" y1="41.8" x2="482.7" y2="49.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="550.1" y1="43.9" x2="550.1" y2="51.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="563.5" y1="46.1" x2="563.5" y2="54.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="546.5" y1="48.2" x2="546.5" y2="56.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="531.7" y1="50.3" x2="531.7" y2="58.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="453.8" y1="52.5" x2="453.8" y2="60.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="488.1" y1="54.6" x2="488.1" y2="62.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="481.6" y1="56.8" x2="481.6" y2="64.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="478.4" y1="58.9" x2="478.4" y2="66.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="485.9" y1="61.0" x2="485.9" y2="69.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="230.3" y1="63.2" x2="230.3" y2="71.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="351.1" y1="65.3" x2="351.1" y2="73.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="447.4" y1="67.4" x2="447.4" y2="75.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="535.2" y1="69.6" x2="535.2" y2="77.6" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="506.3" y1="71.7" x2="506.3" y2="79.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="414.2" y1="73.9" x2="414.2" y2="81.9" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="420.6" y1="76.0" x2="420.6" y2="84.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="450.1" y1="78.1" x2="450.1" y2="86.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="195.9" y1="80.3" x2="195.9" y2="88.3" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="120.9" y1="82.4" x2="120.9" y2="90.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="397.1" y1="84.5" x2="397.1" y2="92.5" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="307.2" y1="86.7" x2="307.2" y2="94.7" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="381.0" y1="88.8" x2="381.0" y2="96.8" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="350.0" y1="91.0" x2="350.0" y2="99.0" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="502.0" y1="93.1" x2="502.0" y2="101.1" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="508.4" y1="95.2" x2="508.4" y2="103.2" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<line x1="460.3" y1="39.4" x2="460.3" y2="47.4" stroke="var(--steel)" stroke-width="1" opacity="0.55"/>
+<g><circle cx="47.2" cy="32" r="4" fill="var(--oxide)"/><line x1="47.2" y1="36" x2="47.2" y2="108" stroke="var(--oxide)" stroke-width="1.4"/><text x="55" y="35" class="annhead" fill="var(--oxide)">the 918 pair · 0.2%</text></g>
+<text x="64" y="102" class="tick" fill="var(--amber)">±2% zone — 0 of 463 pairs</text>
+<text x="46" y="126" class="tick" text-anchor="middle">0%</text>
+<text x="190" y="126" class="tick" text-anchor="middle">25%</text>
+<text x="335" y="126" class="tick" text-anchor="middle">50%</text>
+<text x="480" y="126" class="tick" text-anchor="middle">75%</text>
+<text x="624" y="126" class="tick" text-anchor="middle">100%</text>
+<text x="46" y="142" class="tick">|gap| failed number → later comparable sale · ≥$500k tier · Apr–Aug 2026 · capped at 100%</text>
+</svg>
+<p>How unusual is a landing that close? Across every ≥$500k reserve-not-met opportunity on
+the platform from April to August 2026, <b>0 of 463 later comparable sales landed within
+±2% of the failed number</b> — the nearest of the 463 sits 7.8% away. The 918 pair,
+at 0.2%, is alone in the shaded zone. A close landing can still happen honestly —
+the failed bid may simply have discovered the right price — but in this tier, in this window,
+it happened once.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================ 3 · THE LADDER =========================== -->
+<section id="ladder">
+<div class="kicker">§02 · six days, eighteen bids</div>
+<h2>The staircase — the ladder in real time</h2>
+<p class="lede">Price against the clock. Each tread is a bid resting as high bid; each riser is
+the increment that displaced it — the tallest risers are the loudest. Day one carries nine bids
+in nine hours; the last five days carry five.</p>
+<div class="panel">
+<svg viewBox="0 0 1120 640" role="img" aria-label="The 18-bid ladder as a real-time staircase over six days, riser height equal to increment">
+<line x1="88" y1="510" x2="1094" y2="510" stroke="var(--hair)" stroke-width="1"/>
+<text x="80" y="513" class="tick" text-anchor="end">$400k</text>
+<line x1="88" y1="439" x2="1094" y2="439" stroke="var(--hair)" stroke-width="1"/>
+<text x="80" y="443" class="tick" text-anchor="end">$500k</text>
+<line x1="88" y1="369" x2="1094" y2="369" stroke="var(--hair)" stroke-width="1"/>
+<text x="80" y="373" class="tick" text-anchor="end">$600k</text>
+<line x1="88" y1="299" x2="1094" y2="299" stroke="var(--hair)" stroke-width="1"/>
+<text x="80" y="302" class="tick" text-anchor="end">$700k</text>
+<line x1="88" y1="229" x2="1094" y2="229" stroke="var(--hair)" stroke-width="1"/>
+<text x="80" y="232" class="tick" text-anchor="end">$800k</text>
+<line x1="88" y1="158" x2="1094" y2="158" stroke="var(--hair)" stroke-width="1"/>
+<text x="80" y="162" class="tick" text-anchor="end">$900k</text>
+<line x1="88" y1="88" x2="1094" y2="88" stroke="var(--hair)" stroke-width="1"/>
+<text x="80" y="92" class="tick" text-anchor="end">$1000k</text>
+<line x1="88" y1="46" x2="88" y2="580" stroke="var(--hair)" stroke-width="1" stroke-dasharray="1 4"/>
+<text x="92" y="596" class="tick">Sun Jul 19</text>
+<line x1="218" y1="46" x2="218" y2="580" stroke="var(--hair)" stroke-width="1" stroke-dasharray="1 4"/>
+<text x="222" y="596" class="tick">Mon Jul 20</text>
+<line x1="348" y1="46" x2="348" y2="580" stroke="var(--hair)" stroke-width="1" stroke-dasharray="1 4"/>
+<text x="352" y="596" class="tick">Tue Jul 21</text>
+<line x1="477" y1="46" x2="477" y2="580" stroke="var(--hair)" stroke-width="1" stroke-dasharray="1 4"/>
+<text x="481" y="596" class="tick">Wed Jul 22</text>
+<line x1="607" y1="46" x2="607" y2="580" stroke="var(--hair)" stroke-width="1" stroke-dasharray="1 4"/>
+<text x="611" y="596" class="tick">Thu Jul 23</text>
+<line x1="737" y1="46" x2="737" y2="580" stroke="var(--hair)" stroke-width="1" stroke-dasharray="1 4"/>
+<text x="741" y="596" class="tick">Fri Jul 24</text>
+<line x1="867" y1="46" x2="867" y2="580" stroke="var(--hair)" stroke-width="1" stroke-dasharray="1 4"/>
+<text x="871" y="596" class="tick">Sat Jul 25</text>
+<line x1="997" y1="46" x2="997" y2="580" stroke="var(--hair)" stroke-width="1" stroke-dasharray="1 4"/>
+<text x="1001" y="596" class="tick">Sun Jul 26</text>
+<g class="step" style="transition-delay:0.00s"><line x1="154.7" y1="546.0" x2="159.4" y2="546.0" stroke="var(--parch2)" stroke-width="2" opacity="0.85"/><circle cx="154.7" cy="546.0" r="2.6" fill="var(--parch)"/><text x="161.7" y="534.0" class="chip" text-anchor="start" fill="var(--verd)">BOOOM</text><text x="161.7" y="546.0" class="chipamt" text-anchor="start">$348,340</text><title>BOOOM — $348,340 — Sun Jul 19 12:19 UTC — opening bid</title></g>
+<g class="step" style="transition-delay:0.14s"><line x1="159.4" y1="546.0" x2="159.4" y2="439.5" stroke="var(--steel)" stroke-width="6.4" opacity="0.75"/><line x1="159.4" y1="439.5" x2="165.0" y2="439.5" stroke="var(--parch2)" stroke-width="2" opacity="0.85"/><circle cx="159.4" cy="439.5" r="2.6" fill="var(--parch)"/><text x="152.4" y="427.5" class="chip" text-anchor="end" fill="var(--verd)">Prostockbenji</text><text x="152.4" y="439.5" class="chipamt" text-anchor="end">$500,000</text><title>Prostockbenji — $500,000 — Sun Jul 19 13:12 UTC — riser +$151,660</title></g>
+<g class="step" style="transition-delay:0.28s"><line x1="165.0" y1="439.5" x2="165.0" y2="421.9" stroke="var(--steel)" stroke-width="2.2" opacity="0.75"/><line x1="165.0" y1="421.9" x2="174.5" y2="421.9" stroke="var(--parch2)" stroke-width="2" opacity="0.85"/><circle cx="165.0" cy="421.9" r="2.6" fill="var(--parch)"/><text x="172.0" y="409.9" class="chip" text-anchor="start" fill="var(--amber)">AmeerH</text><text x="172.0" y="421.9" class="chipamt" text-anchor="start">$525,000</text><title>AmeerH — $525,000 — Sun Jul 19 14:14 UTC — riser +$25,000</title></g>
+<g class="step" style="transition-delay:0.42s"><line x1="174.5" y1="421.9" x2="174.5" y2="369.2" stroke="var(--steel)" stroke-width="3.9" opacity="0.75"/><line x1="174.5" y1="369.2" x2="178.9" y2="369.2" stroke="var(--parch2)" stroke-width="2" opacity="0.85"/><circle cx="174.5" cy="369.2" r="2.6" fill="var(--parch)"/><text x="167.5" y="357.2" class="chip" text-anchor="end" fill="var(--amber)">David_22</text><text x="167.5" y="369.2" class="chipamt" text-anchor="end">$600,000</text><title>David_22 — $600,000 — Sun Jul 19 15:59 UTC — riser +$75,000</title></g>
+<g class="step" style="transition-delay:0.56s"><line x1="178.9" y1="369.2" x2="178.9" y2="355.2" stroke="var(--steel)" stroke-width="2.1" opacity="0.75"/><line x1="178.9" y1="355.2" x2="179.5" y2="355.2" stroke="var(--parch2)" stroke-width="2" opacity="0.85"/><circle cx="178.9" cy="355.2" r="2.6" fill="var(--parch)"/><text x="185.9" y="343.2" class="chip" text-anchor="start" fill="var(--amber)">Mancowerks</text><text x="185.9" y="355.2" class="chipamt" text-anchor="start">$620,000</text><title>Mancowerks — $620,000 — Sun Jul 19 16:48 UTC — riser +$20,000</title></g>
+<g class="step" style="transition-delay:0.70s"><line x1="179.5" y1="355.2" x2="179.5" y2="322.4" stroke="var(--oxide)" stroke-width="2.9" opacity="0.95"/><line x1="179.5" y1="322.4" x2="192.3" y2="322.4" stroke="var(--parch2)" stroke-width="2" opacity="0.85"/><circle cx="179.5" cy="322.4" r="2.6" fill="var(--oxide)"/><text x="172.5" y="310.4" class="chip" text-anchor="end" fill="var(--amber)">David_22</text><text x="172.5" y="322.4" class="chipamt" text-anchor="end">$666,666</text><title>David_22 — $666,666 — Sun Jul 19 16:55 UTC — riser +$46,666</title></g>
+<g class="step" style="transition-delay:0.84s"><line x1="192.3" y1="322.4" x2="192.3" y2="298.9" stroke="var(--steel)" stroke-width="2.5" opacity="0.75"/><line x1="192.3" y1="298.9" x2="200.7" y2="298.9" stroke="var(--parch2)" stroke-width="2" opacity="0.85"/><circle cx="192.3" cy="298.9" r="2.6" fill="var(--parch)"/><text x="199.3" y="286.9" class="chip" text-anchor="start" fill="var(--amber)">Dcd0611</text><text x="199.3" y="298.9" class="chipamt" text-anchor="start">$700,000</text><title>Dcd0611 — $700,000 — Sun Jul 19 19:16 UTC — riser +$33,334</title></g>
+<g class="step" style="transition-delay:0.98s"><line x1="200.7" y1="298.9" x2="200.7" y2="279.3" stroke="var(--steel)" stroke-width="2.3" opacity="0.75"/><line x1="200.7" y1="279.3" x2="203.9" y2="279.3" stroke="var(--parch2)" stroke-width="2" opacity="0.85"/><circle cx="200.7" cy="279.3" r="2.6" fill="var(--parch)"/><text x="193.7" y="267.3" class="chip" text-anchor="end" fill="var(--amber)">Mancowerks</text><text x="193.7" y="279.3" class="chipamt" text-anchor="end">$728,000</text><title>Mancowerks — $728,000 — Sun Jul 19 20:50 UTC — riser +$28,000</title></g>
+<g class="step" style="transition-delay:1.12s"><line x1="203.9" y1="279.3" x2="203.9" y2="263.8" stroke="var(--steel)" stroke-width="2.1" opacity="0.75"/><line x1="203.9" y1="263.8" x2="236.5" y2="263.8" stroke="var(--parch2)" stroke-width="2" opacity="0.85"/><circle cx="203.9" cy="263.8" r="2.6" fill="var(--parch)"/><text x="210.9" y="251.8" class="chip" text-anchor="start" fill="var(--verd)">mitchell996</text><text x="210.9" y="263.8" class="chipamt" text-anchor="start">$750,000</text><title>mitchell996 — $750,000 — Sun Jul 19 21:25 UTC — riser +$22,000</title></g>
+<g class="step" style="transition-delay:1.26s"><line x1="236.5" y1="263.8" x2="236.5" y2="246.2" stroke="var(--steel)" stroke-width="2.2" opacity="0.75"/><line x1="236.5" y1="246.2" x2="239.2" y2="246.2" stroke="var(--parch2)" stroke-width="2" opacity="0.85"/><circle cx="236.5" cy="246.2" r="2.6" fill="var(--parch)"/><line x1="227.5" y1="228.2" x2="236.5" y2="246.2" stroke="var(--steel2)" stroke-width="1" opacity="0.7"/><text x="229.5" y="220.2" class="chip" text-anchor="end" fill="var(--amber)">Dcd0611</text><text x="229.5" y="232.2" class="chipamt" text-anchor="end">$775,000</text><title>Dcd0611 — $775,000 — Mon Jul 20 03:27 UTC — riser +$25,000</title></g>
+<g class="step" style="transition-delay:1.40s"><line x1="239.2" y1="246.2" x2="239.2" y2="242.7" stroke="var(--steel)" stroke-width="1.6" opacity="0.75"/><line x1="239.2" y1="242.7" x2="355.4" y2="242.7" stroke="var(--parch2)" stroke-width="2" opacity="0.85"/><circle cx="239.2" cy="242.7" r="2.6" fill="var(--parch)"/><line x1="248.2" y1="231.7" x2="239.2" y2="242.7" stroke="var(--steel2)" stroke-width="1" opacity="0.7"/><text x="246.2" y="223.7" class="chip" text-anchor="start" fill="var(--verd)">mitchell996</text><text x="246.2" y="235.7" class="chipamt" text-anchor="start">$780,000</text><title>mitchell996 — $780,000 — Mon Jul 20 03:57 UTC — riser +$5,000</title></g>
+<g class="step" style="transition-delay:1.54s"><line x1="355.4" y1="242.7" x2="355.4" y2="237.1" stroke="var(--steel)" stroke-width="1.7" opacity="0.75"/><line x1="355.4" y1="237.1" x2="356.2" y2="237.1" stroke="var(--parch2)" stroke-width="2" opacity="0.85"/><circle cx="355.4" cy="237.1" r="2.6" fill="var(--parch)"/><line x1="346.4" y1="198.1" x2="355.4" y2="237.1" stroke="var(--steel2)" stroke-width="1" opacity="0.7"/><text x="348.4" y="190.1" class="chip" text-anchor="end" fill="var(--amber)">Mancowerks</text><text x="348.4" y="202.1" class="chipamt" text-anchor="end">$788,000</text><title>Mancowerks — $788,000 — Tue Jul 21 01:26 UTC — riser +$8,000</title></g>
+<g class="step" style="transition-delay:1.68s"><line x1="356.2" y1="237.1" x2="356.2" y2="228.7" stroke="var(--steel)" stroke-width="1.8" opacity="0.75"/><line x1="356.2" y1="228.7" x2="475.5" y2="228.7" stroke="var(--parch2)" stroke-width="2" opacity="0.85"/><circle cx="356.2" cy="228.7" r="2.6" fill="var(--parch)"/><text x="363.2" y="216.7" class="chip" text-anchor="start" fill="var(--verd)">mitchell996</text><text x="363.2" y="228.7" class="chipamt" text-anchor="start">$800,000</text><title>mitchell996 — $800,000 — Tue Jul 21 01:34 UTC — riser +$12,000</title></g>
+<g class="step" style="transition-delay:1.82s"><line x1="475.5" y1="228.7" x2="475.5" y2="158.4" stroke="var(--oxide)" stroke-width="4.7" opacity="0.95"/><line x1="475.5" y1="158.4" x2="476.3" y2="158.4" stroke="var(--parch2)" stroke-width="2" opacity="0.85"/><circle cx="475.5" cy="158.4" r="2.6" fill="var(--oxide)"/><text x="482.5" y="146.4" class="chip" text-anchor="start" fill="var(--amber)">TorqueOrCork</text><text x="482.5" y="158.4" class="chipamt" text-anchor="start">$900,000</text><title>TorqueOrCork — $900,000 — Tue Jul 21 23:38 UTC — riser +$100,000</title></g>
+<g class="step" style="transition-delay:1.96s"><line x1="476.3" y1="158.4" x2="476.3" y2="128.6" stroke="var(--steel)" stroke-width="2.8" opacity="0.75"/><line x1="476.3" y1="128.6" x2="479.5" y2="128.6" stroke="var(--parch2)" stroke-width="2" opacity="0.85"/><circle cx="476.3" cy="128.6" r="2.6" fill="var(--parch)"/><text x="483.3" y="116.6" class="chip" text-anchor="start" fill="var(--verd)">mitchell996</text><text x="483.3" y="128.6" class="chipamt" text-anchor="start">$942,500</text><title>mitchell996 — $942,500 — Tue Jul 21 23:47 UTC — riser +$42,500</title></g>
+<g class="step" style="transition-delay:2.10s"><line x1="479.5" y1="128.6" x2="479.5" y2="93.8" stroke="var(--oxide)" stroke-width="3.0" opacity="0.95"/><line x1="479.5" y1="93.8" x2="719.2" y2="93.8" stroke="var(--parch2)" stroke-width="2" opacity="0.85"/><circle cx="479.5" cy="93.8" r="2.6" fill="var(--oxide)"/><text x="486.5" y="81.8" class="chip" text-anchor="start" fill="var(--amber)">TorqueOrCork</text><text x="486.5" y="93.8" class="chipamt" text-anchor="start">$991,992</text><title>TorqueOrCork — $991,992 — Wed Jul 22 00:23 UTC — riser +$49,492</title></g>
+<g class="step" style="transition-delay:2.24s"><line x1="719.2" y1="93.8" x2="719.2" y2="89.6" stroke="var(--steel)" stroke-width="1.6" opacity="0.75"/><line x1="719.2" y1="89.6" x2="1019.2" y2="89.6" stroke="var(--parch2)" stroke-width="2" opacity="0.85"/><circle cx="719.2" cy="89.6" r="2.6" fill="var(--parch)"/><text x="726.2" y="77.6" class="chip" text-anchor="start" fill="var(--amber)">Mancowerks</text><text x="726.2" y="89.6" class="chipamt" text-anchor="start">$998,000</text><title>Mancowerks — $998,000 — Thu Jul 23 20:41 UTC — riser +$6,008</title></g>
+<g class="step" style="transition-delay:2.38s"><line x1="1019.2" y1="89.6" x2="1019.2" y2="88.2" stroke="var(--oxide)" stroke-width="1.5" opacity="0.95"/><line x1="1019.2" y1="88.2" x2="1094.0" y2="88.2" stroke="var(--parch2)" stroke-width="2" opacity="0.85"/><circle cx="1019.2" cy="88.2" r="2.6" fill="var(--oxide)"/><text x="1026.2" y="76.2" class="chip" text-anchor="start" fill="var(--verd)">rda1987</text><text x="1026.2" y="88.2" class="chipamt" text-anchor="start">$1,000,000</text><title>rda1987 — $1,000,000 — Sun Jul 26 04:10 UTC — riser +$2,000</title></g>
+<g class="ann"><line x1="610" y1="252" x2="181.5" y2="327.4" stroke="var(--steel2)" stroke-width="1" stroke-dasharray="2 3" opacity="0.8"/>
+<circle cx="610" cy="252" r="1.8" fill="var(--steel)"/>
+<text x="618" y="256" class="annhead">$666,666 — a repeated-digit amount, placed on day one.</text>
+</g>
+<g class="ann"><line x1="610" y1="291" x2="477.5" y2="163.4" stroke="var(--steel2)" stroke-width="1" stroke-dasharray="2 3" opacity="0.8"/>
+<circle cx="610" cy="291" r="1.8" fill="var(--steel)"/>
+<text x="618" y="295" class="annhead">+$100,000 in a single riser — the largest step of the auction.</text>
+<text x="618" y="310" class="annbody">TorqueOrCork’s lifetime record is two auctions, both</text>
+<text x="618" y="325" class="annbody">consigned by this seller.</text>
+</g>
+<g class="ann"><line x1="610" y1="360" x2="481.5" y2="98.8" stroke="var(--steel2)" stroke-width="1" stroke-dasharray="2 3" opacity="0.8"/>
+<circle cx="610" cy="360" r="1.8" fill="var(--steel)"/>
+<text x="618" y="364" class="annhead">$991,992 — a non-round carry; the account’s only other</text>
+<text x="618" y="379" class="annbody">recorded bid ended at $2,305,918 (knot ①).</text>
+</g>
+<g class="ann"><line x1="610" y1="414" x2="1021.2" y2="93.2" stroke="var(--steel2)" stroke-width="1" stroke-dasharray="2 3" opacity="0.8"/>
+<circle cx="610" cy="414" r="1.8" fill="var(--steel)"/>
+<text x="618" y="418" class="annhead">$1,000,000 — rda1987, one lifetime win, holds the closing</text>
+<text x="618" y="433" class="annbody">bid. The lot stayed open to Jul 30; this number stood.</text>
+</g>
+</svg>
+<div class="leglab">who has ever bought anything — lifetime auction wins per account (computed)</div>
+<div class="wchips">
+<span class="wchip won">BOOOM · 5 wins</span>
+<span class="wchip won">Prostockbenji · 4 wins</span>
+<span class="wchip won">mitchell996 · 2 wins</span>
+<span class="wchip won">rda1987 · 1 win</span>
+<span class="wchip zero">AmeerH · 0 wins</span>
+<span class="wchip zero">David_22 · 0 wins</span>
+<span class="wchip zero">Dcd0611 · 0 wins · 14/183 wob</span>
+<span class="wchip zero">Mancowerks · 0 wins</span>
+<span class="wchip zero">PORSCHE911STPTS · 0 wins · 7/76 wob</span>
+<span class="wchip zero">TorqueOrCork · 0 wins</span>
+</div>
+<div class="wchips" style="margin-top:8px;font-size:10.5px;color:var(--steel)">
+<span style="border:none;padding:0"><i style="font-style:normal;color:var(--amber)">amber</i> = zero lifetime wins (the platform’s base case, not an accusation) · <i style="font-style:normal;color:var(--verd)">verdigris</i> = at least one completed purchase · <i style="font-style:normal;color:var(--oxide)">oxide</i> marks the four story bids</span>
+</div>
+</div>
+</section>
+
+<!-- ============================ 4 · BASE RATES =========================== -->
+<section id="baserate">
+<div class="kicker">§03 · the market’s memory</div>
+<h2>A sentence, as a chart</h2>
+<p class="sentence">Of every <span class="n">1,000</span> later comparable sales, <span class="n">41</span> land
+within ±2% of <em>the same seller’s</em> failed number — and <span class="n grey">17</span> on
+<em>anyone else’s</em>.</p>
+<div class="panel">
+<div class="arrgrid">
+<div class="arr"><h3><i style="color:var(--amber)">⬤</i> the seller’s own failed number — 41 in 1,000</h3><svg viewBox="0 0 328 204" class="iconarr" role="img" aria-label="41 of 1000 land within 2 percent of the same seller's failed number"><defs><pattern id="pamber" width="8.0" height="8.0" patternUnits="userSpaceOnUse"><circle cx="4.0" cy="4.0" r="1.7" fill="var(--steel2)" opacity="0.55"/></pattern></defs><rect x="0" y="0" width="320.0" height="200.0" fill="url(#pamber)"/><circle cx="4.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="12.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="20.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="28.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="36.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="44.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="52.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="60.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="68.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="76.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="84.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="92.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="100.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="108.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="116.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="124.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="132.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="140.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="148.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="156.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="164.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="172.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="180.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="188.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="196.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="204.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="212.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="220.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="228.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="236.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="244.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="252.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="260.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="268.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="276.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="284.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="292.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="300.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="308.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="316.0" cy="4.0" r="2.6" fill="var(--amber)"/><circle cx="4.0" cy="12.0" r="2.6" fill="var(--amber)"/></svg></div>
+<div class="arr"><h3><i style="color:var(--steel)">⬤</i> anyone else’s failed number — 17 in 1,000</h3><svg viewBox="0 0 328 204" class="iconarr" role="img" aria-label="17 of 1000 land within 2 percent of any other seller's failed number"><defs><pattern id="psteel" width="8.0" height="8.0" patternUnits="userSpaceOnUse"><circle cx="4.0" cy="4.0" r="1.7" fill="var(--steel2)" opacity="0.55"/></pattern></defs><rect x="0" y="0" width="320.0" height="200.0" fill="url(#psteel)"/><circle cx="4.0" cy="4.0" r="2.6" fill="var(--steel)"/><circle cx="12.0" cy="4.0" r="2.6" fill="var(--steel)"/><circle cx="20.0" cy="4.0" r="2.6" fill="var(--steel)"/><circle cx="28.0" cy="4.0" r="2.6" fill="var(--steel)"/><circle cx="36.0" cy="4.0" r="2.6" fill="var(--steel)"/><circle cx="44.0" cy="4.0" r="2.6" fill="var(--steel)"/><circle cx="52.0" cy="4.0" r="2.6" fill="var(--steel)"/><circle cx="60.0" cy="4.0" r="2.6" fill="var(--steel)"/><circle cx="68.0" cy="4.0" r="2.6" fill="var(--steel)"/><circle cx="76.0" cy="4.0" r="2.6" fill="var(--steel)"/><circle cx="84.0" cy="4.0" r="2.6" fill="var(--steel)"/><circle cx="92.0" cy="4.0" r="2.6" fill="var(--steel)"/><circle cx="100.0" cy="4.0" r="2.6" fill="var(--steel)"/><circle cx="108.0" cy="4.0" r="2.6" fill="var(--steel)"/><circle cx="116.0" cy="4.0" r="2.6" fill="var(--steel)"/><circle cx="124.0" cy="4.0" r="2.6" fill="var(--steel)"/><circle cx="132.0" cy="4.0" r="2.6" fill="var(--steel)"/></svg></div>
+</div>
+<div class="bandrow">
+<div class="band">±0.5% band · same-seller <b>2.37%</b> vs cross <b>0.47%</b> · <span class="x">5.0×</span></div>
+<div class="band">±2% band · same-seller <b>4.14%</b> vs cross <b>1.72%</b> · <span class="x">2.4×</span></div>
+<div class="band">±5% band · same-seller <b>10.06%</b> vs cross <b>4.18%</b> · <span class="x">2.4×</span></div>
+</div>
+<p style="color:var(--parch2);font-size:14.5px;line-height:1.5;margin-top:16px;max-width:80ch">
+Computed from 33,649 failed-number → later-sale pairs (Apr 7 – Aug 1 2026); 169 same-seller,
+33,480 cross-seller. A same-seller landing is 2.4–5.0× more likely to sit on the
+failed number than a cross-seller one — elevated, not conclusive: sellers re-list similar cars,
+and similar cars fetch similar prices.</p>
+</div>
+</section>
+
+<!-- ========================== 5 · VERDICT BOARD ========================== -->
+<section id="verdict">
+<div class="kicker">§04 · ten families of concern, one axis</div>
+<h2>The verdict board — founded to unfounded</h2>
+<p class="lede">Every strategy family the investigation screened, placed where the evidence
+left it. One family survived every control with a p-value; two produced named leads for manual
+review; the rest thinned out toward features of the platform itself.</p>
+<div class="axis"></div>
+<div class="axends"><span><b>◀ founded</b> — survives controls</span><span>unfounded — indistinguishable from the platform ▶</span></div>
+<div class="board">
+<div class="zone"><div class="zlab">PROVEN TAIL</div><div class="zsub">replicated, p-valued</div><div class="strat z0" style="transition-delay:0.00s"><b>Poison bid / winner default</b><span class="tax">B3</span><p>7.79× tail lift over the field · p = 6.5e-7, market-wide</p></div></div>
+<div class="zone"><div class="zlab">REVIEW LEADS</div><div class="zsub">named leads warrant manual review</div><div class="strat z1" style="transition-delay:0.10s"><b>Laddering / chandelier structure</b><span class="tax">A2·A4</span><p>displacement structures present; needs per-lot audit</p></div><div class="strat z1" style="transition-delay:0.20s"><b>Seller-affinity recurrence</b><span class="tax">A1-adj</span><p>named leads — ten-account roster; one account is 2/2 on this seller</p></div></div>
+<div class="zone"><div class="zlab">POSSIBLE</div><div class="zsub">elevated rates, mechanism unproven</div><div class="strat z2" style="transition-delay:0.30s"><b>Reserve protection</b><span class="tax">A4</span><p>consistent with reserve-edge stalls; not separable from demand</p></div><div class="strat z2" style="transition-delay:0.40s"><b>Comp anchoring</b><span class="tax">A3·A8</span><p>same-seller landing 2.4–5.0× elevated vs cross-seller</p></div></div>
+<div class="zone"><div class="zlab">UNRESOLVED</div><div class="zsub">the data cannot close it</div><div class="strat z3" style="transition-delay:0.50s"><b>Account rotation</b><span class="tax">A7-adj</span><p>creation-date clustering suggestive; identity data out of scope</p></div></div>
+<div class="zone"><div class="zlab">SCREENS ONLY</div><div class="zsub">screens ran; nothing survived controls</div><div class="strat z4" style="transition-delay:0.60s"><b>Reciprocal ping-pong</b><span class="tax">A6·B2</span><p>41 candidate pairs screened → controls absorb the signal</p></div><div class="strat z4" style="transition-delay:0.70s"><b>Collusive partitioning</b><span class="tax">C3</span><p>655 candidate structures screened → null-consistent</p></div></div>
+<div class="zone"><div class="zlab">FEATURE / CONTEXT</div><div class="zsub">platform features, not findings</div><div class="strat z5" style="transition-delay:0.80s"><b>Last-minute pressure</b><span class="tax">B5</span><p>platform-wide timing feature; not seller-specific</p></div><div class="strat z5" style="transition-delay:0.90s"><b>Provenance misstatement</b><span class="tax">—</span><p>1 withdrawal · seller self-reported the correction</p></div></div>
+</div>
+<div class="methodnote"><b>How to read this.</b> Placement reflects evidence strength after
+controls, not severity. “Screens only” means the detector ran market-wide and its candidates
+dissolved under dealer/null controls. Strategy IDs reference the 19-strategy taxonomy
+(A1–C6) in <i>research/synthesis/manipulation-strategy-taxonomy.md</i>; the ten families
+above are its case-relevant roll-up. Nothing on this board attaches a conclusion to a named
+person — auctions are graded, businesses are measured, and the open question that would
+close the case in either direction remains whether winners pay.</div>
+</section>
+
+<footer>
+generated by engine/variants/build_v4.py · sources: bidders_history.json × wob_listing_slugs.json
+(client-side captures, robots-allowed surfaces) · listings_analysis.json (18-bid ladder) ·
+base_rates.json (33,649 pairs, Apr 7 – Aug 1 2026) · story dates + verdict placements: case file
++ marketplace-integrity analysis (see # SRC comments in the generator) · every other figure computed
+at build time · time axis expands ×8 after Jul 2025 (marked on the braid) · measured
+language throughout — no output on this page asserts intent, identity, or coordination.
+</footer>
+
+</body></html>
