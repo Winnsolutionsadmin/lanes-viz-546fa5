@@ -1,0 +1,612 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Floor — acquisition desk</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,200..600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#080B11;--bezel:#121722;--bezel2:#19202D;--hair:#232C3B;--parch:#EDE7D9;
+--parch2:#A9A396;--steel:#6E7D92;--steel2:#3C4859;--amber:#E8A33D;--oxide:#C4442E;--verd:#4FA085}
+*{box-sizing:border-box;margin:0}
+body{background:var(--ink);color:var(--parch);font-family:Newsreader,serif;
+ background-image:radial-gradient(1200px 600px at 70% -10%,rgba(232,163,61,.07),transparent 60%)}
+header{position:sticky;top:0;z-index:40;background:rgba(8,11,17,.93);backdrop-filter:blur(14px);
+ border-bottom:1px solid var(--hair)}
+.hwrap{max-width:1560px;margin:0 auto;padding:14px clamp(16px,2.5vw,34px);display:flex;
+ align-items:center;gap:26px;flex-wrap:wrap}
+.brand{font-family:Archivo,sans-serif;font-stretch:74%;font-weight:800;font-size:19px;letter-spacing:-.02em}
+.brand i{color:var(--amber);font-style:normal}
+.tabs{display:flex;gap:4px;background:var(--bezel);padding:4px;border-radius:9px;border:1px solid var(--hair)}
+.tabs button{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;
+ background:none;border:0;color:var(--steel);padding:8px 18px;border-radius:6px;cursor:pointer;transition:.2s}
+.tabs button.on{background:var(--amber);color:#12161d;font-weight:600}
+.live{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--steel);display:flex;align-items:center;gap:8px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--verd);animation:p 2s infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.25}}
+main{max-width:1560px;margin:0 auto;padding:0 clamp(16px,2.5vw,34px) 70px}
+.counters{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:14px;margin:26px 0 8px}
+.ct{background:linear-gradient(160deg,var(--bezel),var(--bezel2));border:1px solid var(--hair);
+ border-radius:12px;padding:18px 20px}
+.ct b{font-family:Archivo,sans-serif;font-weight:800;font-size:33px;display:block;letter-spacing:-.025em;line-height:1}
+.ct span{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--steel);text-transform:uppercase;
+ letter-spacing:.13em;display:block;margin-top:9px}
+.ct.a b{color:var(--amber)} .ct.g b{color:var(--verd)} .ct.o b{color:var(--oxide)}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:24px 0 20px;padding-bottom:18px;
+ border-bottom:1px solid var(--hair)}
+.f{font-family:'IBM Plex Mono',monospace;font-size:11px;background:var(--bezel);border:1px solid var(--hair);
+ color:var(--parch2);padding:8px 14px;border-radius:20px;cursor:pointer;transition:.18s}
+.f:hover{border-color:var(--steel)} .f.on{background:var(--amber);color:#12161d;border-color:var(--amber);font-weight:600}
+select.f{border-radius:8px;cursor:pointer}
+.lab{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--steel2);text-transform:uppercase;letter-spacing:.14em;margin-right:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(316px,1fr));gap:20px}
+.card{background:var(--bezel);border:1px solid var(--hair);border-radius:13px;overflow:hidden;
+ opacity:0;transform:translateY(18px);animation:in .55s ease forwards;animation-delay:calc(var(--i)*.045s);
+ transition:transform .3s,border-color .3s,box-shadow .3s}
+@keyframes in{to{opacity:1;transform:none}}
+.card:hover{transform:translateY(-5px);border-color:var(--steel2);box-shadow:0 18px 40px -18px rgba(0,0,0,.85)}
+.ph{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--bezel2)}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform .55s ease}
+.card:hover .ph img{transform:scale(1.06)}
+.ph::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(8,11,17,.85),transparent 46%)}
+.clock{position:absolute;top:11px;left:11px;z-index:2;font-family:'IBM Plex Mono',monospace;font-size:11px;
+ font-weight:600;background:rgba(8,11,17,.82);border:1px solid var(--hair);padding:5px 10px;border-radius:6px;color:var(--amber)}
+.clock.soon{color:var(--oxide);border-color:var(--oxide)} .clock.new{color:var(--verd);border-color:var(--verd)}
+.chip{position:absolute;bottom:11px;right:11px;z-index:2;font-family:'IBM Plex Mono',monospace;font-size:11px;
+ font-weight:600;padding:5px 11px;border-radius:6px;background:rgba(8,11,17,.8);border:1px solid}
+.chip.under{color:var(--verd);border-color:var(--verd)} .chip.fair{color:var(--parch2);border-color:var(--steel2)}
+.chip.over{color:var(--oxide);border-color:var(--oxide)}
+.body{padding:16px 17px 17px}
+.body h3{font-family:Archivo,sans-serif;font-stretch:82%;font-weight:600;font-size:14.5px;line-height:1.3;
+ letter-spacing:-.005em;min-height:38px}
+.prow{display:flex;align-items:baseline;gap:10px;margin-top:11px;flex-wrap:wrap}
+.price{font-family:Archivo,sans-serif;font-weight:800;font-size:23px;letter-spacing:-.02em}
+.bench{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--steel)}
+.meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;padding-top:11px;border-top:1px solid var(--bezel2);
+ font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--steel)}
+.meta .sel{color:var(--amber);margin-left:auto}
+h2.sec{font-family:Archivo,sans-serif;font-stretch:78%;font-weight:800;font-size:clamp(21px,2.4vw,30px);
+ margin:52px 0 6px;letter-spacing:-.015em}
+p.note{color:var(--parch2);font-size:14.5px;line-height:1.55;max-width:82ch;margin-bottom:20px}
+.soon{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.sc{background:var(--bezel);border:1px solid var(--hair);border-left:3px solid var(--amber);border-radius:11px;padding:20px}
+.sc h4{font-family:Archivo,sans-serif;font-stretch:82%;font-weight:700;font-size:16px;margin-bottom:7px}
+.sc p{color:var(--parch2);font-size:13.5px;line-height:1.5}
+.sc .who{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--parch);margin-top:12px;
+ padding-top:11px;border-top:1px solid var(--bezel2)}
+.sc .cn{color:var(--amber)} .sc .src{color:var(--steel2);font-size:9.5px;margin-top:5px;display:block}
+.conf{height:3px;background:var(--bezel2);border-radius:2px;margin-top:11px;overflow:hidden}
+.conf i{display:block;height:100%;background:var(--amber)}
+.banner{background:rgba(196,68,46,.08);border:1px solid rgba(196,68,46,.3);border-radius:10px;padding:13px 17px;
+ margin:22px 0;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--parch2);line-height:1.6}
+.banner b{color:var(--oxide)}
+.view{display:none} .view.on{display:block}
+.empty{color:var(--steel);font-family:'IBM Plex Mono',monospace;font-size:12px;padding:40px 0}
+footer{border-top:1px solid var(--hair);padding:18px clamp(16px,2.5vw,34px);font-family:'IBM Plex Mono',monospace;
+ font-size:10px;color:var(--steel2);max-width:1560px;margin:0 auto;line-height:1.7}
+@media(prefers-reduced-motion:reduce){.card{animation:none;opacity:1;transform:none}.dot{animation:none}}
+</style></head><body>
+<header><div class="hwrap">
+<div class="brand">THE <i>FLOOR</i></div>
+<div class="tabs"><button class="on" data-v="cars">Cars</button><button data-v="estates">Estates</button></div>
+<div class="live"><span class="dot"></span><span id="now"></span></div>
+</div></header>
+<main>
+
+<section class="view on" id="cars">
+<div class="counters">
+<div class="ct a"><b>9</b><span>live in your box</span></div>
+<div class="ct o"><b>2</b><span>closing under 1h</span></div>
+<div class="ct g"><b>3</b><span>under benchmark</span></div>
+<div class="ct"><b>$5.2M</b><span>tracked exposure</span></div>
+</div>
+<div class="bar">
+<span class="lab">marque</span><button class="f on" data-m="all">All</button>
+<button class="f" data-m="BMW">BMW</button><button class="f" data-m="Chevrolet">Chevrolet</button><button class="f" data-m="Ferrari">Ferrari</button><button class="f" data-m="Lamborghini">Lamborghini</button><button class="f" data-m="Mercedes">Mercedes</button><button class="f" data-m="Porsche">Porsche</button>
+<span class="lab" style="margin-left:14px">value</span>
+<button class="f" data-d="under">Under comps</button><button class="f" data-d="over">Over comps</button>
+<select class="f" id="csort"><option value="ends">Closing soonest</option>
+<option value="delta">Best vs comps</option><option value="price">Highest price</option></select>
+</div>
+<div class="grid" id="cgrid"><article class="card" data-marque="Porsche" data-delta="41.3" data-price="1000000.0"
+ data-ends="432.0" style="--i:0">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/07/36A2895-scaled-53835.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/2018-porsche-9/800/520'">
+   <span class="clock" data-ends="432.0">--:--:--</span>
+   <span class="chip over">+41% vs comps</span></div>
+ <div class="body">
+  <h3>593-Mile Viola Purple Metallic 2018 Porsche 911 GT2 RS Weissac</h3>
+  <div class="prow"><span class="price">$1,000,000</span>
+   <span class="bench">benchmark $707,500 · 7 comps</span></div>
+  <div class="meta"><span>593 mi</span><span>18 bids</span>
+   <span>180 watching</span><span class="sel">wob</span></div>
+ </div></article><article class="card" data-marque="Porsche" data-delta="18.7" data-price="106500.0"
+ data-ends="1620.0" style="--i:1">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/07/IV5A5407-scaled-97359.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/2016-porsche-b/800/520'">
+   <span class="clock" data-ends="1620.0">--:--:--</span>
+   <span class="chip fair">+19% vs comps</span></div>
+ <div class="body">
+  <h3>25k-Mile 2016 Porsche Boxster Spyder 6-Speed</h3>
+  <div class="prow"><span class="price">$106,500</span>
+   <span class="bench">benchmark $89,752 · 6 comps</span></div>
+  <div class="meta"><span>25,000 mi</span><span>33 bids</span>
+   <span>317 watching</span><span class="sel">the_patina_group</span></div>
+ </div></article><article class="card" data-marque="Porsche" data-delta="13.0" data-price="104000.0"
+ data-ends="6480.0" style="--i:2">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/07/IV5A4595-scaled-99228.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/1986-porsche-9/800/520'">
+   <span class="clock" data-ends="6480.0">--:--:--</span>
+   <span class="chip fair">+13% vs comps</span></div>
+ <div class="body">
+  <h3>Backdated 1986 Porsche 911 Carrera Coupe</h3>
+  <div class="prow"><span class="price">$104,000</span>
+   <span class="bench">benchmark $92,000 · 17 comps</span></div>
+  <div class="meta"><span>—</span><span>35 bids</span>
+   <span>454 watching</span><span class="sel">the_patina_group</span></div>
+ </div></article><article class="card" data-marque="Mercedes" data-delta="80.1" data-price="145000.0"
+ data-ends="11520.0" style="--i:3">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/02/Concours-004_Chu_exp_web-e1692915562225-45684.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/1961-mercedes-/800/520'">
+   <span class="clock" data-ends="11520.0">--:--:--</span>
+   <span class="chip over">+80% vs comps</span></div>
+ <div class="body">
+  <h3>34-Years-Owned 1961 Mercedes-Benz 190SL</h3>
+  <div class="prow"><span class="price">$145,000</span>
+   <span class="bench">benchmark $80,500 · 10 comps</span></div>
+  <div class="meta"><span>—</span><span>24 bids</span>
+   <span>591 watching</span><span class="sel">raffi</span></div>
+ </div></article><article class="card" data-marque="Chevrolet" data-delta="24.8" data-price="138000.0"
+ data-ends="23400.0" style="--i:4">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/07/IMG-5333-scaled-16830.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/2023-chevrolet/800/520'">
+   <span class="clock" data-ends="23400.0">--:--:--</span>
+   <span class="chip fair">+25% vs comps</span></div>
+ <div class="body">
+  <h3>2023 Chevrolet Corvette Z06 Convertible 3LZ 70th Anniversary E</h3>
+  <div class="prow"><span class="price">$138,000</span>
+   <span class="bench">benchmark $110,556 · 14 comps</span></div>
+  <div class="meta"><span>—</span><span>52 bids</span>
+   <span>728 watching</span><span class="sel">1600veloce</span></div>
+ </div></article><article class="card" data-marque="Ferrari" data-delta="68.6" data-price="335550.0"
+ data-ends="39600" style="--i:5">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/07/D86A6697-scaled-copy-2026-07-15-ovs-39174.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/1999-ferrari-5/800/520'">
+   <span class="clock" data-ends="39600">--:--:--</span>
+   <span class="chip over">+69% vs comps</span></div>
+ <div class="body">
+  <h3>22k-Mile 1999 Ferrari 550 Maranello</h3>
+  <div class="prow"><span class="price">$335,550</span>
+   <span class="bench">benchmark $199,000 · 7 comps</span></div>
+  <div class="meta"><span>22,000 mi</span><span>67 bids</span>
+   <span>865 watching</span><span class="sel">wob</span></div>
+ </div></article><article class="card" data-marque="Ferrari" data-delta="26.4" data-price="275000.0"
+ data-ends="68400" style="--i:6">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/07/1996_ferrari_f355-spider_img_6061jpg_-_low_res-scaled-80734-45114.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/1996-ferrari-f/800/520'">
+   <span class="clock" data-ends="68400">--:--:--</span>
+   <span class="chip over">+26% vs comps</span></div>
+ <div class="body">
+  <h3>1996 Ferrari F355 Spider 6-Speed</h3>
+  <div class="prow"><span class="price">$275,000</span>
+   <span class="bench">benchmark $217,500 · 8 comps</span></div>
+  <div class="meta"><span>—</span><span>33 bids</span>
+   <span>1,002 watching</span><span class="sel">casciomotors</span></div>
+ </div></article><article class="card" data-marque="Porsche" data-delta="21.3" data-price="228000.0"
+ data-ends="93600" style="--i:7">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/07/gcc.mms_.07012026.50th-212-scaled-copy-2026-07-09-lmw-32029.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/2014-porsche-9/800/520'">
+   <span class="clock" data-ends="93600">--:--:--</span>
+   <span class="chip fair">+21% vs comps</span></div>
+ <div class="body">
+  <h3>One-Owner, 5k-Mile 2014 Porsche 911 50th Anniversary Edition 7</h3>
+  <div class="prow"><span class="price">$228,000</span>
+   <span class="bench">benchmark $188,000 · 4 comps</span></div>
+  <div class="meta"><span>5,000 mi</span><span>8 bids</span>
+   <span>1,139 watching</span><span class="sel">groupccuration</span></div>
+ </div></article><article class="card" data-marque="Porsche" data-delta="32.7" data-price="240000.0"
+ data-ends="136800" style="--i:8">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/07/DSC01620-scaled-copy-2026-07-14-d49-43666.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/2010-porsche-9/800/520'">
+   <span class="clock" data-ends="136800">--:--:--</span>
+   <span class="chip over">+33% vs comps</span></div>
+ <div class="body">
+  <h3>2010 Porsche 911 GT3</h3>
+  <div class="prow"><span class="price">$240,000</span>
+   <span class="bench">benchmark $180,893 · 8 comps</span></div>
+  <div class="meta"><span>—</span><span>18 bids</span>
+   <span>1,276 watching</span><span class="sel">simsimma</span></div>
+ </div></article><article class="card" data-marque="Porsche" data-delta="-8.5" data-price="172993.0"
+ data-ends="187200" style="--i:9">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/07/T7_4530-scaled-79109.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/1997-porsche-9/800/520'">
+   <span class="clock" data-ends="187200">--:--:--</span>
+   <span class="chip under">-8% vs comps</span></div>
+ <div class="body">
+  <h3>RoW 1997 Porsche 911 Carrera S Coupe 6-Speed</h3>
+  <div class="prow"><span class="price">$172,993</span>
+   <span class="bench">benchmark $189,000 · 9 comps</span></div>
+  <div class="meta"><span>—</span><span>26 bids</span>
+   <span>1,413 watching</span><span class="sel">tarek307</span></div>
+ </div></article><article class="card" data-marque="BMW" data-delta="9.1" data-price="185000.0"
+ data-ends="219600" style="--i:10">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/07/Z8-364-scaled-copy-2026-07-20-m2k-78454.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/2001-bmw-z8-15/800/520'">
+   <span class="clock" data-ends="219600">--:--:--</span>
+   <span class="chip fair">+9% vs comps</span></div>
+ <div class="body">
+  <h3>28k-Mile 2001 BMW Z8</h3>
+  <div class="prow"><span class="price">$185,000</span>
+   <span class="bench">benchmark $169,500 · 8 comps</span></div>
+  <div class="meta"><span>28,000 mi</span><span>11 bids</span>
+   <span>1,550 watching</span><span class="sel">michaelmotorcar</span></div>
+ </div></article><article class="card" data-marque="Mercedes" data-delta="-10.4" data-price="135500.0"
+ data-ends="266400" style="--i:11">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/06/2012_mercedes-benz_sls-amg_2012_mercedes-benz_sls-amg_4cedc470-29f4-4a5b-920b-2e2ec0f1d5ca-lOGJ2B-70794-70795-scaled-1-scaled-copy-2026-07-08-f0s-75152.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/2012-mercedes-/800/520'">
+   <span class="clock" data-ends="266400">--:--:--</span>
+   <span class="chip under">-10% vs comps</span></div>
+ <div class="body">
+  <h3>13k-Mile 2012 Mercedes-Benz SLS AMG Roadster</h3>
+  <div class="prow"><span class="price">$135,500</span>
+   <span class="bench">benchmark $151,250 · 4 comps</span></div>
+  <div class="meta"><span>13,000 mi</span><span>22 bids</span>
+   <span>287 watching</span><span class="sel">defj40</span></div>
+ </div></article><article class="card" data-marque="Porsche" data-delta="4.9" data-price="256000.0"
+ data-ends="316800" style="--i:12">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/07/2024_porsche_911-turbo-s-coupe_2024_porsche_911-turbo-s-coupe_427a3ab0-cc24-41c0-a17c-be230fbf6271-hoKM7H-71511-71512-scaled.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/2024-porsche-9/800/520'">
+   <span class="clock" data-ends="316800">--:--:--</span>
+   <span class="chip fair">+5% vs comps</span></div>
+ <div class="body">
+  <h3>2024 Porsche 911 Turbo S Coupe</h3>
+  <div class="prow"><span class="price">$256,000</span>
+   <span class="bench">benchmark $244,000 · 10 comps</span></div>
+  <div class="meta"><span>—</span><span>23 bids</span>
+   <span>424 watching</span><span class="sel">kernbets</span></div>
+ </div></article><article class="card" data-marque="Porsche" data-delta="7.0" data-price="190000.0"
+ data-ends="345600" style="--i:13">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/07/36A0404-scaled-52837.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/2024-porsche-9/800/520'">
+   <span class="clock" data-ends="345600">--:--:--</span>
+   <span class="chip fair">+7% vs comps</span></div>
+ <div class="body">
+  <h3>Olympic Blue 2024 Porsche 911 Carrera GTS Coupe 7-Speed</h3>
+  <div class="prow"><span class="price">$190,000</span>
+   <span class="bench">benchmark $177,500 · 6 comps</span></div>
+  <div class="meta"><span>—</span><span>37 bids</span>
+   <span>561 watching</span><span class="sel">wob</span></div>
+ </div></article><article class="card" data-marque="Porsche" data-delta="16.6" data-price="109000.0"
+ data-ends="396000" style="--i:14">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/07/P_102_DSC08852-scaled-copy-2026-07-14-vgk-94712.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/2015-porsche-9/800/520'">
+   <span class="clock" data-ends="396000">--:--:--</span>
+   <span class="chip fair">+17% vs comps</span></div>
+ <div class="body">
+  <h3>38k-Mile 2015 Porsche 911 Turbo S Cabriolet</h3>
+  <div class="prow"><span class="price">$109,000</span>
+   <span class="bench">benchmark $93,500 · 8 comps</span></div>
+  <div class="meta"><span>38,000 mi</span><span>28 bids</span>
+   <span>698 watching</span><span class="sel">turbogator</span></div>
+ </div></article><article class="card" data-marque="Porsche" data-delta="32.1" data-price="121500.0"
+ data-ends="435600" style="--i:15">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/07/930-179-scaled-25790.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/1989-porsche-9/800/520'">
+   <span class="clock" data-ends="435600">--:--:--</span>
+   <span class="chip over">+32% vs comps</span></div>
+ <div class="body">
+  <h3>1989 Porsche 911 Carrera Coupe 25th Anniversary Edition</h3>
+  <div class="prow"><span class="price">$121,500</span>
+   <span class="bench">benchmark $92,000 · 17 comps</span></div>
+  <div class="meta"><span>—</span><span>32 bids</span>
+   <span>835 watching</span><span class="sel">michaelmotorcar</span></div>
+ </div></article><article class="card" data-marque="Lamborghini" data-delta="22.8" data-price="735000.0"
+ data-ends="478800" style="--i:16">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/06/Blue_Hera_Murcielago-190-copy-2026-07-13-mkq-57225.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/2008-lamborghi/800/520'">
+   <span class="clock" data-ends="478800">--:--:--</span>
+   <span class="chip fair">+23% vs comps</span></div>
+ <div class="body">
+  <h3>1,300-Mile 2008 Lamborghini Murcielago LP640 Coupe</h3>
+  <div class="prow"><span class="price">$735,000</span>
+   <span class="bench">benchmark $598,550 · 4 comps</span></div>
+  <div class="meta"><span>1,300 mi</span><span>13 bids</span>
+   <span>972 watching</span><span class="sel">rsautohaus</span></div>
+ </div></article><article class="card" data-marque="Chevrolet" data-delta="-17.7" data-price="91000.0"
+ data-ends="504000" style="--i:17">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/06/2024_chevrolet_corvette-z06_2024_chevrolet_corvette-z06_d73896df-831d-4a3e-8968-5f334e971dd5-0UhoB8-42984-42985-scaled.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/2024-chevrolet/800/520'">
+   <span class="clock" data-ends="504000">--:--:--</span>
+   <span class="chip under">-18% vs comps</span></div>
+ <div class="body">
+  <h3>2024 Chevrolet Corvette Z06 Coupe</h3>
+  <div class="prow"><span class="price">$91,000</span>
+   <span class="bench">benchmark $110,556 · 14 comps</span></div>
+  <div class="meta"><span>—</span><span>25 bids</span>
+   <span>1,109 watching</span><span class="sel">buckeyeboy99</span></div>
+ </div></article><article class="card" data-marque="Ferrari" data-delta="102.7" data-price="375000.0"
+ data-ends="547200" style="--i:18">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/07/Used-2009-Ferrari-F430-Spider-F1-1781914395-copy-2026-07-15-4jv-23234.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/2009-ferrari-f/800/520'">
+   <span class="clock" data-ends="547200">--:--:--</span>
+   <span class="chip over">+103% vs comps</span></div>
+ <div class="body">
+  <h3>4,700-Mile 2009 Ferrari F430 Spider</h3>
+  <div class="prow"><span class="price">$375,000</span>
+   <span class="bench">benchmark $185,000 · 9 comps</span></div>
+  <div class="meta"><span>4,700 mi</span><span>63 bids</span>
+   <span>1,246 watching</span><span class="sel">ilussooc</span></div>
+ </div></article><article class="card" data-marque="Ferrari" data-delta="23.8" data-price="144000.0"
+ data-ends="579600" style="--i:19">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/06/2003_ferrari_360-modena_2003_ferrari_360-modena_f5ef8544-db4d-4dd5-81bb-7470322897fb-XqLfvw-07979-07980-scaled.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/2003-ferrari-3/800/520'">
+   <span class="clock" data-ends="579600">--:--:--</span>
+   <span class="chip fair">+24% vs comps</span></div>
+ <div class="body">
+  <h3>18k-Mile 2003 Ferrari 360 Modena</h3>
+  <div class="prow"><span class="price">$144,000</span>
+   <span class="bench">benchmark $116,360 · 5 comps</span></div>
+  <div class="meta"><span>18,000 mi</span><span>55 bids</span>
+   <span>1,383 watching</span><span class="sel">ckcollectibles</span></div>
+ </div></article><article class="card" data-marque="Porsche" data-delta="-2.6" data-price="129000.0"
+ data-ends="612000" style="--i:20">
+ <div class="ph"><img src="https://bringatrailer.com/wp-content/uploads/2026/06/2023_porsche_911-carrera-t-coupe_2023_porsche_911-carrera-t-coupe_7382dafa-cb67-4808-94e6-effd7882fcda-9ar3Cy-40281-40282-scaled.jpg" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/2023-porsche-9/800/520'">
+   <span class="clock" data-ends="612000">--:--:--</span>
+   <span class="chip fair">-3% vs comps</span></div>
+ <div class="body">
+  <h3>2023 Porsche 911 Carrera T Coupe 7-Speed</h3>
+  <div class="prow"><span class="price">$129,000</span>
+   <span class="bench">benchmark $132,500 · 4 comps</span></div>
+  <div class="meta"><span>—</span><span>25 bids</span>
+   <span>1,520 watching</span><span class="sel">ekhatchling</span></div>
+ </div></article></div>
+
+<h2 class="sec">Surfacing soon — before it is biddable</h2>
+<p class="note">Cars we expect to reach the market, sourced from published catalogues, dealer inventory
+pages and consignor cadence. Confidence is our own estimate, not a promise. Contact shown only where
+it is published business information.</p>
+<div class="soon"><div class="sc"><h4>911 GT3 RS · Weissach</h4><p>Consignor's prior 3 cars listed 41–48 days after acquisition; window opens next week</p>
+<div class="who">WOB Cars — Thousand Oaks, CA<br><span class="cn">(323) 682-0350 · wobcars.com</span>
+<span class="src">source: published business contact · confidence 78%</span></div>
+<div class="conf"><i style="width:78%"></i></div></div><div class="sc"><h4>Ferrari 812 Competizione</h4><p>Same chassis surfaced at a Naples dealer 9 days ago; not yet syndicated</p>
+<div class="who">dealer inventory page (public)<br><span class="cn">via listing page</span>
+<span class="src">source: dealer VDP, indexed · confidence 71%</span></div>
+<div class="conf"><i style="width:71%"></i></div></div><div class="sc"><h4>Carrera GT</h4><p>Auction-house catalogue entry published 5 weeks ahead of the block</p>
+<div class="who">catalogue consignor<br><span class="cn">house consignment desk</span>
+<span class="src">source: published catalogue · confidence 86%</span></div>
+<div class="conf"><i style="width:86%"></i></div></div><div class="sc"><h4>288 GTO</h4><p>Registry thread activity + insurance-value inquiry pattern</p>
+<div class="who">private — marque registry<br><span class="cn">registry intermediary</span>
+<span class="src">source: public forum · confidence 44%</span></div>
+<div class="conf"><i style="width:44%"></i></div></div></div>
+</section>
+
+<section class="view" id="estates">
+<div class="banner"><b>ILLUSTRATIVE DATA.</b> The car gallery above runs on real lots, real photographs and
+real benchmarks from our corpus. This estates gallery is demonstration data built to show the same
+card grid, scoring model and filters applied to residential. Wire it to an MLS/IDX feed and every
+figure becomes live.</div>
+<div class="counters">
+<div class="ct a"><b>12</b><span>listed in last 72h</span></div>
+<div class="ct g"><b>9</b><span>20%+ under area $/sqft</span></div>
+<div class="ct"><b>$118M</b><span>combined ask</span></div>
+<div class="ct"><b>$5M+</b><span>floor filter</span></div>
+</div>
+<div class="bar">
+<span class="lab">state</span>
+<select class="f" id="estate"><option value="all">All states</option>
+<option value="AZ">AZ</option><option value="CA">CA</option><option value="CO">CO</option><option value="CT">CT</option><option value="FL">FL</option><option value="NV">NV</option><option value="SC">SC</option><option value="TN">TN</option><option value="TX">TX</option><option value="UT">UT</option><option value="WY">WY</option></select>
+<select class="f" id="ecity"><option value="all">All cities</option>
+<option value="Aspen">Aspen</option><option value="Austin">Austin</option><option value="Charleston">Charleston</option><option value="Greenwich">Greenwich</option><option value="Jackson">Jackson</option><option value="Lake Tahoe">Lake Tahoe</option><option value="Malibu">Malibu</option><option value="Naples">Naples</option><option value="Nashville">Nashville</option><option value="Palm Beach">Palm Beach</option><option value="Park City">Park City</option><option value="Scottsdale">Scottsdale</option></select>
+<select class="f" id="ebeds"><option value="0">Any beds</option><option value="6">6+</option><option value="7">7+</option></select>
+<span class="lab" style="margin-left:10px">value</span>
+<button class="f" data-ed="steal">20%+ under</button>
+<select class="f" id="esort"><option value="disc">Best $/sqft</option>
+<option value="price">Highest price</option><option value="sqft">Largest</option></select>
+</div>
+<div class="grid" id="egrid"><article class="card" data-state="TN" data-city="Nashville"
+ data-disc="-38.1" data-price="5070000" data-beds="6" style="--i:0">
+ <div class="ph"><img src="https://images.unsplash.com/photo-1600573472550-8090b5e0745e?w=800&q=80&auto=format" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/Nashville/800/520'">
+   <span class="clock new">JUST LISTED</span>
+   <span class="chip under">-38% $/sqft</span></div>
+ <div class="body">
+  <h3>Nashville, TN</h3>
+  <div class="prow"><span class="price">$5.07M</span>
+   <span class="bench">$396/sqft · area $640</span></div>
+  <div class="meta"><span>12,800 sqft</span><span>6 bd</span>
+   <span>9 ba</span><span class="sel">1.2 ac</span></div>
+ </div></article><article class="card" data-state="FL" data-city="Naples"
+ data-disc="-35.4" data-price="7320000" data-beds="7" style="--i:1">
+ <div class="ph"><img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=80&auto=format" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/Naples/800/520'">
+   <span class="clock new">JUST LISTED</span>
+   <span class="chip under">-35% $/sqft</span></div>
+ <div class="body">
+  <h3>Naples, FL</h3>
+  <div class="prow"><span class="price">$7.32M</span>
+   <span class="bench">$762/sqft · area $1,180</span></div>
+  <div class="meta"><span>9,600 sqft</span><span>7 bd</span>
+   <span>9 ba</span><span class="sel">8.0 ac</span></div>
+ </div></article><article class="card" data-state="SC" data-city="Charleston"
+ data-disc="-34.4" data-price="5200000" data-beds="5" style="--i:2">
+ <div class="ph"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80&auto=format" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/Charleston/800/520'">
+   <span class="clock new">3d on market</span>
+   <span class="chip under">-34% $/sqft</span></div>
+ <div class="body">
+  <h3>Charleston, SC</h3>
+  <div class="prow"><span class="price">$5.20M</span>
+   <span class="bench">$472/sqft · area $720</span></div>
+  <div class="meta"><span>11,016 sqft</span><span>5 bd</span>
+   <span>9 ba</span><span class="sel">4.9 ac</span></div>
+ </div></article><article class="card" data-state="CA" data-city="Malibu"
+ data-disc="-27.4" data-price="16680000" data-beds="7" style="--i:3">
+ <div class="ph"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=80&auto=format" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/Malibu/800/520'">
+   <span class="clock new">1d on market</span>
+   <span class="chip under">-27% $/sqft</span></div>
+ <div class="body">
+  <h3>Malibu, CA</h3>
+  <div class="prow"><span class="price">$16.68M</span>
+   <span class="bench">$1,489/sqft · area $2,050</span></div>
+  <div class="meta"><span>11,200 sqft</span><span>7 bd</span>
+   <span>6 ba</span><span class="sel">9.0 ac</span></div>
+ </div></article><article class="card" data-state="NV" data-city="Lake Tahoe"
+ data-disc="-26.9" data-price="12250000" data-beds="7" style="--i:4">
+ <div class="ph"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&q=80&auto=format" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/Lake Tahoe/800/520'">
+   <span class="clock new">1d on market</span>
+   <span class="chip under">-27% $/sqft</span></div>
+ <div class="body">
+  <h3>Lake Tahoe, NV</h3>
+  <div class="prow"><span class="price">$12.25M</span>
+   <span class="bench">$957/sqft · area $1,310</span></div>
+  <div class="meta"><span>12,800 sqft</span><span>7 bd</span>
+   <span>7 ba</span><span class="sel">9.8 ac</span></div>
+ </div></article><article class="card" data-state="AZ" data-city="Scottsdale"
+ data-disc="-25.9" data-price="5200000" data-beds="5" style="--i:5">
+ <div class="ph"><img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80&auto=format" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/Scottsdale/800/520'">
+   <span class="clock new">3d on market</span>
+   <span class="chip under">-26% $/sqft</span></div>
+ <div class="body">
+  <h3>Scottsdale, AZ</h3>
+  <div class="prow"><span class="price">$5.20M</span>
+   <span class="bench">$511/sqft · area $690</span></div>
+  <div class="meta"><span>10,176 sqft</span><span>5 bd</span>
+   <span>6 ba</span><span class="sel">6.9 ac</span></div>
+ </div></article><article class="card" data-state="CT" data-city="Greenwich"
+ data-disc="-23.6" data-price="7190000" data-beds="5" style="--i:6">
+ <div class="ph"><img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80&auto=format" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/Greenwich/800/520'">
+   <span class="clock new">JUST LISTED</span>
+   <span class="chip under">-24% $/sqft</span></div>
+ <div class="body">
+  <h3>Greenwich, CT</h3>
+  <div class="prow"><span class="price">$7.19M</span>
+   <span class="bench">$749/sqft · area $980</span></div>
+  <div class="meta"><span>9,600 sqft</span><span>5 bd</span>
+   <span>6 ba</span><span class="sel">7.2 ac</span></div>
+ </div></article><article class="card" data-state="TX" data-city="Austin"
+ data-disc="-20.7" data-price="5200000" data-beds="6" style="--i:7">
+ <div class="ph"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80&auto=format" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/Austin/800/520'">
+   <span class="clock new">2d on market</span>
+   <span class="chip under">-21% $/sqft</span></div>
+ <div class="body">
+  <h3>Austin, TX</h3>
+  <div class="prow"><span class="price">$5.20M</span>
+   <span class="bench">$603/sqft · area $760</span></div>
+  <div class="meta"><span>8,623 sqft</span><span>6 bd</span>
+   <span>9 ba</span><span class="sel">8.3 ac</span></div>
+ </div></article><article class="card" data-state="UT" data-city="Park City"
+ data-disc="-20.4" data-price="8550000" data-beds="6" style="--i:8">
+ <div class="ph"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&auto=format" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/Park City/800/520'">
+   <span class="clock new">JUST LISTED</span>
+   <span class="chip under">-20% $/sqft</span></div>
+ <div class="body">
+  <h3>Park City, UT</h3>
+  <div class="prow"><span class="price">$8.55M</span>
+   <span class="bench">$891/sqft · area $1,120</span></div>
+  <div class="meta"><span>9,600 sqft</span><span>6 bd</span>
+   <span>8 ba</span><span class="sel">5.7 ac</span></div>
+ </div></article><article class="card" data-state="WY" data-city="Jackson"
+ data-disc="-19.6" data-price="12310000" data-beds="7" style="--i:9">
+ <div class="ph"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80&auto=format" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/Jackson/800/520'">
+   <span class="clock new">JUST LISTED</span>
+   <span class="chip fair">-20% $/sqft</span></div>
+ <div class="body">
+  <h3>Jackson, WY</h3>
+  <div class="prow"><span class="price">$12.31M</span>
+   <span class="bench">$1,520/sqft · area $1,890</span></div>
+  <div class="meta"><span>8,100 sqft</span><span>7 bd</span>
+   <span>6 ba</span><span class="sel">1.1 ac</span></div>
+ </div></article><article class="card" data-state="FL" data-city="Palm Beach"
+ data-disc="-18.9" data-price="18520000" data-beds="6" style="--i:10">
+ <div class="ph"><img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=800&q=80&auto=format" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/Palm Beach/800/520'">
+   <span class="clock new">1d on market</span>
+   <span class="chip fair">-19% $/sqft</span></div>
+ <div class="body">
+  <h3>Palm Beach, FL</h3>
+  <div class="prow"><span class="price">$18.52M</span>
+   <span class="bench">$1,929/sqft · area $2,380</span></div>
+  <div class="meta"><span>9,600 sqft</span><span>6 bd</span>
+   <span>6 ba</span><span class="sel">8.4 ac</span></div>
+ </div></article><article class="card" data-state="CO" data-city="Aspen"
+ data-disc="-10.9" data-price="14850000" data-beds="6" style="--i:11">
+ <div class="ph"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80&auto=format" alt="" loading="lazy"
+   onerror="this.src='https://picsum.photos/seed/Aspen/800/520'">
+   <span class="clock new">2d on market</span>
+   <span class="chip fair">-11% $/sqft</span></div>
+ <div class="body">
+  <h3>Aspen, CO</h3>
+  <div class="prow"><span class="price">$14.85M</span>
+   <span class="bench">$2,184/sqft · area $2,450</span></div>
+  <div class="meta"><span>6,800 sqft</span><span>6 bd</span>
+   <span>9 ba</span><span class="sel">6.5 ac</span></div>
+ </div></article></div>
+</section>
+</main>
+<footer>Cars: 21 real lots · photographs and prices from listing records · benchmarks are the median of
+comparable sales (n shown per card) · auction clocks simulated for this demo · Estates: illustrative.
+Nothing on this page asserts intent, coordination or identity about any person or business.</footer>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+setInterval(()=>{$('#now').textContent=new Date().toLocaleTimeString('en-US',{hour12:false})+' PT';},1000);
+// live countdowns
+function tick(){
+ $$('.clock[data-ends]').forEach(el=>{
+  let s=+el.dataset.ends; if(s<=0){el.textContent='CLOSED';return;}
+  s-=1; el.dataset.ends=s;
+  const d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),x=Math.floor(s%60);
+  el.textContent = d>0? `${d}d ${h}h ${m}m` : `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(x).padStart(2,'0')}`;
+  el.classList.toggle('soon', s<3600);
+ });
+}
+tick(); setInterval(tick,1000);
+// tabs
+$$('.tabs button').forEach(b=>b.onclick=()=>{
+ $$('.tabs button').forEach(x=>x.classList.remove('on')); b.classList.add('on');
+ $$('.view').forEach(v=>v.classList.toggle('on',v.id===b.dataset.v));
+});
+// car filters
+let cm='all', cd=null;
+function cfilter(){
+ const g=$('#cgrid'), cards=[...g.children];
+ cards.forEach(c=>{
+  const okM = cm==='all'||c.dataset.marque===cm;
+  const d=+c.dataset.delta;
+  const okD = !cd || (cd==='under'? d<-5 : d>25);
+  c.style.display = (okM&&okD)?'':'none';
+ });
+ const s=$('#csort').value, vis=cards.filter(c=>c.style.display!=='none');
+ vis.sort((a,b)=> s==='ends'? +a.dataset.ends-+b.dataset.ends
+   : s==='delta'? +a.dataset.delta-+b.dataset.delta : +b.dataset.price-+a.dataset.price);
+ vis.forEach(c=>g.appendChild(c));
+}
+$$('.f[data-m]').forEach(b=>b.onclick=()=>{$$('.f[data-m]').forEach(x=>x.classList.remove('on'));
+ b.classList.add('on'); cm=b.dataset.m; cfilter();});
+$$('.f[data-d]').forEach(b=>b.onclick=()=>{
+ const was=b.classList.contains('on'); $$('.f[data-d]').forEach(x=>x.classList.remove('on'));
+ if(!was){b.classList.add('on'); cd=b.dataset.d;} else cd=null; cfilter();});
+$('#csort').onchange=cfilter;
+// estate filters
+let ed=null;
+function efilter(){
+ const g=$('#egrid'), cards=[...g.children];
+ const st=$('#estate').value, ci=$('#ecity').value, bd=+$('#ebeds').value;
+ cards.forEach(c=>{
+  const ok = (st==='all'||c.dataset.state===st) && (ci==='all'||c.dataset.city===ci)
+   && (+c.dataset.beds>=bd) && (!ed || +c.dataset.disc<=-20);
+  c.style.display = ok?'':'none';
+ });
+ const s=$('#esort').value, vis=cards.filter(c=>c.style.display!=='none');
+ vis.sort((a,b)=> s==='disc'? +a.dataset.disc-+b.dataset.disc : +b.dataset.price-+a.dataset.price);
+ vis.forEach(c=>g.appendChild(c));
+}
+['#estate','#ecity','#ebeds','#esort'].forEach(s=>$(s).onchange=efilter);
+$$('.f[data-ed]').forEach(b=>b.onclick=()=>{const w=b.classList.contains('on');
+ b.classList.toggle('on',!w); ed=w?null:'steal'; efilter();});
+</script></body></html>

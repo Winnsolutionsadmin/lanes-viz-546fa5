@@ -21,7 +21,7 @@ p.sub{color:var(--parch2);font-size:14.5px;line-height:1.5;margin-top:12px;max-w
 table{width:100%;border-collapse:collapse;margin-top:18px}
 th{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--steel);text-transform:uppercase;letter-spacing:.12em;text-align:left;padding:8px 12px;border-bottom:1px solid var(--hair)}
 td{padding:10px 12px;border-bottom:1px solid var(--bezel2);font-size:14px}
-td.m{font-family:'IBM Plex Mono',monospace;font-size:12.5px} td.n{text-align:right} td.hot{color:var(--amber);font-weight:600}
+td.m{font-family:'IBM Plex Mono',monospace;font-size:12.5px} td.n{text-align:right} td.hot{color:var(--amber);font-weight:600} td.kill{color:var(--oxide);font-weight:600}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-top:24px}
 .stat{background:var(--bezel);border:1px solid var(--hair);border-radius:10px;padding:19px}
 .stat b{font-family:Archivo,sans-serif;font-weight:800;font-size:31px;display:block;letter-spacing:-.02em}
@@ -47,7 +47,7 @@ html.flat .slide{min-height:auto;padding:26px 0}
 html.flat .reveal{opacity:1!important;transform:none!important;transition:none!important}
 footer{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--steel);padding:16px 3vw;border-top:1px solid var(--hair)}
 </style></head><body>
-<nav class="rail"><a href="#s1" data-s="s1"></a><a href="#s2" data-s="s2"></a><a href="#s3" data-s="s3"></a><a href="#s4" data-s="s4"></a><a href="#s5" data-s="s5"></a><a href="#s6" data-s="s6"></a><a href="#s7" data-s="s7"></a></nav>
+<nav class="rail"><a href="#s1" data-s="s1"></a><a href="#s2" data-s="s2"></a><a href="#s3" data-s="s3"></a><a href="#s4" data-s="s4"></a><a href="#s5" data-s="s5"></a><a href="#s6" data-s="s6"></a><a href="#s7" data-s="s7"></a><a href="#s8" data-s="s8"></a></nav>
 
 <section class="slide" id="s1"><div class="inner center">
 <div class="eyebrow reveal" style="--d:0">hammerindex · 30 july, after our call</div>
@@ -64,23 +64,20 @@ and one of them is this.</p>
 </div></section>
 
 <section class="slide" id="s2"><div class="inner">
-<div class="eyebrow reveal" style="--d:0">the cluster you named</div>
-<h2 class="reveal" style="--d:1">wob → Ryan Friedman → Porsche San Luis Obispo</h2>
-<p class="sub reveal" style="--d:2">You asked us to look at that trio. We ran 217 VINs through public
-records today <b>before reviewing your notes</b>, and the cluster surfaced on its own:</p>
-<div class="two reveal" style="--d:3">
-<div class="card lit"><div class="k">the GT2 RS itself</div><h3>Porsche San Luis Obispo</h3>
-<p>The $1M car carries a prior retail listing at <b>$565,888 / 593 miles</b> at Porsche San Luis Obispo
-— the same car that hammered at a million this morning.</p>
-<div class="num">VIN WP0AE2A93JS185343 · listed $565,888 · sold $1,000,000</div></div>
-<div class="card lit"><div class="k">a second car, both names</div><h3>488 Spider — Friedman → SLO</h3>
-<p>A 2018 488 Spider shows at <b>Ryan Friedman Motor Cars</b> (Glen Cove NY, 5,479 mi), then at
-<b>Porsche San Luis Obispo</b> at $313,888 / 13,715 mi. Both of your named parties, one chassis.</p>
-<div class="num">VIN ZFF80AMAXJ0232605 · Friedman → SLO · sold $475,000 on platform</div></div>
-</div>
-<div class="ask reveal" style="--d:5">Two of three names you gave us appear on two separate cars, one of
-which is the case car. <b>That is not proof of anything — it is the thread you asked us to pull, and it
-holds.</b> Give us the third and we will run the same pass across every car they have touched.</div>
+<div class="eyebrow reveal" style="--d:0">the pattern, in the seller's own book</div>
+<h2 class="reveal" style="--d:1">Eleven accounts have bid $9.4M on this seller's cars<br>and bought none of them</h2>
+<p class="sub reveal" style="--d:2">Every account below appeared on <b>two or more</b> wob lots, bid
+<b>$700,000 or more</b>, and won <b>nothing</b>. The last column is the one that matters — that is
+their win count across the entire platform, not just here.</p>
+<div class="fig reveal" style="--d:3">
+<table><thead><tr><th>account</th><th class="n">wob lots</th><th class="n">bids</th>
+<th class="n">largest bid</th><th class="n">lots (all sellers)</th><th class="n">wins, ever</th></tr></thead>
+<tbody><tr><td class="m">odk</td><td class="m n">3</td><td class="m n">15</td><td class="m n">$1,050,000</td><td class="m n">4</td><td class="m n ">1</td></tr><tr><td class="m">mitchell996</td><td class="m n">3</td><td class="m n">22</td><td class="m n">$942,500</td><td class="m n">10</td><td class="m n ">1</td></tr><tr><td class="m">vintagevintner</td><td class="m n">2</td><td class="m n">3</td><td class="m n">$900,000</td><td class="m n">16</td><td class="m n ">2</td></tr><tr><td class="m">mlchl</td><td class="m n">2</td><td class="m n">7</td><td class="m n">$900,000</td><td class="m n">7</td><td class="m n ">2</td></tr><tr><td class="m">e_unknown</td><td class="m n">3</td><td class="m n">3</td><td class="m n">$897,000</td><td class="m n">12</td><td class="m n kill">0</td></tr><tr><td class="m">gosmarte</td><td class="m n">2</td><td class="m n">5</td><td class="m n">$865,000</td><td class="m n">5</td><td class="m n ">1</td></tr><tr><td class="m">foreignaffairsmotorsport</td><td class="m n">2</td><td class="m n">3</td><td class="m n">$851,000</td><td class="m n">175</td><td class="m n ">8</td></tr><tr><td class="m">riverrobins</td><td class="m n">3</td><td class="m n">24</td><td class="m n">$801,000</td><td class="m n">9</td><td class="m n ">2</td></tr><tr><td class="m">dcd0611</td><td class="m n">2</td><td class="m n">3</td><td class="m n">$775,000</td><td class="m n">23</td><td class="m n kill">0</td></tr><tr><td class="m">barrettautogroup</td><td class="m n">3</td><td class="m n">4</td><td class="m n">$746,000</td><td class="m n">24</td><td class="m n ">2</td></tr><tr><td class="m">freemason</td><td class="m n">2</td><td class="m n">2</td><td class="m n">$701,000</td><td class="m n">8</td><td class="m n kill">0</td></tr></tbody></table></div>
+<div class="ask reveal" style="--d:5">Three of the eleven have <b>never won a single auction anywhere
+on the platform</b> — and two of those carry bids of $897,000 and $775,000 on wob cars.
+<b>What we are not saying:</b> zero wins is common, most bidders lose, and a dealer's regulars
+naturally recur on its inventory. What is unusual is the combination — repeat presence, seven-figure
+money, and no purchase, concentrated on one book.</div>
 </div></section>
 
 <section class="slide" id="s3"><div class="inner">
@@ -146,6 +143,34 @@ that's a plant or a serious private buyer, it is the population worth knowing �
 No permission, no grey area, no dependency on a platform that could switch us off.</div>
 </div></section>
 
+<section class="slide" id="s6x"><div class="inner">
+<div class="eyebrow reveal" style="--d:0">05 · verifying a car actually changed hands</div>
+<h2 class="reveal" style="--d:1">We found the free route. Buying title data is the fallback, not the plan.</h2>
+<p class="sub reveal" style="--d:2">You asked whether the winning bid ever becomes a real transfer.
+Carfax blocks automated access to every VIN path, so we went looking for what is actually open. Four
+sources, verified live this week:</p>
+<div class="two reveal" style="--d:3">
+<div class="card lit"><div class="k">free tier · verified</div><h3>Dealer-listing history by VIN</h3>
+<p>auto.dev returns VIN-parameter listing search on a genuinely free tier (1,000 calls/month).
+Marketcheck's VIN-history endpoint returns <b>six years of online listing history per VIN</b> — every
+dealer, date, price and odometer change. A VIN reappearing in dealer inventory after the hammer is a
+definitive hands-changed signal, and the price and mileage deltas feed the re-trade metric directly.</p>
+<div class="num">official APIs · no scraping · no permission problem</div></div>
+<div class="card lit"><div class="k">free · robots-permitted</div><h3>Auction-house archives</h3>
+<p>Gooding's robots file explicitly permits crawlers and its pages return clean JSON with chassis
+numbers. Bonhams and Mecum are permitted; RM Sotheby's publishes no restriction at all. A car of
+yours re-crossing another block is the single highest-value transfer event we can observe.</p>
+<div class="num">Barrett-Jackson disallows · we respect it</div></div>
+<div class="card"><div class="k">free · official</div><h3>State title portals</h3>
+<p>Florida's MVCheck and Wisconsin's lien search both return title issue date, brands and liens by
+VIN, free, with no owner names. Low volume, but authoritative corroboration when a specific car matters.</p></div>
+<div class="card"><div class="k">the fallback</div><h3>Licensed title data</h3>
+<p>NMVTIS resellers remain available at roughly $1-12 a car if the free routes leave a gap on a
+specific chassis. We would rather spend that on the two or three cars where it decides something than
+on a blanket pull.</p></div>
+</div>
+</div></section>
+
 <section class="slide" id="s6"><div class="inner">
 <div class="eyebrow reveal" style="--d:0">04 · the Carfax answer you asked for</div>
 <h2 class="reveal" style="--d:1">We can't scrape it, and here's the straight reason</h2>
@@ -179,7 +204,10 @@ we run the same pass.</p></div>
 lots to back-test against. Send them. If the detectors fire on cars you already know are dirty, that is
 the validation that matters more than anything we can self-report.</p></div>
 </div>
-<p class="lede reveal" style="--d:4">The TdF comp spike you watched at Amelia Island is the same mechanism
+<p class="lede reveal" style="--d:4"><b>Live mock of the desk: <a href="floor.html" style="color:var(--amber)">the Floor →</a></b>
+ — real lots, real photographs, real benchmarks, working filters. The estates tab shows the same
+ grid applied to $5M+ residential.</p>
+<p class="lede reveal" style="--d:5">The TdF comp spike you watched at Amelia Island is the same mechanism
 at a different scale: one printed number re-rates everything behind it. We can now see that happen
 in near-real time, per cohort, on 9,850 lots. <b>What would you point it at first?</b></p>
 </div></section>
