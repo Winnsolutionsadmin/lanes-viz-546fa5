@@ -25,6 +25,14 @@ h1{font-family:Archivo,sans-serif;font-stretch:75%;font-weight:800;font-size:cla
 .chip.on{border-color:var(--amber);color:var(--amber)}
 .chip:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 .count{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--steel);margin-left:auto}
+/* simple/advanced segmented toggle */
+.seg{display:inline-flex;border:1px solid var(--hair);border-radius:99px;overflow:hidden}
+.seg button{background:var(--bezel);border:0;color:var(--parch2);font-family:'IBM Plex Mono',monospace;
+  font-size:11.5px;padding:8px 16px;cursor:pointer}
+.seg button.on{background:var(--amber);color:var(--ink);font-weight:600}
+.seg button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.pat{font-size:10.5px;color:var(--parch2)}
+td.pat{white-space:normal;max-width:330px;line-height:1.45}
 /* ledger */
 table{border-collapse:collapse;width:100%;font-family:'IBM Plex Mono',monospace;font-size:12.5px}
 th{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--steel);text-align:right;
@@ -62,28 +70,20 @@ signals above the population 95th percentile; they are a reading order, not a ve
 <div class="meta" id="meta">loading…</div>
 
 <div class="bar">
+  <div class="seg" role="group" aria-label="view mode">
+    <button id="mSimple">simple</button><button id="mAdv">advanced</button>
+  </div>
   <input id="q" type="search" placeholder="search seller…" aria-label="search seller">
-  <button class="chip" data-f="pr">priority ≥ 1</button>
-  <button class="chip" data-f="ph">phantoms ≥ 2</button>
-  <button class="chip" data-f="conc">concentrated bidders</button>
-  <button class="chip" data-f="cw">comp-wash instance</button>
+  <button class="chip" data-f="pr" data-s="anything worth a look">priority ≥ 1</button>
+  <button class="chip" data-f="ph" data-s="inflated failed bids" data-a="phantoms ≥ 2">phantoms ≥ 2</button>
+  <button class="chip" data-f="conc" data-s="devoted no-buy bidders" data-a="concentrated bidders">concentrated bidders</button>
+  <button class="chip" data-f="cw" data-s="failed price echoed" data-a="comp-wash instance">comp-wash instance</button>
   <button class="chip" data-f="vol">≥ 10 lots</button>
   <span class="count" id="count"></span>
 </div>
 
 <table aria-label="seller ledger">
-<thead><tr>
-  <th class="l" data-k="name">seller</th>
-  <th data-k="lots">lots</th>
-  <th data-k="gmv" class="hide-m">gmv</th>
-  <th data-k="st" class="hide-m">sell-thru</th>
-  <th data-k="alpha">alpha</th>
-  <th data-k="rnm_rate">rnm %</th>
-  <th data-k="ph">phantoms</th>
-  <th data-k="conc">conc. pairs</th>
-  <th data-k="cw" class="hide-m">comp-wash</th>
-  <th data-k="pr">priority</th>
-</tr></thead>
+<thead id="th"></thead>
 <tbody id="tb"></tbody>
 </table>
 <button class="more" id="more" hidden>show 300 more</button>
@@ -97,15 +97,59 @@ signal fires on a single event.</div>
 <script>
 const fmt$=v=>v>=1e6?'$'+(v/1e6).toFixed(1)+'M':v>=1e3?'$'+Math.round(v/1e3)+'k':'$'+v;
 const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let all=[],view=[],shown=0,sortK='pr',sortD=-1;
+let all=[],view=[],shown=0,sortK='pr',sortD=-1,META=null;
+let MODE=localStorage.getItem('hxmode')||'simple';
 const filters={pr:!1,ph:!1,conc:!1,cw:!1,vol:!1};
-fetch('data/sellers/index.json').then(r=>r.json()).then(d=>{
-  all=d.sellers;
-  document.getElementById('meta').textContent=
-    `${d.meta.n_sellers.toLocaleString()} sellers · ${d.meta.n_lots.toLocaleString()} lots · window ${d.meta.window[0]} → ${d.meta.window[1]} · comp-wash market base rate ${d.meta.compwash_base_pct}%`;
+const LEDE={
+ simple:`Look up any seller of collector cars at auction. See how their prices compare with the
+  same cars sold by everyone else, and whether any patterns around their auctions deserve a
+  closer look. Amber dots mean "worth a look" — they are a reading order, never an accusation.`,
+ adv:`Search any seller and open its dossier: cohort-benchmarked price premium, phantom
+  reserve-not-met prices, comp-wash instances, repeat-bidder concentration, and ladder actors —
+  each signal shown with its population percentile and its innocent explanation. Review-priority
+  pips count signals above the population 95th percentile; they are a reading order, not a verdict.`};
+function setMode(m){
+  MODE=m;localStorage.setItem('hxmode',m);
+  document.getElementById('mSimple').classList.toggle('on',m==='simple');
+  document.getElementById('mAdv').classList.toggle('on',m==='adv');
+  document.querySelector('.lede').textContent=LEDE[m];
+  document.querySelectorAll('.chip[data-s]').forEach(c=>c.textContent=m==='simple'?c.dataset.s:(c.dataset.a||c.dataset.s));
+  if(META)renderMeta();
   apply();
+}
+function renderMeta(){
+  const d=META;
+  document.getElementById('meta').textContent=MODE==='simple'
+   ?`${d.meta.n_sellers.toLocaleString()} sellers · ${d.meta.n_lots.toLocaleString()} auctions · ${d.meta.window[0]} to ${d.meta.window[1]}`
+   :`${d.meta.n_sellers.toLocaleString()} sellers · ${d.meta.n_lots.toLocaleString()} lots · window ${d.meta.window[0]} → ${d.meta.window[1]} · comp-wash market base rate ${d.meta.compwash_base_pct}%`;
+}
+fetch('data/sellers/index.json').then(r=>r.json()).then(d=>{
+  all=d.sellers;META=d;renderMeta();setMode(MODE);
 });
+const COLS={
+ adv:[['name','seller','l'],['lots','lots'],['gmv','gmv','hide-m'],['st','sell-thru','hide-m'],
+      ['alpha','alpha'],['rnm_rate','rnm %'],['ph','phantoms'],['conc','conc. pairs'],
+      ['cw','comp-wash','hide-m'],['pr','priority']],
+ simple:[['name','seller','l'],['lots','auctions'],['gmv','total sales','hide-m'],
+      ['st','% sold','hide-m'],['alpha','price vs similar cars'],['rnm_rate','didn’t sell'],
+      ['pr','patterns','l pat-col'],['pr2','worth a look']]};
+function buildHead(){
+  document.getElementById('th').innerHTML='<tr>'+COLS[MODE].map(([k,lab,cls])=>
+    `<th class="${cls||''} ${sortK===(k==='pr2'?'pr':k)?'on':''}" data-k="${k==='pr2'?'pr':k}">${lab}</th>`).join('')+'</tr>';
+  document.querySelectorAll('th').forEach(th=>th.onclick=()=>{
+    const k=th.dataset.k;if(!k)return;
+    if(sortK===k)sortD*=-1;else{sortK=k;sortD=k==='name'?1:-1;}
+    apply();});
+}
+function patterns(r){
+  const p=[];
+  if(r.ph>=2)p.push('inflated failed bids');
+  if(r.conc>=2)p.push('devoted bidders who never buy');
+  if(r.cw>=1)p.push('failed price echoed in a later sale');
+  return p.length?p.join(' · '):'<span class="dim">—</span>';
+}
 function apply(){
+  buildHead();
   const q=document.getElementById('q').value.trim().toLowerCase();
   view=all.filter(r=>(!q||r.name.toLowerCase().includes(q))
     &&(!filters.pr||r.pr>=1)&&(!filters.ph||r.ph>=2)&&(!filters.conc||r.conc>=2)
@@ -123,14 +167,21 @@ function renderMore(){
   const tb=document.getElementById('tb');const chunk=view.slice(shown,shown+300);
   tb.insertAdjacentHTML('beforeend',chunk.map(r=>{
     const aw=r.alpha==null?24:Math.min(100,Math.abs(r.alpha));
-    const alpha=r.alpha==null?'<span class="dim">—</span>'
-      :`${r.alpha>0?'+':''}${r.alpha}%<span class="mb div"><i class="${r.alpha<0?'neg':''}" style="left:${r.alpha<0?50-aw/2:50}%;width:${aw/2}%"></i></span>`;
+    const bar=`<span class="mb div"><i class="${r.alpha<0?'neg':''}" style="left:${r.alpha<0?50-aw/2:50}%;width:${aw/2}%"></i></span>`;
+    const alphaAdv=r.alpha==null?'<span class="dim">—</span>':`${r.alpha>0?'+':''}${r.alpha}%${bar}`;
+    const alphaSimple=r.alpha==null?'<span class="dim">not enough sales</span>'
+      :`${Math.abs(r.alpha)}% ${r.alpha>=0?'higher':'lower'}${bar}`;
     const pips='<span class="pips">'+[0,1,2,3,4].map(i=>`<span class="${i<r.pr?(r.cw>=1&&i===r.pr-1?'crit on':'on'):''}"></span>`).join('')+'</span>';
-    return `<tr class="row" onclick="location='seller.html?s=${r.slug}'">
-      <td class="l"><a href="seller.html?s=${r.slug}">${esc(r.name)}</a></td>
-      <td>${r.lots}</td><td class="hide-m dim">${fmt$(r.gmv)}</td>
-      <td class="hide-m dim">${r.st}%</td>
-      <td>${alpha}</td>
+    const open=`onclick="location='seller.html?s=${r.slug}'"`;
+    const lead=`<td class="l"><a href="seller.html?s=${r.slug}">${esc(r.name)}</a></td><td>${r.lots}</td>
+      <td class="hide-m dim">${fmt$(r.gmv)}</td><td class="hide-m dim">${r.st}%</td>`;
+    if(MODE==='simple')return `<tr class="row" ${open}>${lead}
+      <td>${alphaSimple}</td>
+      <td>${r.rnm_rate}%<span class="mb"><i style="left:0;width:${Math.min(100,r.rnm_rate)}%"></i></span></td>
+      <td class="l pat">${patterns(r)}</td>
+      <td>${pips}</td></tr>`;
+    return `<tr class="row" ${open}>${lead}
+      <td>${alphaAdv}</td>
       <td>${r.rnm_rate}%<span class="mb"><i style="left:0;width:${Math.min(100,r.rnm_rate)}%"></i></span></td>
       <td>${r.ph?r.ph:'<span class="dim">—</span>'}</td>
       <td>${r.conc?r.conc:'<span class="dim">—</span>'}</td>
@@ -144,10 +195,7 @@ document.getElementById('more').onclick=renderMore;
 document.getElementById('q').addEventListener('input',apply);
 document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{
   filters[c.dataset.f]=!filters[c.dataset.f];c.classList.toggle('on');apply();});
-document.querySelectorAll('th').forEach(th=>th.onclick=()=>{
-  const k=th.dataset.k;if(!k)return;
-  if(sortK===k)sortD*=-1;else{sortK=k;sortD=k==='name'?1:-1;}
-  document.querySelectorAll('th').forEach(t=>t.classList.toggle('on',t.dataset.k===sortK));
-  apply();});
+document.getElementById('mSimple').onclick=()=>setMode('simple');
+document.getElementById('mAdv').onclick=()=>setMode('adv');
 </script>
 </body></html>
