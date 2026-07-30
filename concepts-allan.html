@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Three concepts — hammerindex</title>
+<title>What we can build — hammerindex</title>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,200..700&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#0B0E14;--bezel:#151A24;--bezel2:#1B2230;--hair:#242D3C;--parch:#E8E2D4;
@@ -11,195 +11,186 @@ html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
 body{background:var(--ink);color:var(--parch);font-family:Newsreader,serif}
 .slide{min-height:100svh;scroll-snap-align:start;display:flex;align-items:center;border-bottom:1px solid var(--hair)}
 .inner{width:min(1200px,94vw);margin:0 auto;padding:44px 0}
-.center{text-align:center;max-width:940px}
-.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--amber);letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px}
-h1{font-family:Archivo,sans-serif;font-stretch:72%;font-weight:800;font-size:clamp(40px,6.4vw,84px);line-height:1.02;letter-spacing:-.02em}
-h2{font-family:Archivo,sans-serif;font-stretch:78%;font-weight:800;font-size:clamp(26px,3.6vw,46px);line-height:1.06;letter-spacing:-.012em}
-p.lede{color:var(--parch2);font-size:clamp(16px,1.55vw,20px);line-height:1.55;margin-top:18px;max-width:70ch}
+.center{text-align:center;max-width:960px}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--amber);letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+h1{font-family:Archivo,sans-serif;font-stretch:72%;font-weight:800;font-size:clamp(38px,6vw,80px);line-height:1.01;letter-spacing:-.022em}
+h2{font-family:Archivo,sans-serif;font-stretch:78%;font-weight:800;font-size:clamp(25px,3.5vw,44px);line-height:1.06;letter-spacing:-.014em}
+p.lede{color:var(--parch2);font-size:clamp(16px,1.5vw,19px);line-height:1.55;margin-top:16px;max-width:72ch}
 .center p.lede{margin-left:auto;margin-right:auto}
-p.sub{color:var(--parch2);font-size:15px;line-height:1.5;margin-top:12px;max-width:92ch}
-.huge{font-family:Archivo,sans-serif;font-stretch:70%;font-weight:900;font-size:clamp(76px,15vw,190px);line-height:.86;letter-spacing:-.04em;color:var(--amber)}
-.fig{background:var(--bezel);border:1px solid var(--hair);border-radius:10px;padding:18px;margin-top:22px;overflow-x:auto}
-.fig svg{min-width:900px;width:100%;height:auto;display:block}
-.tick{font-family:'IBM Plex Mono',monospace;font-size:11px;fill:var(--steel)}
-.call{font-family:'IBM Plex Mono',monospace;font-size:11.5px;fill:var(--oxide);font-weight:600}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-top:26px}
-.stat{background:var(--bezel);border:1px solid var(--hair);border-radius:10px;padding:20px}
-.stat b{font-family:Archivo,sans-serif;font-weight:800;font-size:34px;display:block;letter-spacing:-.02em}
-.stat span{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--steel);display:block;margin-top:8px;line-height:1.5}
+p.sub{color:var(--parch2);font-size:14.5px;line-height:1.5;margin-top:12px;max-width:94ch}
+table{width:100%;border-collapse:collapse;margin-top:18px}
+th{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--steel);text-transform:uppercase;letter-spacing:.12em;text-align:left;padding:8px 12px;border-bottom:1px solid var(--hair)}
+td{padding:10px 12px;border-bottom:1px solid var(--bezel2);font-size:14px}
+td.m{font-family:'IBM Plex Mono',monospace;font-size:12.5px} td.n{text-align:right} td.hot{color:var(--amber);font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-top:24px}
+.stat{background:var(--bezel);border:1px solid var(--hair);border-radius:10px;padding:19px}
+.stat b{font-family:Archivo,sans-serif;font-weight:800;font-size:31px;display:block;letter-spacing:-.02em}
+.stat span{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--steel);display:block;margin-top:7px;line-height:1.55}
 .stat.hot b{color:var(--amber)} .stat.kill b{color:var(--oxide)} .stat.good b{color:var(--verd)}
-.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-top:24px}
-.card{background:var(--bezel);border:1px solid var(--hair);border-radius:10px;padding:26px}
-.card .k{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--amber);letter-spacing:.14em;text-transform:uppercase}
-.card h3{font-family:Archivo,sans-serif;font-stretch:80%;font-weight:700;font-size:21px;margin:10px 0 8px}
-.card p{color:var(--parch2);font-size:14.5px;line-height:1.55}
-.card .num{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--parch);margin-top:12px;padding-top:12px;border-top:1px solid var(--hair);line-height:1.7}
-.ask{border-left:3px solid var(--amber);padding:6px 0 6px 18px;margin-top:26px;font-size:17px;line-height:1.5;color:var(--parch)}
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .75s ease,transform .75s ease;transition-delay:calc(var(--d,0)*.15s)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:22px}
+.card{background:var(--bezel);border:1px solid var(--hair);border-radius:10px;padding:24px}
+.card.lit{border-color:var(--amber)}
+.card .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--amber);letter-spacing:.14em;text-transform:uppercase}
+.card h3{font-family:Archivo,sans-serif;font-stretch:80%;font-weight:700;font-size:20px;margin:9px 0 8px}
+.card p{color:var(--parch2);font-size:14px;line-height:1.55}
+.card .num{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--parch);margin-top:12px;padding-top:11px;border-top:1px solid var(--hair);line-height:1.7}
+.quote{border-left:3px solid var(--oxide);padding:8px 0 8px 18px;margin-top:20px;font-size:19px;line-height:1.45;color:var(--parch);font-style:italic;max-width:74ch}
+.quote cite{display:block;font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--steel);margin-top:8px}
+.ask{border-left:3px solid var(--amber);padding:6px 0 6px 18px;margin-top:22px;font-size:16px;line-height:1.5}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;transition-delay:calc(var(--d,0)*.14s)}
 .slide.active .reveal{opacity:1;transform:none}
-.curve{stroke-dasharray:2600;stroke-dashoffset:2600;transition:stroke-dashoffset 2.4s cubic-bezier(.3,.8,.3,1) .4s}
-.slide.active .curve{stroke-dashoffset:0}
-.zone{opacity:0;transition:opacity .8s ease 2.2s} .slide.active .zone{opacity:.13}
 .rail{position:fixed;right:16px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:5}
 .rail a{width:8px;height:8px;border-radius:50%;background:var(--steel2);display:block;transition:.3s}
 .rail a.on{background:var(--amber);transform:scale(1.4)}
-@media(prefers-reduced-motion:reduce){.reveal,.curve,.zone{opacity:1!important;transform:none!important;stroke-dashoffset:0!important;transition:none!important}}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none!important}}
 html.flat .slide{min-height:auto;padding:26px 0}
-html.flat .reveal,html.flat .curve,html.flat .zone{opacity:1!important;transform:none!important;stroke-dashoffset:0!important;transition:none!important}
+html.flat .reveal{opacity:1!important;transform:none!important;transition:none!important}
 footer{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--steel);padding:16px 3vw;border-top:1px solid var(--hair)}
 </style></head><body>
-<nav class="rail"><a href="#s1" data-s="s1"></a><a href="#s2" data-s="s2"></a><a href="#s3" data-s="s3"></a><a href="#s4" data-s="s4"></a><a href="#s5" data-s="s5"></a><a href="#s6" data-s="s6"></a></nav>
+<nav class="rail"><a href="#s1" data-s="s1"></a><a href="#s2" data-s="s2"></a><a href="#s3" data-s="s3"></a><a href="#s4" data-s="s4"></a><a href="#s5" data-s="s5"></a><a href="#s6" data-s="s6"></a><a href="#s7" data-s="s7"></a></nav>
 
 <section class="slide" id="s1"><div class="inner center">
-<div class="eyebrow reveal" style="--d:0">hammerindex · concepts for discussion · nothing here is a pitch</div>
-<h1 class="reveal" style="--d:1">Speed doesn't win<br>these auctions.</h1>
-<p class="lede reveal" style="--d:2">Before proposing anything, here is the finding that kills the
-obvious idea. We measured every bid in the corpus — 267,442 of them across 9,850 lots.
-If a concept survives this slide, it's worth your time. If it doesn't, we shouldn't build it.</p>
-<div class="stats reveal" style="--d:3">
-<div class="stat kill"><b>89%</b><span>of winners place their<br>winning bid in the final<br>FIVE MINUTES</span></div>
-<div class="stat kill"><b>95%</b><span>place it in the<br>final hour</span></div>
-<div class="stat"><b>77%</b><span>of winners hadn't bid<br>at all until the<br>last 24 hours</span></div>
-</div>
-<p class="sub reveal center-sub" style="--d:4" style="margin:22px auto 0">Finding a listing early buys nothing.
-Whether you see a car on day one or day six, you arrive at the same five-minute fight.</p>
+<div class="eyebrow reveal" style="--d:0">hammerindex · 30 july, after our call</div>
+<h1 class="reveal" style="--d:1">You called RDA<br>before it closed.</h1>
+<p class="lede reveal" style="--d:2">This morning the GT2 RS hammered at <b>$1,000,000</b>. The winning
+account was <b>rda1987</b>. Here is that account's entire footprint in four months of market data.</p>
+<div class="fig reveal" style="--d:3" style="margin-top:26px">
+<table><thead><tr><th>seller bid on</th><th class="n">lots</th><th class="n">bids</th><th class="n">wins</th><th class="n">largest bid</th></tr></thead>
+<tbody><tr><td class="m">wob</td><td class="m n">1</td><td class="m n">1</td><td class="m n">0</td><td class="m n hot">$1,000,000</td></tr><tr><td class="m">collectingcars247</td><td class="m n">1</td><td class="m n">1</td><td class="m n">0</td><td class="m n ">$70,000</td></tr></tbody></table></div>
+<p class="sub reveal center-sub" style="--d:4">Two bids in four months. One was $70,000. The other was
+<b>a million dollars on a wob car</b>. Straight version: across his full member history he has 63 bids
+and one prior win, so he is not a brand-new account — but his recent activity is two appearances,
+and one of them is this.</p>
 </div></section>
 
 <section class="slide" id="s2"><div class="inner">
-<div class="eyebrow reveal" style="--d:0">the shape of the week</div>
-<h2 class="reveal" style="--d:1">A lot sits at 25% of its final price with seven days left</h2>
-<p class="sub reveal" style="--d:2">Median share of the eventual hammer already reached, plotted against
-time remaining. Price discovery barely happens until the end — which is why "we'll alert you faster"
-is not a product.</p>
-<div class="fig reveal" style="--d:2"><svg viewBox="0 0 1180 380" role="img" aria-label="Share of final price reached over the auction week">
-<line x1="78" y1="322" x2="1140" y2="322" stroke="var(--hair)"/>
-<text x="68" y="326" class="tick" text-anchor="end">0%</text>
-<line x1="78" y1="249" x2="1140" y2="249" stroke="var(--hair)"/>
-<text x="68" y="253" class="tick" text-anchor="end">25%</text>
-<line x1="78" y1="176" x2="1140" y2="176" stroke="var(--hair)"/>
-<text x="68" y="180" class="tick" text-anchor="end">50%</text>
-<line x1="78" y1="103" x2="1140" y2="103" stroke="var(--hair)"/>
-<text x="68" y="107" class="tick" text-anchor="end">75%</text>
-<line x1="78" y1="30" x2="1140" y2="30" stroke="var(--hair)"/>
-<text x="68" y="34" class="tick" text-anchor="end">100%</text>
-<line x1="78" y1="30" x2="78" y2="322" stroke="var(--bezel2)"/>
-<text x="78" y="342" class="tick" text-anchor="middle">7d</text>
-<line x1="252" y1="30" x2="252" y2="322" stroke="var(--bezel2)"/>
-<text x="252" y="342" class="tick" text-anchor="middle">3d</text>
-<line x1="474" y1="30" x2="474" y2="322" stroke="var(--bezel2)"/>
-<text x="474" y="342" class="tick" text-anchor="middle">24h</text>
-<line x1="737" y1="30" x2="737" y2="322" stroke="var(--bezel2)"/>
-<text x="737" y="342" class="tick" text-anchor="middle">6h</text>
-<line x1="997" y1="30" x2="997" y2="322" stroke="var(--bezel2)"/>
-<text x="997" y="342" class="tick" text-anchor="middle">1h</text>
-<line x1="1094" y1="30" x2="1094" y2="322" stroke="var(--bezel2)"/>
-<text x="1094" y="342" class="tick" text-anchor="middle">15m</text>
-<line x1="1124" y1="30" x2="1124" y2="322" stroke="var(--bezel2)"/>
-<text x="1124" y="342" class="tick" text-anchor="middle">5m</text>
-<polyline class="curve" points="78.0,250.2 109.7,213.5 147.2,199.6 192.9,187.2 251.8,176.0 334.3,163.6 473.6,148.2 609.0,131.6 737.2,127.3 853.0,116.4 996.5,104.8 1056.1,94.9 1093.8,78.7 1124.1,43.3" fill="none" stroke="var(--amber)" stroke-width="2.5"/>
-<rect class="zone" x="1094" y="30" width="46" height="292" fill="var(--oxide)" opacity="0.13"/>
-<text x="1117" y="52" class="call" text-anchor="middle">the entire contest</text>
-<text x="86" y="239" class="tick">a week out, a lot sits at 25% of what it will bring</text>
-</svg></div>
-<div class="ask reveal" style="--d:4">So the question isn't how to be early to a listing. It's:
-<b>where is there a window that isn't a seven-day auction everyone can see?</b> We found two, plus
-one thing that isn't a window at all.</div>
+<div class="eyebrow reveal" style="--d:0">the cluster you named</div>
+<h2 class="reveal" style="--d:1">wob → Ryan Friedman → Porsche San Luis Obispo</h2>
+<p class="sub reveal" style="--d:2">You asked us to look at that trio. We ran 217 VINs through public
+records today <b>before reviewing your notes</b>, and the cluster surfaced on its own:</p>
+<div class="two reveal" style="--d:3">
+<div class="card lit"><div class="k">the GT2 RS itself</div><h3>Porsche San Luis Obispo</h3>
+<p>The $1M car carries a prior retail listing at <b>$565,888 / 593 miles</b> at Porsche San Luis Obispo
+— the same car that hammered at a million this morning.</p>
+<div class="num">VIN WP0AE2A93JS185343 · listed $565,888 · sold $1,000,000</div></div>
+<div class="card lit"><div class="k">a second car, both names</div><h3>488 Spider — Friedman → SLO</h3>
+<p>A 2018 488 Spider shows at <b>Ryan Friedman Motor Cars</b> (Glen Cove NY, 5,479 mi), then at
+<b>Porsche San Luis Obispo</b> at $313,888 / 13,715 mi. Both of your named parties, one chassis.</p>
+<div class="num">VIN ZFF80AMAXJ0232605 · Friedman → SLO · sold $475,000 on platform</div></div>
+</div>
+<div class="ask reveal" style="--d:5">Two of three names you gave us appear on two separate cars, one of
+which is the case car. <b>That is not proof of anything — it is the thread you asked us to pull, and it
+holds.</b> Give us the third and we will run the same pass across every car they have touched.</div>
 </div></section>
 
 <section class="slide" id="s3"><div class="inner">
-<div class="eyebrow reveal" style="--d:0">concept 01</div>
-<h2 class="reveal" style="--d:1">The cars that didn't sell — and where they go</h2>
-<p class="sub reveal" style="--d:2">In four months, <b>1,743 vehicles failed to meet reserve</b>,
-carrying <b>$107M</b> in high bids. Every one is a seller who publicly proved they
-want to sell and publicly proved the exact number the market offered them. Only <b>51</b> of
-them (3%) came back to the platform. <b>1,692 of them went somewhere the
-platform never saw.</b></p>
+<div class="eyebrow reveal" style="--d:0">01 · what we build for you first</div>
+<h2 class="reveal" style="--d:1">Your buy box, watched continuously</h2>
+<p class="sub reveal" style="--d:2">You give the parameters — models, year bands, mileage ceilings, spec,
+price. We watch every lot against them and score each one before you need to decide. Not "a car
+appeared." <b>This car, versus what its cohort actually trades at, with everywhere it has been.</b></p>
 <div class="stats reveal" style="--d:3">
-<div class="stat hot"><b>1,743</b><span>failed lots<br>in 4 months</span></div>
-<div class="stat"><b>223</b><span>of them with a<br>high bid ≥ $100k</span></div>
-<div class="stat kill"><b>1,692</b><span>never returned —<br>invisible to the platform</span></div>
-<div class="stat good"><b>+13.1%</b><span>what the ones that DID<br>return sold for, vs the<br>bid that failed</span></div>
+<div class="stat hot"><b>267,790</b><span>bid events behind<br>every score</span></div>
+<div class="stat"><b>362</b><span>priced cohorts —<br>a number is normal<br>for that car, or it isn't</span></div>
+<div class="stat"><b>9,850</b><span>complete ladders:<br>who bid, when, how</span></div>
+<div class="stat"><b>48,777</b><span>accounts profiled<br>by behaviour</span></div>
 </div>
-<div class="ask reveal" style="--d:5"><b>The honest correction:</b> we assumed these were distressed
-sellers. They are not — when they come back they get <b>13.1% more</b> than the bid they
-turned down, median 23 days later. So this isn't a bargain list. It's something better: a
-list of proven sellers with a published price expectation, 1,692 of whom nobody is
-talking to. <b>Does that list have value to you?</b></div>
+<div class="two reveal" style="--d:4">
+<div class="card"><div class="k">why it matters on the clock</div><h3>89% of winners bid in the last five minutes</h3>
+<p>Measured across 267,442 bids on 9,850 lots. Nobody researches a car while the clock runs — so
+the work has to be done days before. The alert isn't the product. <b>Arriving already decided is.</b></p></div>
+<div class="card"><div class="k">the part nobody else has</div><h3>Every car's past, attached on sight</h3>
+<p>Real example from this week: a 360 CS came up. Everyone saw the listing. Only we could see it sold at
+duPont Registry for $676,000 in March and was relisted by a Chicago dealer at $899,995 in April —
+<b>four miles</b> apart.</p></div>
+</div>
 </div></section>
 
 <section class="slide" id="s4"><div class="inner">
-<div class="eyebrow reveal" style="--d:0">concept 02</div>
-<h2 class="reveal" style="--d:1">Predicting what surfaces, instead of reacting to it</h2>
-<p class="sub reveal" style="--d:2">The only way to beat a public auction is to not be in one. Inventory
-doesn't appear randomly — it comes from pipelines with a cadence. <b>85 sellers</b> account for
-<b>20%</b> of all lots. Cars come back to market on a measurable clock.</p>
-<div class="stats reveal" style="--d:3">
-<div class="stat hot"><b>85</b><span>sellers running<br>≥10 lots each</span></div>
-<div class="stat"><b>20%</b><span>of all market volume<br>from those pipelines</span></div>
-<div class="stat"><b>23 days</b><span>median time for a failed<br>car to come back</span></div>
-<div class="stat"><b>130</b><span>same-car reappearances<br>observed in 4 months</span></div>
+<div class="eyebrow reveal" style="--d:0">02 · the one you can't get anywhere else</div>
+<h2 class="reveal" style="--d:1">1,781 cars that failed to sell — and where they went</h2>
+<p class="sub reveal" style="--d:2">Every failed lot is a seller who publicly proved they want to sell and
+publicly published the exact number the market offered. In four months: <b>1,781 of them,
+$108M in unaccepted high bids</b>. Almost none come back to the platform — they go private,
+to a dealer, or nowhere. <b>That is the private-sale pipeline, and it is a list.</b></p>
+<div class="fig reveal" style="--d:3">
+<table><thead><tr><th>failed lots by high bid</th><th class="n">cars</th><th class="n">unaccepted value</th></tr></thead>
+<tbody><tr><td class="m">$500k+</td><td class="m n">21</td><td class="m n">$20.1M</td></tr><tr><td class="m">$250-500k</td><td class="m n">38</td><td class="m n">$13.0M</td></tr><tr><td class="m">$100-250k</td><td class="m n">165</td><td class="m n">$24.9M</td></tr><tr><td class="m">under $100k</td><td class="m n">1557</td><td class="m n">$50.4M</td></tr></tbody></table></div>
+<div class="stats reveal" style="--d:4">
+<div class="stat hot"><b>59</b><span>failed cars above $250k —<br>a callable list, four months</span></div>
+<div class="stat good"><b>+13.1%</b><span>what the ones that came back<br>later sold for, vs the bid<br>they turned down</span></div>
+<div class="stat"><b>23 days</b><span>median time to return<br>when they do</span></div>
 </div>
-<div class="ask reveal" style="--d:5"><b>Straight about the limits:</b> 130 reappearances in a
-four-month window is a thin base to model on. This concept needs the all-time corpus to be more than
-a hypothesis — and we'd rather say that than show you a forecast built on 130 events.
-<b>Is a ranked "likely to surface in 90 days" list worth the build, or is your own network already
-faster than a model would be?</b></div>
+<div class="ask reveal" style="--d:5">The +13.1% is the useful part and it cuts against the obvious play:
+these are <b>not</b> distressed sellers. They held out and got more. So the approach isn't a lowball —
+it's arriving early with a number that beats what the room just showed them.</div>
 </div></section>
 
 <section class="slide" id="s5"><div class="inner">
-<div class="eyebrow reveal" style="--d:0">concept 03 — the one that isn't about speed</div>
-<h2 class="reveal" style="--d:1">Everyone sees the listing. Nobody else sees the history.</h2>
-<p class="sub reveal" style="--d:2">If the decision happens in a five-minute window, then everything
-useful has to already be computed when that window opens. That's not a reflex problem, it's an
-inventory-of-knowledge problem — and it's the only one here a competitor can't solve by writing
-a scraper.</p>
-<div class="stats reveal" style="--d:3">
-<div class="stat hot"><b>267,790</b><span>bid events</span></div>
-<div class="stat"><b>48,777</b><span>distinct accounts<br>and their behaviour</span></div>
-<div class="stat"><b>9,850</b><span>complete<br>bid ladders</span></div>
-<div class="stat"><b>362</b><span>priced cohorts<br>with benchmarks</span></div>
+<div class="eyebrow reveal" style="--d:0">03 · before it ever lists</div>
+<h2 class="reveal" style="--d:1">Finding cars that haven't hit the market yet</h2>
+<p class="sub reveal" style="--d:2">The only way to beat an auction is to not be in one. Three feeds
+where a car is visible before it is biddable — none of them require anyone's permission:</p>
+<div class="two reveal" style="--d:3">
+<div class="card"><div class="k">signal 1</div><h3>Auction-house catalogues</h3>
+<p>RM, Gooding, Bonhams and Mecum publish consignment catalogues <b>weeks</b> before the block. A car
+appearing there in September is knowable in August, and its owner is reachable.</p></div>
+<div class="card"><div class="k">signal 2</div><h3>Dealer "just acquired" inventory</h3>
+<p>Dealers post cars to their own sites before syndication picks them up. That gap is days to weeks,
+and it is where a private deal gets done.</p></div>
+<div class="card"><div class="k">signal 3</div><h3>The one-appearance money</h3>
+<p><b>649</b> accounts in four months bid $250k+ while appearing on two lots or fewer. Whether
+that's a plant or a serious private buyer, it is the population worth knowing — and it is knowable.</p></div>
 </div>
-<div class="two reveal" style="--d:4">
-<div class="card"><div class="k">what it looks like in practice</div>
-<h3>A real example from this week</h3>
-<p>A Ferrari 360 CS came up. Everyone could see the listing. What only we could see: it had sold
-at duPont Registry for $676,000 in March, then been relisted by a Chicago dealer at $899,995 in
-April — with <b>four miles</b> added between the two.</p>
-<div class="num">seller's basis: known · dealer flip: confirmed · asking-vs-realised gap: visible</div></div>
-<div class="card"><div class="k">the same idea, other direction</div>
-<h3>What a number is actually worth</h3>
-<p>Every lot gets scored against its own cohort, not against a vibe — 362 benchmarks built
-from 267,790 bid events. A price is either normal for that car in that window, or it isn't,
-and we can say which before the hammer falls.</p>
-<div class="num">residual vs cohort · prior asks · failed-sale history · who else was bidding</div></div>
+<div class="ask reveal" style="--d:5">Everything above runs on public pages and published catalogues.
+No permission, no grey area, no dependency on a platform that could switch us off.</div>
+</div></section>
+
+<section class="slide" id="s6"><div class="inner">
+<div class="eyebrow reveal" style="--d:0">04 · the Carfax answer you asked for</div>
+<h2 class="reveal" style="--d:1">We can't scrape it, and here's the straight reason</h2>
+<p class="sub reveal" style="--d:2">You asked for a Carfax monitor on the GT2 RS to prove whether the
+title actually moves. We tried. <b>Carfax's own robots file blocks every VIN path</b> — /vehicle/,
+/vin=, /vehiclehistory/, /api/, /search. classic.com, Cars &amp; Bids and cars.com all return 403 to
+any automated client.</p>
+<div class="two reveal" style="--d:3">
+<div class="card"><div class="k">why we won't route around it</div><h3>The corpus is only worth what its provenance is worth</h3>
+<p>Every byte we hold came from a permitted surface. The first question anyone serious asks about a
+finding is how the data was obtained. We are not trading that for a few hundred dollars of title data
+— it would make every number above unusable in the exact moment it matters.</p></div>
+<div class="card lit"><div class="k">what we do instead</div><h3>Licensed title data, ~$1–12 a car</h3>
+<p>NMVTIS is the federal title system; approved resellers sell API access legally. Same answer,
+bought instead of taken. <b>A 100-car pilot is roughly $100–1,200</b> and tells us whether inflated
+sales actually transfer. That is a purchase decision, not a technical one.</p>
+<div class="num">free monitor already live on the GT2 RS: relisting + dealer-surface watch, daily</div></div>
 </div>
 </div></section>
 
-<section class="slide" id="s6"><div class="inner center">
-<div class="eyebrow reveal" style="--d:0">what we're actually asking</div>
-<h2 class="reveal" style="--d:1">Which of these is real,<br>and which is us talking to ourselves?</h2>
-<p class="lede reveal" style="--d:2">You know this market and we have the data on it. Those are
-different things, and the second is worth nothing without the first. We killed the speed concept
-ourselves on slide one — we'd rather do that than sell you something that doesn't hold.</p>
-<div class="two reveal" style="--d:3" style="text-align:left">
-<div class="card"><div class="k">honest gaps</div><h3>What we can't do yet</h3>
-<p>We cannot see whether a title actually transfers — that needs licensed data we haven't bought.
-The prediction model rests on 130 reappearances, which isn't enough. And every surface worth
-polling outside this platform blocks automated access.</p></div>
-<div class="card"><div class="k">the open question</div><h3>Where would you spend it?</h3>
-<p>The 1,692 unhandled sellers, the pipeline forecast, or the history layer — one of these
-is probably worth real money to a dealer and the other two probably aren't. We don't know which.
-You do.</p></div>
+<section class="slide" id="s7"><div class="inner center">
+<div class="eyebrow reveal" style="--d:0">what we need from you</div>
+<h2 class="reveal" style="--d:1">Three inputs and we start.</h2>
+<div class="two reveal" style="--d:2" style="text-align:left">
+<div class="card lit"><div class="k">ask 1</div><h3>Your buy box</h3><p>Models, years, mileage ceilings,
+spec must-haves, price bands. That is the whole configuration — the watcher runs off it the same day.</p></div>
+<div class="card lit"><div class="k">ask 2</div><h3>The third name</h3><p>You gave us wob, Ryan Friedman
+and Porsche San Luis Obispo. Two are already connected in our data. Name anyone else you suspect and
+we run the same pass.</p></div>
+<div class="card lit"><div class="k">ask 3</div><h3>Two more auctions</h3><p>You offered to send suspicious
+lots to back-test against. Send them. If the detectors fire on cars you already know are dirty, that is
+the validation that matters more than anything we can self-report.</p></div>
 </div>
+<p class="lede reveal" style="--d:4">The TdF comp spike you watched at Amelia Island is the same mechanism
+at a different scale: one printed number re-rates everything behind it. We can now see that happen
+in near-real time, per cohort, on 9,850 lots. <b>What would you point it at first?</b></p>
 </div></section>
 
-<footer>every figure computed at build time from 9,695 vehicle lots and 267,790 bid events ·
-engine/build_allan_deck.py · no figure typed by hand · nothing here asserts intent about any person</footer>
+<footer>every figure computed at build time from 9,695 vehicle lots · 267,790 bid events ·
+engine/build_allan_deck.py · nothing here asserts intent, coordination, or identity about any person or business</footer>
 <script>
 const S=[...document.querySelectorAll('.slide')],P=[...document.querySelectorAll('.rail a')];
 if(location.hash==='#flat'){document.documentElement.classList.add('flat');S.forEach(s=>s.classList.add('active'));}
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('active');
-P.forEach(p=>p.classList.toggle('on',p.dataset.s===x.target.id));}}),{threshold:.5});S.forEach(s=>io.observe(s));
+P.forEach(p=>p.classList.toggle('on',p.dataset.s===x.target.id));}}),{threshold:.45});S.forEach(s=>io.observe(s));
 addEventListener('keydown',e=>{const i=S.findIndex(s=>s.getBoundingClientRect().top>-innerHeight/2);
 if(['ArrowRight','ArrowDown',' '].includes(e.key)){e.preventDefault();(S[i+1]||S[i]).scrollIntoView();}
 if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();(S[Math.max(0,i-1)]||S[0]).scrollIntoView();}});
