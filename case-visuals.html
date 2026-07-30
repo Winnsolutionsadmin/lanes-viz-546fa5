@@ -1,0 +1,741 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hammerindex — the case, drawn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,200..700;1,6..72,200..700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0B0E14;--bezel:#151A24;--bezel2:#1B2230;--hair:#242D3C;
+--parch:#E8E2D4;--parch2:#A8A296;--steel:#6B7A8F;--steel2:#3E4A5C;
+--amber:#E8A33D;--oxide:#C4442E;--verd:#4A8C7B;--pad:clamp(16px,3vw,40px)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--ink);color:var(--parch);font-family:Newsreader,serif;padding:var(--pad)}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--amber);letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+h1{font-family:Archivo,sans-serif;font-stretch:75%;font-weight:800;font-size:clamp(26px,4vw,44px);letter-spacing:-.01em}
+h2{font-family:Archivo,sans-serif;font-stretch:80%;font-weight:700;font-size:22px;margin:44px 0 6px}
+p.lede{max-width:76ch;color:var(--parch2);font-size:16.5px;line-height:1.55;margin-top:10px}
+.panel{background:var(--bezel);border:1px solid var(--hair);border-radius:10px;padding:22px;margin-top:14px;overflow-x:auto}
+svg{min-width:1000px;width:100%;height:auto;display:block}
+.tick{font-family:'IBM Plex Mono',monospace;font-size:11px;fill:var(--steel)}
+.rung{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600}
+.amt{font-family:'IBM Plex Mono',monospace;font-size:9.5px;fill:var(--parch2)}
+.call{font-family:'IBM Plex Mono',monospace;font-size:11.5px;fill:var(--amber)}
+.cast{font-family:'IBM Plex Mono',monospace;font-size:12px;fill:var(--parch)}
+.sub{font-family:'IBM Plex Mono',monospace;font-size:9.5px;fill:var(--steel)}
+.bigv{font-family:Archivo,sans-serif;font-weight:700;font-size:17px;fill:var(--parch)}
+.dot circle{transition:r .12s} .dot:hover circle{r:9}
+.note{border-left:3px solid var(--verd);padding:4px 0 4px 16px;color:var(--parch2);max-width:78ch;font-size:15px;line-height:1.5;margin-top:16px}
+nav{font-family:'IBM Plex Mono',monospace;font-size:12px;margin-top:8px}
+nav a{color:var(--amber);text-decoration:none;border-bottom:1px dotted var(--amber)}
+footer{margin-top:34px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--steel)}
+</style></head><body>
+<div class="eyebrow">hammerindex · lot 254,233 and the numbers around it</div>
+<h1>The case, drawn</h1>
+<nav><a href="./">← ten-lane recurrence timeline</a></nav>
+<p class="lede">Three computed pictures. The ladder as it was actually built, bid by bid, with each
+account's lifetime record beside it. The 918 sequence as a price diagram against the market's base
+rate. And the base rate itself. Nothing here asserts intent — each picture carries its innocent
+explanation.</p>
+
+<h2>1 · The ladder — 18 bids, $348,340 → $1,000,000</h2>
+<p class="lede">Top chart: bids in sequence. Amber = accounts with zero lifetime wins, steel =
+accounts that have bought, oxide = TorqueOrCork (its entire platform life is two seven-figure
+runs on this seller). Bottom strip: the same bids on a real clock — eleven bids on day one, then
+sparse seven-figure steps. Hover any dot for the account's lifetime record.</p>
+<div class="panel"><svg viewBox="0 0 1240 744" role="img" aria-label="Bid ladder for lot 254233, 18 bids from 348 thousand to 1 million dollars">
+<line x1="96" y1="531" x2="920" y2="531" stroke="var(--hair)"/>
+<text x="86" y="535" class="tick" text-anchor="end">$400k</text>
+<line x1="96" y1="457" x2="920" y2="457" stroke="var(--hair)"/>
+<text x="86" y="461" class="tick" text-anchor="end">$500k</text>
+<line x1="96" y1="382" x2="920" y2="382" stroke="var(--hair)"/>
+<text x="86" y="386" class="tick" text-anchor="end">$600k</text>
+<line x1="96" y1="307" x2="920" y2="307" stroke="var(--hair)"/>
+<text x="86" y="311" class="tick" text-anchor="end">$700k</text>
+<line x1="96" y1="233" x2="920" y2="233" stroke="var(--hair)"/>
+<text x="86" y="237" class="tick" text-anchor="end">$800k</text>
+<line x1="96" y1="158" x2="920" y2="158" stroke="var(--hair)"/>
+<text x="86" y="162" class="tick" text-anchor="end">$900k</text>
+<line x1="96" y1="83" x2="920" y2="83" stroke="var(--hair)"/>
+<text x="86" y="87" class="tick" text-anchor="end">$1000k</text>
+<path d="M118.9 569.9 L164.7 569.9 L164.7 456.7 L210.4 456.7 L210.4 438.0 L256.2 438.0 L256.2 382.0 L302.0 382.0 L302.0 367.1 L347.8 367.1 L347.8 332.2 L393.6 332.2 L393.6 307.3 L439.3 307.3 L439.3 286.4 L485.1 286.4 L485.1 270.0 L530.9 270.0 L530.9 251.3 L576.7 251.3 L576.7 247.6 L622.4 247.6 L622.4 241.6 L668.2 241.6 L668.2 232.7 L714.0 232.7 L714.0 158.0 L759.8 158.0 L759.8 126.3 L805.6 126.3 L805.6 89.3 L851.3 89.3 L851.3 84.8 L897.1 84.8 L897.1 83.3" fill="none" stroke="var(--parch2)" stroke-width="1.6" opacity="0.85"/>
+<circle cx="130" cy="68" r="8" fill="var(--ink)" stroke="var(--amber)" stroke-width="1.1"/>
+<text x="130" y="71.5" class="call" text-anchor="middle">a</text>
+<text x="146" y="72" class="cast">$666,666 — David_22</text>
+<circle cx="130" cy="90" r="8" fill="var(--ink)" stroke="var(--amber)" stroke-width="1.1"/>
+<text x="130" y="93.5" class="call" text-anchor="middle">b</text>
+<text x="146" y="94" class="cast">$800k → $900k: +$100,000 in one step — TorqueOrCork</text>
+<circle cx="130" cy="112" r="8" fill="var(--ink)" stroke="var(--amber)" stroke-width="1.1"/>
+<text x="130" y="115.5" class="call" text-anchor="middle">c</text>
+<text x="146" y="116" class="cast">$991,992 — a non-round signature — TorqueOrCork</text>
+<circle cx="130" cy="134" r="8" fill="var(--ink)" stroke="var(--amber)" stroke-width="1.1"/>
+<text x="130" y="137.5" class="call" text-anchor="middle">d</text>
+<text x="146" y="138" class="cast">$1,000,000 — the current high — rda1987</text>
+<g class="dot"><circle cx="118.9" cy="569.9" r="7" fill="var(--steel)"/><title>BOOOM — $348,340 — Jul 19 05:19 — 5 lifetime wins, 10/420 auctions on wob</title></g>
+<text x="118.9" y="556" class="rung" text-anchor="middle" fill="var(--steel)">BOOOM</text>
+<text x="118.9" y="592" class="amt" text-anchor="middle">$348k</text>
+<g class="dot"><circle cx="164.7" cy="456.7" r="7" fill="var(--steel)"/><title>Prostockbenji — $500,000 — Jul 19 06:12 — 4 lifetime wins, 1/45 auctions on wob</title></g>
+<text x="164.7" y="429" class="rung" text-anchor="middle" fill="var(--steel)">Prostockbenji</text>
+<text x="164.7" y="479" class="amt" text-anchor="middle">$500k</text>
+<g class="dot"><circle cx="210.4" cy="438.0" r="7" fill="var(--amber)"/><title>AmeerH — $525,000 — Jul 19 07:14 — 0 lifetime wins, 2/11 auctions on wob</title></g>
+<text x="210.4" y="424" class="rung" text-anchor="middle" fill="var(--amber)">AmeerH</text>
+<text x="210.4" y="460" class="amt" text-anchor="middle">$525k</text>
+<g class="dot"><circle cx="256.2" cy="382.0" r="7" fill="var(--amber)"/><title>David_22 — $600,000 — Jul 19 08:59 — 0 lifetime wins, 1/13 auctions on wob</title></g>
+<text x="256.2" y="354" class="rung" text-anchor="middle" fill="var(--amber)">David_22</text>
+<text x="256.2" y="404" class="amt" text-anchor="middle">$600k</text>
+<g class="dot"><circle cx="302.0" cy="367.1" r="7" fill="var(--amber)"/><title>Mancowerks — $620,000 — Jul 19 09:48 — 0 lifetime wins, 1/4 auctions on wob</title></g>
+<text x="302.0" y="353" class="rung" text-anchor="middle" fill="var(--amber)">Mancowerks</text>
+<text x="302.0" y="389" class="amt" text-anchor="middle">$620k</text>
+<g class="dot"><circle cx="347.8" cy="332.2" r="7" fill="var(--amber)"/><title>David_22 — $666,666 — Jul 19 09:55 — 0 lifetime wins, 1/13 auctions on wob</title></g>
+<text x="347.8" y="304" class="rung" text-anchor="middle" fill="var(--amber)">David_22</text>
+<text x="347.8" y="354" class="amt" text-anchor="middle">$666k</text>
+<circle cx="360.8" cy="321.2" r="8" fill="var(--ink)" stroke="var(--amber)" stroke-width="1.1"/>
+<text x="360.8" y="324.7" class="call" text-anchor="middle">a</text>
+<g class="dot"><circle cx="393.6" cy="307.3" r="7" fill="var(--amber)"/><title>Dcd0611 — $700,000 — Jul 19 12:16 — 0 lifetime wins, 14/183 auctions on wob</title></g>
+<text x="393.6" y="293" class="rung" text-anchor="middle" fill="var(--amber)">Dcd0611</text>
+<text x="393.6" y="329" class="amt" text-anchor="middle">$700k</text>
+<g class="dot"><circle cx="439.3" cy="286.4" r="7" fill="var(--amber)"/><title>Mancowerks — $728,000 — Jul 19 13:50 — 0 lifetime wins, 1/4 auctions on wob</title></g>
+<text x="439.3" y="258" class="rung" text-anchor="middle" fill="var(--amber)">Mancowerks</text>
+<text x="439.3" y="308" class="amt" text-anchor="middle">$728k</text>
+<g class="dot"><circle cx="485.1" cy="270.0" r="7" fill="var(--steel)"/><title>mitchell996 — $750,000 — Jul 19 14:25 — 2 lifetime wins, 4/29 auctions on wob</title></g>
+<text x="485.1" y="256" class="rung" text-anchor="middle" fill="var(--steel)">mitchell996</text>
+<text x="485.1" y="292" class="amt" text-anchor="middle">$750k</text>
+<g class="dot"><circle cx="530.9" cy="251.3" r="7" fill="var(--amber)"/><title>Dcd0611 — $775,000 — Jul 19 20:27 — 0 lifetime wins, 14/183 auctions on wob</title></g>
+<text x="530.9" y="223" class="rung" text-anchor="middle" fill="var(--amber)">Dcd0611</text>
+<text x="530.9" y="273" class="amt" text-anchor="middle">$775k</text>
+<g class="dot"><circle cx="576.7" cy="247.6" r="7" fill="var(--steel)"/><title>mitchell996 — $780,000 — Jul 19 20:57 — 2 lifetime wins, 4/29 auctions on wob</title></g>
+<text x="576.7" y="234" class="rung" text-anchor="middle" fill="var(--steel)">mitchell996</text>
+<text x="576.7" y="270" class="amt" text-anchor="middle">$780k</text>
+<g class="dot"><circle cx="622.4" cy="241.6" r="7" fill="var(--amber)"/><title>Mancowerks — $788,000 — Jul 20 18:26 — 0 lifetime wins, 1/4 auctions on wob</title></g>
+<text x="622.4" y="214" class="rung" text-anchor="middle" fill="var(--amber)">Mancowerks</text>
+<text x="622.4" y="264" class="amt" text-anchor="middle">$788k</text>
+<g class="dot"><circle cx="668.2" cy="232.7" r="7" fill="var(--steel)"/><title>mitchell996 — $800,000 — Jul 20 18:34 — 2 lifetime wins, 4/29 auctions on wob</title></g>
+<text x="668.2" y="219" class="rung" text-anchor="middle" fill="var(--steel)">mitchell996</text>
+<text x="668.2" y="255" class="amt" text-anchor="middle">$800k</text>
+<g class="dot"><circle cx="714.0" cy="158.0" r="7" fill="var(--oxide)"/><title>TorqueOrCork — $900,000 — Jul 21 16:38 — 0 lifetime wins, 2/2 auctions on wob</title></g>
+<text x="714.0" y="130" class="rung" text-anchor="middle" fill="var(--oxide)">TorqueOrCork</text>
+<text x="714.0" y="180" class="amt" text-anchor="middle">$900k</text>
+<circle cx="727.0" cy="147.0" r="8" fill="var(--ink)" stroke="var(--amber)" stroke-width="1.1"/>
+<text x="727.0" y="150.5" class="call" text-anchor="middle">b</text>
+<g class="dot"><circle cx="759.8" cy="126.3" r="7" fill="var(--steel)"/><title>mitchell996 — $942,500 — Jul 21 16:47 — 2 lifetime wins, 4/29 auctions on wob</title></g>
+<text x="759.8" y="112" class="rung" text-anchor="middle" fill="var(--steel)">mitchell996</text>
+<text x="759.8" y="148" class="amt" text-anchor="middle">$942k</text>
+<g class="dot"><circle cx="805.6" cy="89.3" r="7" fill="var(--oxide)"/><title>TorqueOrCork — $991,992 — Jul 21 17:23 — 0 lifetime wins, 2/2 auctions on wob</title></g>
+<text x="805.6" y="61" class="rung" text-anchor="middle" fill="var(--oxide)">TorqueOrCork</text>
+<text x="805.6" y="111" class="amt" text-anchor="middle">$991k</text>
+<circle cx="818.6" cy="78.3" r="8" fill="var(--ink)" stroke="var(--amber)" stroke-width="1.1"/>
+<text x="818.6" y="81.8" class="call" text-anchor="middle">c</text>
+<g class="dot"><circle cx="851.3" cy="84.8" r="7" fill="var(--amber)"/><title>Mancowerks — $998,000 — Jul 23 13:41 — 0 lifetime wins, 1/4 auctions on wob</title></g>
+<text x="851.3" y="71" class="rung" text-anchor="middle" fill="var(--amber)">Mancowerks</text>
+<text x="851.3" y="107" class="amt" text-anchor="middle">$998k</text>
+<g class="dot"><circle cx="897.1" cy="83.3" r="7" fill="var(--steel)"/><title>rda1987 — $1,000,000 — Jul 25 21:10 — 1 lifetime wins, 2/29 auctions on wob</title></g>
+<text x="897.1" y="55" class="rung" text-anchor="middle" fill="var(--steel)">rda1987</text>
+<text x="897.1" y="105" class="amt" text-anchor="middle">$1000k</text>
+<circle cx="910.1" cy="72.3" r="8" fill="var(--ink)" stroke="var(--amber)" stroke-width="1.1"/>
+<text x="910.1" y="75.8" class="call" text-anchor="middle">d</text>
+<text x="96" y="638" class="tick">the same 18 bids in real time — the ladder was built in bursts</text>
+<line x1="96" y1="652" x2="920" y2="652" stroke="var(--bezel2)" stroke-width="2"/>
+<text x="209" y="686" class="tick">Jul 20</text>
+<text x="323" y="686" class="tick">Jul 21</text>
+<text x="438" y="686" class="tick">Jul 22</text>
+<text x="552" y="686" class="tick">Jul 23</text>
+<text x="667" y="686" class="tick">Jul 24</text>
+<text x="781" y="686" class="tick">Jul 25</text>
+<text x="895" y="686" class="tick">Jul 26</text>
+<line x1="118.9" y1="578.9" x2="119.8" y2="647.0" stroke="var(--steel2)" stroke-width="0.7" opacity="0.6"/>
+<circle cx="119.8" cy="652" r="4.5" fill="var(--steel)"/>
+<line x1="164.7" y1="465.7" x2="124.0" y2="647.0" stroke="var(--steel2)" stroke-width="0.7" opacity="0.6"/>
+<circle cx="124.0" cy="652" r="4.5" fill="var(--steel)"/>
+<line x1="210.4" y1="447.0" x2="128.9" y2="647.0" stroke="var(--steel2)" stroke-width="0.7" opacity="0.6"/>
+<circle cx="128.9" cy="652" r="4.5" fill="var(--amber)"/>
+<line x1="256.2" y1="391.0" x2="137.3" y2="647.0" stroke="var(--steel2)" stroke-width="0.7" opacity="0.6"/>
+<circle cx="137.3" cy="652" r="4.5" fill="var(--amber)"/>
+<line x1="302.0" y1="376.1" x2="141.2" y2="647.0" stroke="var(--steel2)" stroke-width="0.7" opacity="0.6"/>
+<circle cx="141.2" cy="652" r="4.5" fill="var(--amber)"/>
+<line x1="347.8" y1="341.2" x2="141.7" y2="647.0" stroke="var(--steel2)" stroke-width="0.7" opacity="0.6"/>
+<circle cx="141.7" cy="652" r="4.5" fill="var(--amber)"/>
+<line x1="393.6" y1="316.3" x2="153.0" y2="647.0" stroke="var(--steel2)" stroke-width="0.7" opacity="0.6"/>
+<circle cx="153.0" cy="652" r="4.5" fill="var(--amber)"/>
+<line x1="439.3" y1="295.4" x2="160.4" y2="647.0" stroke="var(--steel2)" stroke-width="0.7" opacity="0.6"/>
+<circle cx="160.4" cy="652" r="4.5" fill="var(--amber)"/>
+<line x1="485.1" y1="279.0" x2="163.2" y2="647.0" stroke="var(--steel2)" stroke-width="0.7" opacity="0.6"/>
+<circle cx="163.2" cy="652" r="4.5" fill="var(--steel)"/>
+<line x1="530.9" y1="260.3" x2="192.0" y2="647.0" stroke="var(--steel2)" stroke-width="0.7" opacity="0.6"/>
+<circle cx="192.0" cy="652" r="4.5" fill="var(--amber)"/>
+<line x1="576.7" y1="256.6" x2="194.3" y2="647.0" stroke="var(--steel2)" stroke-width="0.7" opacity="0.6"/>
+<circle cx="194.3" cy="652" r="4.5" fill="var(--steel)"/>
+<line x1="622.4" y1="250.6" x2="296.7" y2="647.0" stroke="var(--steel2)" stroke-width="0.7" opacity="0.6"/>
+<circle cx="296.7" cy="652" r="4.5" fill="var(--amber)"/>
+<line x1="668.2" y1="241.7" x2="297.4" y2="647.0" stroke="var(--steel2)" stroke-width="0.7" opacity="0.6"/>
+<circle cx="297.4" cy="652" r="4.5" fill="var(--steel)"/>
+<line x1="714.0" y1="167.0" x2="402.6" y2="647.0" stroke="var(--steel2)" stroke-width="0.7" opacity="0.6"/>
+<circle cx="402.6" cy="652" r="4.5" fill="var(--oxide)"/>
+<line x1="759.8" y1="135.3" x2="403.3" y2="647.0" stroke="var(--steel2)" stroke-width="0.7" opacity="0.6"/>
+<circle cx="403.3" cy="652" r="4.5" fill="var(--steel)"/>
+<line x1="805.6" y1="98.3" x2="406.2" y2="647.0" stroke="var(--steel2)" stroke-width="0.7" opacity="0.6"/>
+<circle cx="406.2" cy="652" r="4.5" fill="var(--oxide)"/>
+<line x1="851.3" y1="93.8" x2="617.4" y2="647.0" stroke="var(--steel2)" stroke-width="0.7" opacity="0.6"/>
+<circle cx="617.4" cy="652" r="4.5" fill="var(--amber)"/>
+<line x1="897.1" y1="92.3" x2="881.9" y2="647.0" stroke="var(--steel2)" stroke-width="0.7" opacity="0.6"/>
+<circle cx="881.9" cy="652" r="4.5" fill="var(--steel)"/>
+<text x="944" y="102" class="tick">the cast — lifetime record</text>
+<circle cx="950" cy="122" r="5.5" fill="var(--steel)"/>
+<text x="962" y="126" class="cast">BOOOM</text>
+<text x="962" y="138" class="sub">5 wins · 10/420 on wob · since November 2019</text>
+<circle cx="950" cy="152" r="5.5" fill="var(--steel)"/>
+<text x="962" y="156" class="cast">Prostockbenji</text>
+<text x="962" y="168" class="sub">4 wins · 1/45 on wob · since June 2024</text>
+<circle cx="950" cy="182" r="5.5" fill="var(--amber)"/>
+<text x="962" y="186" class="cast">AmeerH</text>
+<text x="962" y="198" class="sub">0 wins · 2/11 on wob · since January 2026</text>
+<circle cx="950" cy="212" r="5.5" fill="var(--amber)"/>
+<text x="962" y="216" class="cast">David_22</text>
+<text x="962" y="228" class="sub">0 wins · 1/13 on wob · since June 2022</text>
+<circle cx="950" cy="242" r="5.5" fill="var(--amber)"/>
+<text x="962" y="246" class="cast">Mancowerks</text>
+<text x="962" y="258" class="sub">0 wins · 1/4 on wob · since August 2025</text>
+<circle cx="950" cy="272" r="5.5" fill="var(--amber)"/>
+<text x="962" y="276" class="cast">Dcd0611</text>
+<text x="962" y="288" class="sub">0 wins · 14/183 on wob · since February 2022</text>
+<circle cx="950" cy="302" r="5.5" fill="var(--steel)"/>
+<text x="962" y="306" class="cast">mitchell996</text>
+<text x="962" y="318" class="sub">2 wins · 4/29 on wob · since June 2024</text>
+<circle cx="950" cy="332" r="5.5" fill="var(--oxide)"/>
+<text x="962" y="336" class="cast">TorqueOrCork</text>
+<text x="962" y="348" class="sub">0 wins · 2/2 on wob · since July 2025</text>
+<circle cx="950" cy="362" r="5.5" fill="var(--steel)"/>
+<text x="962" y="366" class="cast">rda1987</text>
+<text x="962" y="378" class="sub">1 wins · 2/29 on wob · since May 2021</text>
+</svg></div>
+<div class="note">The innocent read: a halo car draws collectors who bid big and rarely win.
+The read worth testing: five of the eight accounts on this ladder have zero lifetime wins, and
+the two largest single jumps ($800k→$900k, $942.5k→$991,992) came from the account that exists
+only on this seller's lots. The decisive fact is not on this chart: does the winner pay.</div>
+
+<h2>2 · The anchor — a failed number, realized on the next unit</h2>
+<div class="panel"><svg viewBox="0 0 1240 480" role="img" aria-label="918 price anchor diagram">
+<rect x="180" y="128" width="140" height="252" fill="rgba(196,68,46,0.10)" stroke="var(--oxide)" stroke-width="2" rx="4"/>
+<text x="250" y="94" class="bigv" text-anchor="middle">$2,305,918</text>
+<text x="250" y="112" class="tick" text-anchor="middle">RESERVE NOT MET</text>
+<text x="250" y="402" class="cast" text-anchor="middle">918 Spyder #1 — Jul 31 2025</text>
+<rect x="550" y="129" width="140" height="251" fill="rgba(74,140,123,0.12)" stroke="var(--verd)" stroke-width="2" rx="4"/>
+<text x="620" y="95" class="bigv" text-anchor="middle">$2,301,000</text>
+<text x="620" y="113" class="tick" text-anchor="middle">SOLD</text>
+<text x="620" y="402" class="cast" text-anchor="middle">918 Spyder #2 — Oct 2025</text>
+<line x1="322" y1="128" x2="548" y2="129" stroke="var(--amber)" stroke-width="1.5" stroke-dasharray="4 5"/>
+<text x="435.0" y="170" class="call" text-anchor="middle">the failed number travels —</text>
+<text x="435.0" y="186" class="call" text-anchor="middle">realized at 0.2%, ten weeks later</text>
+<text x="435.0" y="214" class="tick" text-anchor="middle">high bidder on #1: TorqueOrCork (account created that month)</text>
+<text x="435.0" y="229" class="tick" text-anchor="middle">underbidder at $2,300,000: PORSCHE911STPTS</text>
+<text x="830" y="114" class="cast">how often does ANY failed ≥$500k number</text>
+<text x="830" y="130" class="cast">get realized within ±2% on a comparable?</text>
+<circle cx="830.0" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="839.6" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="849.2" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="858.8" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="868.4" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="878.0" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="887.6" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="897.2" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="906.8" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="916.4" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="926.0" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="935.6" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="945.2" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="954.8" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="964.4" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="974.0" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="983.6" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="993.2" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1002.8" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1012.4" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1022.0" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1031.6" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1041.2" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1050.8" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1060.4" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1070.0" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1079.6" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1089.2" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1098.8" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1108.4" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1118.0" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1127.6" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1137.2" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1146.8" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1156.4" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1166.0" cy="160.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="830.0" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="839.6" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="849.2" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="858.8" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="868.4" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="878.0" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="887.6" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="897.2" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="906.8" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="916.4" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="926.0" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="935.6" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="945.2" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="954.8" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="964.4" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="974.0" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="983.6" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="993.2" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1002.8" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1012.4" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1022.0" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1031.6" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1041.2" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1050.8" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1060.4" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1070.0" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1079.6" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1089.2" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1098.8" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1108.4" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1118.0" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1127.6" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1137.2" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1146.8" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1156.4" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1166.0" cy="169.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="830.0" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="839.6" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="849.2" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="858.8" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="868.4" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="878.0" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="887.6" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="897.2" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="906.8" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="916.4" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="926.0" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="935.6" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="945.2" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="954.8" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="964.4" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="974.0" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="983.6" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="993.2" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1002.8" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1012.4" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1022.0" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1031.6" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1041.2" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1050.8" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1060.4" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1070.0" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1079.6" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1089.2" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1098.8" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1108.4" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1118.0" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1127.6" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1137.2" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1146.8" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1156.4" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1166.0" cy="179.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="830.0" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="839.6" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="849.2" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="858.8" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="868.4" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="878.0" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="887.6" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="897.2" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="906.8" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="916.4" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="926.0" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="935.6" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="945.2" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="954.8" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="964.4" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="974.0" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="983.6" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="993.2" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1002.8" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1012.4" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1022.0" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1031.6" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1041.2" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1050.8" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1060.4" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1070.0" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1079.6" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1089.2" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1098.8" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1108.4" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1118.0" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1127.6" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1137.2" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1146.8" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1156.4" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1166.0" cy="188.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="830.0" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="839.6" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="849.2" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="858.8" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="868.4" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="878.0" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="887.6" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="897.2" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="906.8" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="916.4" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="926.0" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="935.6" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="945.2" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="954.8" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="964.4" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="974.0" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="983.6" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="993.2" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1002.8" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1012.4" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1022.0" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1031.6" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1041.2" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1050.8" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1060.4" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1070.0" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1079.6" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1089.2" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1098.8" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1108.4" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1118.0" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1127.6" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1137.2" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1146.8" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1156.4" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1166.0" cy="198.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="830.0" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="839.6" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="849.2" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="858.8" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="868.4" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="878.0" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="887.6" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="897.2" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="906.8" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="916.4" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="926.0" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="935.6" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="945.2" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="954.8" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="964.4" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="974.0" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="983.6" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="993.2" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1002.8" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1012.4" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1022.0" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1031.6" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1041.2" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1050.8" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1060.4" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1070.0" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1079.6" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1089.2" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1098.8" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1108.4" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1118.0" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1127.6" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1137.2" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1146.8" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1156.4" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1166.0" cy="208.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="830.0" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="839.6" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="849.2" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="858.8" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="868.4" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="878.0" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="887.6" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="897.2" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="906.8" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="916.4" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="926.0" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="935.6" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="945.2" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="954.8" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="964.4" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="974.0" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="983.6" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="993.2" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1002.8" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1012.4" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1022.0" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1031.6" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1041.2" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1050.8" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1060.4" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1070.0" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1079.6" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1089.2" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1098.8" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1108.4" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1118.0" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1127.6" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1137.2" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1146.8" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1156.4" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1166.0" cy="217.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="830.0" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="839.6" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="849.2" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="858.8" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="868.4" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="878.0" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="887.6" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="897.2" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="906.8" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="916.4" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="926.0" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="935.6" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="945.2" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="954.8" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="964.4" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="974.0" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="983.6" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="993.2" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1002.8" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1012.4" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1022.0" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1031.6" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1041.2" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1050.8" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1060.4" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1070.0" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1079.6" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1089.2" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1098.8" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1108.4" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1118.0" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1127.6" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1137.2" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1146.8" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1156.4" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1166.0" cy="227.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="830.0" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="839.6" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="849.2" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="858.8" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="868.4" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="878.0" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="887.6" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="897.2" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="906.8" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="916.4" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="926.0" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="935.6" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="945.2" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="954.8" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="964.4" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="974.0" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="983.6" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="993.2" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1002.8" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1012.4" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1022.0" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1031.6" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1041.2" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1050.8" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1060.4" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1070.0" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1079.6" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1089.2" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1098.8" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1108.4" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1118.0" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1127.6" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1137.2" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1146.8" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1156.4" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="1166.0" cy="236.8" r="2.7" fill="var(--steel2)"/>
+<circle cx="830.0" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="839.6" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="849.2" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="858.8" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="868.4" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="878.0" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="887.6" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="897.2" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="906.8" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="916.4" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="926.0" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="935.6" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="945.2" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="954.8" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="964.4" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="974.0" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="983.6" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="993.2" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1002.8" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1012.4" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1022.0" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1031.6" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1041.2" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1050.8" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1060.4" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1070.0" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1079.6" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1089.2" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1098.8" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1108.4" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1118.0" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1127.6" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1137.2" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1146.8" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1156.4" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="1166.0" cy="246.4" r="2.7" fill="var(--steel2)"/>
+<circle cx="830.0" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="839.6" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="849.2" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="858.8" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="868.4" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="878.0" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="887.6" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="897.2" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="906.8" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="916.4" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="926.0" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="935.6" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="945.2" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="954.8" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="964.4" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="974.0" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="983.6" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="993.2" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1002.8" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1012.4" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1022.0" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1031.6" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1041.2" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1050.8" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1060.4" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1070.0" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1079.6" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1089.2" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1098.8" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1108.4" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1118.0" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1127.6" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1137.2" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1146.8" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1156.4" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="1166.0" cy="256.0" r="2.7" fill="var(--steel2)"/>
+<circle cx="830.0" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="839.6" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="849.2" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="858.8" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="868.4" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="878.0" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="887.6" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="897.2" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="906.8" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="916.4" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="926.0" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="935.6" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="945.2" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="954.8" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="964.4" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="974.0" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="983.6" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="993.2" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1002.8" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1012.4" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1022.0" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1031.6" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1041.2" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1050.8" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1060.4" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1070.0" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1079.6" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1089.2" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1098.8" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1108.4" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1118.0" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1127.6" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1137.2" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1146.8" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1156.4" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="1166.0" cy="265.6" r="2.7" fill="var(--steel2)"/>
+<circle cx="830.0" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="839.6" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="849.2" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="858.8" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="868.4" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="878.0" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="887.6" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="897.2" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="906.8" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="916.4" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="926.0" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="935.6" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="945.2" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="954.8" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="964.4" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="974.0" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="983.6" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="993.2" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1002.8" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1012.4" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1022.0" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1031.6" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1041.2" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1050.8" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1060.4" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1070.0" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1079.6" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1089.2" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1098.8" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1108.4" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<circle cx="1118.0" cy="275.2" r="2.7" fill="var(--steel2)"/>
+<text x="830" y="311" class="call">0 of 463 candidate pairs</text>
+<text x="830" y="329" class="tick">full market, Apr 7 – Aug 1 2026</text>
+<text x="830" y="345" class="tick">the 918 sequence has no analog in the window</text>
+</svg></div>
+<div class="note">A reserve-not-met high bid never transacted, yet it is public. Ten weeks later
+the same seller's next comparable unit sold within 0.2% of it. Market-wide, across
+463 comparable opportunities at the ≥$500k tier in four months, that happened
+0 times. Confound: a seller's own comparables are similar cars, which raises price
+agreement honestly — see the base rates below.</div>
+
+<h2>3 · The base rate — same seller vs everyone else</h2>
+<div class="panel"><svg viewBox="0 0 1240 380" role="img" aria-label="Base rates: probability a later comparable sale lands within a band of a failed number">
+<rect x="150" y="253" width="120" height="47" fill="var(--amber)" rx="3" opacity="1"/>
+<text x="210.0" y="243" class="bigv" text-anchor="middle">2.37%</text>
+<text x="210.0" y="320" class="tick" text-anchor="middle">same seller</text>
+<rect x="278" y="291" width="120" height="9" fill="var(--steel)" rx="3" opacity="0.75"/>
+<text x="338.0" y="281" class="bigv" text-anchor="middle">0.47%</text>
+<text x="338.0" y="320" class="tick" text-anchor="middle">any other seller</text>
+<text x="274" y="217" class="call" text-anchor="middle">5.0×</text>
+<text x="274" y="346" class="cast" text-anchor="middle">within ±0.5%</text>
+<rect x="520" y="217" width="120" height="83" fill="var(--amber)" rx="3" opacity="1"/>
+<text x="580.0" y="207" class="bigv" text-anchor="middle">4.14%</text>
+<text x="580.0" y="320" class="tick" text-anchor="middle">same seller</text>
+<rect x="648" y="266" width="120" height="34" fill="var(--steel)" rx="3" opacity="0.75"/>
+<text x="708.0" y="256" class="bigv" text-anchor="middle">1.72%</text>
+<text x="708.0" y="320" class="tick" text-anchor="middle">any other seller</text>
+<text x="644" y="181" class="call" text-anchor="middle">2.4×</text>
+<text x="644" y="346" class="cast" text-anchor="middle">within ±2%</text>
+<rect x="890" y="99" width="120" height="201" fill="var(--amber)" rx="3" opacity="1"/>
+<text x="950.0" y="89" class="bigv" text-anchor="middle">10.06%</text>
+<text x="950.0" y="320" class="tick" text-anchor="middle">same seller</text>
+<rect x="1018" y="216" width="120" height="84" fill="var(--steel)" rx="3" opacity="0.75"/>
+<text x="1078.0" y="206" class="bigv" text-anchor="middle">4.18%</text>
+<text x="1078.0" y="320" class="tick" text-anchor="middle">any other seller</text>
+<text x="1014" y="63" class="call" text-anchor="middle">2.4×</text>
+<text x="1014" y="346" class="cast" text-anchor="middle">within ±5%</text>
+<text x="150" y="60" class="cast">P(a LATER comparable sale lands within the band of a seller's own failed RNM number)</text>
+<text x="150" y="80" class="tick">33,649 candidate pairs (169 same-seller) · full market Apr 7 – Aug 1 2026 · comparable = same cohort + marque, ±3 years</text>
+</svg></div>
+<div class="note">A seller's own later comparable lands on their failed number 2.4–5.0× more
+often than anyone else's does, and the elevation is strongest at the tightest band — the
+anchoring signature. It is also partly explained by inventory similarity. Both readings are
+kept; the tiebreaker is durability (does the premium survive re-trade), which needs the
+all-time corpus.</div>
+
+<footer>generated by engine/build_case_visuals.py · sources: listings_analysis.json (client-side ladder capture) · bidders_history.json × wob catalog · hammerindex.duckdb (33,649 candidate pairs) · every figure computed at build time</footer>
+</body></html>
