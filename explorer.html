@@ -98,7 +98,7 @@ signal fires on a single event.</div>
 const fmt$=v=>v>=1e6?'$'+(v/1e6).toFixed(1)+'M':v>=1e3?'$'+Math.round(v/1e3)+'k':'$'+v;
 const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let all=[],view=[],shown=0,sortK='pr',sortD=-1,META=null;
-let MODE=localStorage.getItem('hxmode')||'simple';
+let MODE=new URLSearchParams(location.search).get('mode')||localStorage.getItem('hxmode')||'simple';
 const filters={pr:!1,ph:!1,conc:!1,cw:!1,vol:!1};
 const LEDE={
  simple:`Look up any seller of collector cars at auction. See how their prices compare with the
