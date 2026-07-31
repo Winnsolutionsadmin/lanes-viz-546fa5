@@ -1,0 +1,188 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The consignment plan — built on measured market structure</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,200..600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#080B11;--bezel:#121722;--bezel2:#19202D;--hair:#232C3B;--parch:#EDE7D9;
+--parch2:#A9A396;--steel:#6E7D92;--steel2:#3C4859;--amber:#E8A33D;--oxide:#C4442E;--verd:#4FA085}
+*{box-sizing:border-box;margin:0}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+body{background:var(--ink);color:var(--parch);font-family:Newsreader,serif}
+.s{min-height:100svh;scroll-snap-align:start;display:flex;align-items:center;border-bottom:1px solid var(--hair);padding:44px 0}
+.in{width:min(1180px,93vw);margin:0 auto}
+.ctr{text-align:center;max-width:940px}
+.eb{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--amber);letter-spacing:.19em;text-transform:uppercase;margin-bottom:14px}
+h1{font-family:Archivo,sans-serif;font-stretch:72%;font-weight:800;font-size:clamp(36px,5.8vw,76px);line-height:1.02;letter-spacing:-.022em}
+h2{font-family:Archivo,sans-serif;font-stretch:78%;font-weight:800;font-size:clamp(24px,3.4vw,42px);line-height:1.07;letter-spacing:-.015em}
+p.l{color:var(--parch2);font-size:clamp(15.5px,1.5vw,19px);line-height:1.58;margin-top:16px;max-width:74ch}
+.ctr p.l{margin-left:auto;margin-right:auto}
+p.sub{color:var(--parch2);font-size:14.5px;line-height:1.55;margin-top:11px;max-width:96ch}
+.fig{background:var(--bezel);border:1px solid var(--hair);border-radius:12px;padding:22px;margin-top:20px;overflow-x:auto}
+.fig svg{min-width:820px;width:100%;height:auto;display:block}
+.bl{font-family:'IBM Plex Mono',monospace;font-size:12px;fill:var(--parch2)}
+.bv{font-family:Archivo,sans-serif;font-weight:700;font-size:15px}
+.vb{width:0;transition:width 1s cubic-bezier(.2,.9,.25,1);transition-delay:var(--d)}
+.s.on .vb{width:var(--w)}
+table{width:100%;border-collapse:collapse;margin-top:16px}
+th{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--steel);text-transform:uppercase;letter-spacing:.13em;text-align:left;padding:9px 12px;border-bottom:1px solid var(--hair)}
+th.n,td.n{text-align:right}
+td{padding:11px 12px;border-bottom:1px solid var(--bezel2);font-size:14px}
+td.m{font-family:'IBM Plex Mono',monospace;font-size:12.5px} td.hot{color:var(--amber);font-weight:600}
+tr.lit{background:rgba(232,163,61,.09)} tr.lit td{border-color:var(--amber)}
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:16px;margin-top:24px}
+.cc{background:var(--bezel);border:1px solid var(--hair);border-radius:12px;padding:22px}
+.cc .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--steel);letter-spacing:.13em;text-transform:uppercase}
+.cc .v{font-family:Archivo,sans-serif;font-weight:800;font-size:38px;letter-spacing:-.028em;margin:9px 0 3px}
+.cc .v.a{color:var(--amber)} .cc .v.g{color:var(--verd)} .cc .v.o{color:var(--oxide)}
+.cc .d{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--parch2);line-height:1.6}
+.ph{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:17px;margin-top:22px}
+.pc{background:var(--bezel);border:1px solid var(--hair);border-left:3px solid var(--amber);border-radius:11px;padding:22px}
+.pc .n{font-family:Archivo,sans-serif;font-weight:800;font-size:30px;color:var(--amber);letter-spacing:-.03em;line-height:1}
+.pc .w{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--steel);letter-spacing:.12em;text-transform:uppercase;margin:8px 0 9px}
+.pc h3{font-family:Archivo,sans-serif;font-stretch:80%;font-weight:700;font-size:17.5px;line-height:1.25;margin-bottom:8px}
+.pc p{color:var(--parch2);font-size:13.5px;line-height:1.55}
+.pc .g{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--verd);margin-top:11px;padding-top:10px;border-top:1px solid var(--bezel2);line-height:1.6}
+.note{border-left:3px solid var(--verd);padding:6px 0 6px 17px;color:var(--parch2);font-size:15px;line-height:1.58;margin-top:22px;max-width:82ch}
+.risk{display:flex;flex-direction:column;gap:2px;margin-top:20px}
+.rr{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--hair)}
+.rr b{font-family:Archivo,sans-serif;font-weight:800;font-size:19px;color:var(--oxide)}
+.rr p{color:var(--parch2);font-size:14.5px;line-height:1.55}
+.rr p i{color:var(--parch);font-style:normal;font-weight:600}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;transition-delay:calc(var(--i,0)*.13s)}
+.s.on .rv{opacity:1;transform:none}
+.rail{position:fixed;right:15px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:5}
+.rail a{width:8px;height:8px;border-radius:50%;background:var(--steel2);display:block;transition:.3s}
+.rail a.on{background:var(--amber);transform:scale(1.4)}
+@media(prefers-reduced-motion:reduce){.rv,.vb{opacity:1!important;transform:none!important;width:var(--w)!important;transition:none!important}}
+html.flat .s{min-height:auto} html.flat .rv{opacity:1;transform:none} html.flat .vb{width:var(--w)}
+footer{padding:18px 4vw;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--steel2);line-height:1.8;border-top:1px solid var(--hair)}
+</style></head><body>
+<nav class="rail"><a href="#s1" data-s="s1"></a><a href="#s2" data-s="s2"></a><a href="#s3" data-s="s3"></a><a href="#s4" data-s="s4"></a><a href="#s5" data-s="s5"></a><a href="#s6" data-s="s6"></a><a href="#s7" data-s="s7"></a><a href="#s8" data-s="s8"></a></nav>
+
+<section class="s" id="s1"><div class="in ctr">
+<div class="eb rv" style="--i:0">the consignment plan · every figure computed, none asserted</div>
+<h1 class="rv" style="--i:1">The audience is<br>already yours.</h1>
+<p class="l rv" style="--i:2">Most marketplace businesses die on the cold start: you cannot get sellers
+without buyers, or buyers without sellers. This market does not work that way, and the number on the
+next slide is the reason a two-person operation can start here credibly.</p>
+</div></section>
+
+<section class="s" id="s2"><div class="in">
+<div class="eb rv" style="--i:0">01 · the finding that determines the strategy</div>
+<h2 class="rv" style="--i:1">A first listing reaches almost the same audience<br>as the biggest seller on the platform.</h2>
+<p class="sub rv" style="--i:2">Average views per listing, by how many cars the seller moves per month.
+The bars are the argument: <b>1.27×</b> separates a total unknown from the largest
+operator. The platform supplies the demand — you do not have to build it.</p>
+<div class="fig rv" style="--i:2"><svg viewBox="0 0 1120 330" role="img" aria-label="Views per listing by seller tier — nearly flat"><text x="176" y="47" class="bl" text-anchor="end">first-time seller</text><rect class="vb" x="190" y="30" height="26" rx="4" style="--w:588px;--d:0.0s" fill="var(--amber)"/><text x="790" y="48" class="bv" fill="var(--amber)">7,125</text><text x="176" y="101" class="bl" text-anchor="end">2–3</text><rect class="vb" x="190" y="84" height="26" rx="4" style="--w:577px;--d:0.12s" fill="var(--steel2)"/><text x="779" y="102" class="bv" fill="var(--parch2)">6,990</text><text x="176" y="155" class="bl" text-anchor="end">4–9</text><rect class="vb" x="190" y="138" height="26" rx="4" style="--w:564px;--d:0.24s" fill="var(--steel2)"/><text x="766" y="156" class="bv" fill="var(--parch2)">6,835</text><text x="176" y="209" class="bl" text-anchor="end">10–29</text><rect class="vb" x="190" y="192" height="26" rx="4" style="--w:594px;--d:0.36s" fill="var(--steel2)"/><text x="796" y="210" class="bv" fill="var(--parch2)">7,194</text><text x="176" y="263" class="bl" text-anchor="end">30+ lots/mo</text><rect class="vb" x="190" y="246" height="26" rx="4" style="--w:748px;--d:0.48s" fill="var(--steel2)"/><text x="950" y="264" class="bv" fill="var(--parch2)">9,062</text></svg></div>
+<div class="note rv" style="--i:4">This is why <b>2,849 one-time sellers</b> moved
+<b>$91.3M</b> in a single month — more GMV than the top two professional tiers combined
+($48.9M). The expensive part of starting a marketplace brand does not exist here.</div>
+</div></section>
+
+<section class="s" id="s3"><div class="in">
+<div class="eb rv" style="--i:0">02 · so what do the professionals actually win on</div>
+<h2 class="rv" style="--i:1">Not attention. Inventory, conversion and nerve.</h2>
+<div class="cmp">
+<div class="cc rv" style="--i:2"><div class="k">sell-through</div>
+ <div class="v g">84.5%</div>
+ <div class="d">vs 79.5% for occasional sellers<br><b>+5.0 points</b> — correct reserves, presentation, timing</div></div>
+<div class="cc rv" style="--i:3"><div class="k">average car</div>
+ <div class="v a">$81,298</div>
+ <div class="d">vs $46,164<br><b>1.76×</b> — the real moat, and it compounds</div></div>
+<div class="cc rv" style="--i:4"><div class="k">no-reserve share</div>
+ <div class="v">44.2%</div>
+ <div class="d">vs 38.6%<br>confidence in the outcome, which itself lifts sell-through</div></div>
+<div class="cc rv" style="--i:5"><div class="k">operators above 10 cars/mo</div>
+ <div class="v o">35</div>
+ <div class="d">on the entire platform<br>a thin professional layer, not a crowded field</div></div>
+</div>
+<div class="note rv" style="--i:6"><b>None of these require scale to start.</b> All three are process — which
+means they are available to a disciplined operator on day one.</div>
+</div></section>
+
+<section class="s" id="s4"><div class="in">
+<div class="eb rv" style="--i:0">03 · market structure</div>
+<h2 class="rv" style="--i:1">A long tail with a thin professional layer</h2>
+<div class="fig rv" style="--i:2">
+<table><thead><tr><th>seller tier</th><th class="n">sellers</th><th class="n">lots/mo</th>
+<th class="n">GMV/mo</th><th class="n">sell-through</th><th class="n">avg car</th></tr></thead>
+<tbody><tr><td class="m">30+ lots/mo</td><td class="m n">8</td><td class="m n">367</td><td class="m n">$28.8M</td><td class="m n">84.7%</td><td class="m n">$92,685</td></tr><tr><td class="m">10–29</td><td class="m n">27</td><td class="m n">364</td><td class="m n">$20.1M</td><td class="m n">83.5%</td><td class="m n">$66,264</td></tr><tr><td class="m">4–9</td><td class="m n">140</td><td class="m n">745</td><td class="m n">$27.5M</td><td class="m n">80.7%</td><td class="m n">$45,789</td></tr><tr><td class="m">2–3</td><td class="m n">326</td><td class="m n">751</td><td class="m n">$32.0M</td><td class="m n">80.6%</td><td class="m n">$52,824</td></tr><tr><td class="m">first-time seller</td><td class="m n">2,849</td><td class="m n">2,849</td><td class="m n">$91.3M</td><td class="m n">78.3%</td><td class="m n">$40,932</td></tr></tbody></table></div>
+<p class="sub rv" style="--i:3">The money is not concentrated at the top. Volume rises with tier, but so
+does car value — which is the variable that actually pays.</p>
+</div></section>
+
+<section class="s" id="s5"><div class="in">
+<div class="eb rv" style="--i:0">04 · the revenue model</div>
+<h2 class="rv" style="--i:1">Five cars a month is a $597k business for two people.</h2>
+<p class="sub rv" style="--i:2">Collector-car consignment commission runs 5–10%, scaling down as value
+rises. Modelled at 5% on a $199,155 average — the realised average for cars at or above $80k,
+which is the segment worth operating in.</p>
+<div class="fig rv" style="--i:3">
+<table><thead><tr><th>cadence</th><th class="n">cars / yr</th><th class="n">GMV</th><th class="n">commission @ 5%</th></tr></thead>
+<tbody><tr class=""><td class="m">2/mo</td><td class="m n">24</td><td class="m n">$4.8M</td><td class="m n hot">$238,986</td></tr><tr class="lit"><td class="m">5/mo</td><td class="m n">60</td><td class="m n">$11.9M</td><td class="m n hot">$597,465</td></tr><tr class=""><td class="m">10/mo</td><td class="m n">120</td><td class="m n">$23.9M</td><td class="m n hot">$1,194,930</td></tr><tr class=""><td class="m">Wob-scale, 34/mo</td><td class="m n">408</td><td class="m n">$81.3M</td><td class="m n hot">$4,062,762</td></tr><tr class=""><td class="m">1600veloce, 46/mo</td><td class="m n">552</td><td class="m n">$109.9M</td><td class="m n hot">$5,496,678</td></tr></tbody></table></div>
+<div class="note rv" style="--i:4">The highlighted row is the target. <b>Wob-scale is not the goal</b> —
+it is a decade-old operation with a warehouse, a staff and a photographer, and chasing it is how a
+new entrant runs out of money.</div>
+</div></section>
+
+<section class="s" id="s6"><div class="in">
+<div class="eb rv" style="--i:0">05 · the ramp</div>
+<h2 class="rv" style="--i:1">Twenty-four months, four phases, each with a gate</h2>
+<div class="ph"><div class="pc rv" style="--i:2"><div class="n">01</div>
+<div class="w">Months 1–3</div><h3>Prove the process on your own cars</h3><p>Seed with 6–10 cars you control. No client to disappoint while you find the style. The objective is not revenue — it is a public track record and a repeatable production process.</p><div class="g">Gate: ≥80% sell-through and one result visibly above comparable sales.</div></div><div class="pc rv" style="--i:3"><div class="n">02</div>
+<div class="w">Months 4–9</div><h3>Buy the only real moat</h3><p>A specialist automotive photographer and a rigid house style. Buyers identify a top seller's listing from the photograph before reading the title. That recognition is the asset — and it is a hire plus a discipline, not a technology.</p><div class="g">Gate: two-thirds of listings sourced from outside your own collection.</div></div><div class="pc rv" style="--i:4"><div class="n">03</div>
+<div class="w">Months 10–18</div><h3>Differentiate on evidence</h3><p>Every competitor sells on taste. Sell on proof: what the car is worth against 267,790 bid events, what it will realistically bring, what reserve to set, when to list. Reframes the pitch from “trust our eye” to “check our math.”</p><div class="g">No consignor in this market can make that claim.</div></div><div class="pc rv" style="--i:5"><div class="n">04</div>
+<div class="w">Months 19–24</div><h3>Work the list nobody else has</h3><p>1,781 failed-to-sell cars, $108M in refused bids. Owners who publicly proved they want to sell and published the number they turned down. Returns sell +13.1% above the refused bid, 23 days later.</p><div class="g">Not a lowball list — an arrive-early-with-a-better-number list.</div></div></div>
+</div></section>
+
+<section class="s" id="s7"><div class="in">
+<div class="eb rv" style="--i:0">06 · unit economics, stated honestly</div>
+<h2 class="rv" style="--i:1">The margin is thin per car. That is the whole reason<br>inventory value beats volume.</h2>
+<div class="cmp">
+<div class="cc rv" style="--i:2"><div class="k">production cost / car</div><div class="v">$3–8k</div>
+ <div class="d">photography &amp; detail $2–4k · listing fee ~$99–1,499 · transport $500–2,500 · storage $150–400/mo</div></div>
+<div class="cc rv" style="--i:3"><div class="k">commission / car @ 5%</div><div class="v a">$9,958</div>
+ <div class="d">on the $199,155 realised average in the ≥$80k segment</div></div>
+<div class="cc rv" style="--i:4"><div class="k">gross margin / car</div><div class="v g">$2–7k</div>
+ <div class="d">which is why the professionals' 1.76× inventory advantage matters more than raw volume</div></div>
+<div class="cc rv" style="--i:5"><div class="k">cost of a failed reserve</div><div class="v o">−$3–8k</div>
+ <div class="d">full production spend, zero revenue. The +5.0pt sell-through gap is exactly this skill</div></div>
+</div>
+<div class="note rv" style="--i:6">This is where pricing evidence pays for itself. A correct reserve is
+worth more per car than any amount of marketing, and it is the one thing a data layer can actually
+guarantee.</div>
+</div></section>
+
+<section class="s" id="s8"><div class="in">
+<div class="eb rv" style="--i:0">the honest part</div>
+<h2 class="rv" style="--i:1">Four risks, and the one that governs</h2>
+<div class="risk">
+<div class="rr rv" style="--i:2"><b>1</b><p><i>Reputation is the slowest asset to build.</i> The incumbents
+have a decade. The only real shortcut is entering as someone the market already knows — which is worth
+more than any tooling.</p></div>
+<div class="rr rv" style="--i:3"><b>2</b><p><i>Platform dependency is total.</i> Terms, fees or ranking
+changes hit revenue directly, and there is no second channel with this audience.</p></div>
+<div class="rr rv" style="--i:4"><b>3</b><p><i>Thin margin punishes bad reserve calls.</i> One failed car
+erases the margin on two successful ones.</p></div>
+<div class="rr rv" style="--i:5"><b>4</b><p><i>It is a service business until it is a brand.</i> Revenue
+scales with headcount until recognition starts doing the selling for you.</p></div>
+</div>
+<div class="note rv" style="--i:6">The platform hands you the audience for free. What you must build is
+inventory quality, conversion discipline and a recognisable presentation — and the differentiator nobody
+else in this market can copy is <b>pricing evidence</b>.</div>
+</div></section>
+
+<footer>Computed from a 5,076-lot / 30-day full-market export and a 9,695-lot, 267,790-bid warehouse ·
+engine/build_plan_deck.py · generated 2026-07-30 · commission rates
+and per-car costs are industry ranges, not measured · nothing here asserts intent about any person or business.</footer>
+<script>
+const S=[...document.querySelectorAll('.s')],P=[...document.querySelectorAll('.rail a')];
+if(location.hash==='#flat'){document.documentElement.classList.add('flat');S.forEach(x=>x.classList.add('on'));}
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');
+ P.forEach(p=>p.classList.toggle('on',p.dataset.s===x.target.id));}}),{threshold:.4});
+S.forEach(x=>io.observe(x));
+addEventListener('keydown',e=>{const i=S.findIndex(x=>x.getBoundingClientRect().top>-innerHeight/2);
+ if(['ArrowRight','ArrowDown',' '].includes(e.key)){e.preventDefault();(S[i+1]||S[i]).scrollIntoView();}
+ if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();(S[Math.max(0,i-1)]||S[0]).scrollIntoView();}});
+</script></body></html>
