@@ -58,7 +58,25 @@ select.f{border-radius:8px}
  padding:5px 10px;border-radius:6px;background:rgba(8,11,17,.82);border:1px solid}
 .chip.under{color:var(--verd);border-color:var(--verd)} .chip.fair{color:var(--parch2);border-color:var(--steel2)}
 .chip.over{color:var(--oxide);border-color:var(--oxide)} .chip.none{color:var(--steel2);border-color:var(--steel2)}
+.chip.early{color:var(--steel);border-color:var(--steel2)}
 .chip.lead{color:var(--amber);border-color:var(--amber)}
+.card.hero{border-color:var(--amber);box-shadow:0 0 0 1px rgba(232,163,61,.18)}
+.tgt{position:absolute;top:10px;right:10px;z-index:2;font-family:'IBM Plex Mono',monospace;font-size:9.5px;
+ font-weight:600;letter-spacing:.08em;background:var(--amber);color:#12161d;padding:4px 9px;border-radius:5px}
+.why{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--amber);margin-top:10px;padding-top:9px;
+ border-top:1px solid var(--bezel2);line-height:1.55}
+.hxwrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:14px;margin:14px 0 6px}
+.hx{display:flex;gap:13px;background:var(--bezel);border:1px solid var(--hair);border-radius:11px;padding:13px;
+ opacity:0;transform:translateY(12px);animation:in .5s ease forwards;animation-delay:calc(var(--i)*.06s)}
+.hxi{width:86px;height:64px;border-radius:7px;overflow:hidden;flex:none;background:var(--bezel2)}
+.hxi img{width:100%;height:100%;object-fit:cover}
+.hxb{min-width:0;flex:1}
+.hxt{font-family:Archivo,sans-serif;font-stretch:82%;font-weight:600;font-size:12px;line-height:1.3;margin-bottom:7px}
+.hxr{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10.5px;margin-top:2px}
+.hxl{color:var(--steel)} .hxr b{color:var(--parch)} .hxr b.lost{color:var(--oxide)} .hxr b.open{color:var(--verd)}
+.hxg{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;margin-top:6px}
+.hxg.lost{color:var(--oxide)} .hxg.open{color:var(--verd)}
+.hxs{font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:var(--steel2);margin-top:5px}
 .body{padding:15px 16px 16px}
 .body h3{font-family:Archivo,sans-serif;font-stretch:82%;font-weight:600;font-size:14px;line-height:1.32;min-height:37px}
 .prow{display:flex;align-items:baseline;gap:9px;margin-top:10px;flex-wrap:wrap}
@@ -84,25 +102,133 @@ footer{border-top:1px solid var(--hair);padding:18px clamp(16px,2.5vw,34px);font
 </style></head><body>
 <header><div class="hwrap">
 <div class="brand">THE <i>FLOOR</i></div>
-<div class="who">desk profile: <b>A. Marshall</b> · Ferrari-first, exotic set<br>30 lots in box · benchmarks from 267,790 bid events</div>
+<div class="who">desk profile: <b>A. Marshall</b> · Ferrari-first, exotic set<br>32 lots in box · benchmarks from 267,790 bid events</div>
 <div class="tabs"><button class="on" data-v="live">Live</button><button data-v="pre">Pre-auction</button><button data-v="estates">Estates</button></div>
 <div class="live"><span class="dot"></span><span id="now"></span></div>
 </div></header>
 <main>
 
 <section class="view on" id="live">
-<span class="prov l">● LIVE — polled Jul 30, 15:19 PT</span>
+<span class="prov v">◆ YOUR RECORD — from lots we collected; your member page is not scraped</span>
+<h2 class="sec" style="margin-top:6px">Four Ferraris. Twenty-two bids. Zero cars.</h2>
+<div class="pd">Everything below is derived from your own bidding in our corpus — 100% Ferrari, and
+you were outbid on all four. Two of them by less than $3,000. <b>The 430 Scuderia never sold at
+all</b>, which means the seller is still holding it.</div>
+<div class="hxwrap"><div class="hx" style="--i:0">
+ <div class="hxi"><img src="https://bringatrailer.com/wp-content/uploads/2026/05/430_Scud-7-copy-2026-06-17-8ho-18266-scaled.jpg" alt="" loading="lazy"></div>
+ <div class="hxb"><div class="hxt">10k-Mile 2008 Ferrari 430 Scuderia</div>
+  <div class="hxr"><span class="hxl">you bid</span><b>$701,000</b></div>
+  <div class="hxr"><span class="hxl">high bid, did not sell</span>
+   <b class="open">$754,000</b></div>
+  <div class="hxg open">you were $53,000 short — car unsold</div>
+  <div class="hxs">2026-07-01 · elismotorcars · 1 bid</div>
+ </div></div><div class="hx" style="--i:1">
+ <div class="hxi"><img src="https://bringatrailer.com/wp-content/uploads/2026/05/2003_ferrari_360-spider_gated360-164-02335.jpg" alt="" loading="lazy"></div>
+ <div class="hxb"><div class="hxt">9k-Mile 2003 Ferrari 360 Spider 6-Speed</div>
+  <div class="hxr"><span class="hxl">you bid</span><b>$267,500</b></div>
+  <div class="hxr"><span class="hxl">sold for</span>
+   <b class="lost">$270,000</b></div>
+  <div class="hxg lost">missed by $2,500</div>
+  <div class="hxs">2026-05-28 · otsandco · 4 bids</div>
+ </div></div><div class="hx" style="--i:2">
+ <div class="hxi"><img src="https://bringatrailer.com/wp-content/uploads/2026/06/DSC01596-copy-2026-06-12-daw-08721-scaled.jpg" alt="" loading="lazy"></div>
+ <div class="hxb"><div class="hxt">8k-Mile 2004 Ferrari 360 Spider</div>
+  <div class="hxr"><span class="hxl">you bid</span><b>$162,000</b></div>
+  <div class="hxr"><span class="hxl">sold for</span>
+   <b class="lost">$165,000</b></div>
+  <div class="hxg lost">missed by $3,000</div>
+  <div class="hxs">2026-06-24 · ilussooc · 5 bids</div>
+ </div></div><div class="hx" style="--i:3">
+ <div class="hxi"><img src="https://bringatrailer.com/wp-content/uploads/2026/02/Concours-004_Chu_exp_web-e1692915562225-45684.jpg" alt="" loading="lazy"></div>
+ <div class="hxb"><div class="hxt">Ferrari Monza SP1 Driver Accessories by Berluti and </div>
+  <div class="hxr"><span class="hxl">you bid</span><b>$32,000</b></div>
+  <div class="hxr"><span class="hxl">sold for</span>
+   <b class="lost">$40,000</b></div>
+  <div class="hxg lost">missed by $8,000</div>
+  <div class="hxs">2026-06-15 · reoriginalclassics · 12 bids</div>
+ </div></div></div>
+
+<span class="prov l">● ON THE BLOCK NOW — models you have personally chased</span>
+<div class="pd">8 live lots match a car you have bid on before. These lead the board;
+everything else follows underneath.</div>
+<div class="grid" style="margin-bottom:8px"><article class="card hero" data-marque="Ferrari" data-delta="20.9"
+ data-price="162000" data-ends="1785527760" data-bench="1" style="--i:0">
+ <a class="ph" href="https://bringatrailer.com/listing/2007-ferrari-f430-88/" target="_blank" rel="noopener">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/BAT_-_2007_F430-40-copy-2026-07-20-vc6-56803.jpg?w=470&h=318&crop=1" alt="" loading="lazy"><span class="clock" data-ends="1785527760">--:--:--</span><span class="chip fair">+21% projected</span>
+   <span class="tgt">F430</span></a>
+ <div class="body"><h3>17k-Mile 2007 Ferrari F430</h3>
+  <div class="prow"><span class="price">$162,000</span>
+   <span class="bench">proj. finish $275,400 vs $227,750 benchmark</span></div>
+  <div class="why">the 430 line you chased at $701,000</div></div></article><article class="card hero" data-marque="Ferrari" data-delta="999"
+ data-price="100000" data-ends="1785609600" data-bench="1" style="--i:1">
+ <a class="ph" href="https://bringatrailer.com/listing/2004-ferrari-360-spider-111/" target="_blank" rel="noopener">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/2004_ferrari_360-spider_2004_ferrari_360-spider_2a258d2e-0c00-4149-9880-fefcf3c7192e-NbjtAN-38869-38870-scaled.jpg?w=470&h=318&crop=1" alt="" loading="lazy"><span class="clock" data-ends="1785609600">--:--:--</span><span class="chip early">2d out — too early to score</span>
+   <span class="tgt">360 Spider</span></a>
+ <div class="body"><h3>14k-Mile 2004 Ferrari 360 Spider</h3>
+  <div class="prow"><span class="price">$100,000</span>
+   <span class="bench">$80,500 benchmark · 8 comps</span></div>
+  <div class="why">you bid on two — lost both by under $3,000</div></div></article><article class="card hero" data-marque="Ferrari" data-delta="999"
+ data-price="48888" data-ends="1785778980" data-bench="1" style="--i:2">
+ <a class="ph" href="https://bringatrailer.com/listing/2002-ferrari-360-modena-26/" target="_blank" rel="noopener">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/06/252702_360-98-scaled-copy-2026-06-29-h6e-56438.jpg?w=470&h=318&crop=1" alt="" loading="lazy"><span class="clock" data-ends="1785778980">--:--:--</span><span class="chip early">4d out — too early to score</span>
+   <span class="tgt">360 Modena</span></a>
+ <div class="body"><h3>2002 Ferrari 360 Modena</h3>
+  <div class="prow"><span class="price">$48,888</span>
+   <span class="bench">$116,360 benchmark · 5 comps</span></div>
+  <div class="why">same platform as your two 360 Spider runs</div></div></article><article class="card hero" data-marque="Ferrari" data-delta="999"
+ data-price="250000" data-ends="1785784500" data-bench="1" style="--i:3">
+ <a class="ph" href="https://bringatrailer.com/listing/2003-ferrari-360-spider-94/" target="_blank" rel="noopener">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/BaTYellow360Extra-scaled-copy-2026-07-23-f0u-18550.jpg?w=470&h=318&crop=1" alt="" loading="lazy"><span class="clock" data-ends="1785784500">--:--:--</span><span class="chip early">4d out — too early to score</span>
+   <span class="tgt">360 Spider</span></a>
+ <div class="body"><h3>7k-Mile 2003 Ferrari 360 Spider 6-Speed</h3>
+  <div class="prow"><span class="price">$250,000</span>
+   <span class="bench">$250,000 benchmark · 4 comps</span></div>
+  <div class="why">you bid on two — lost both by under $3,000</div></div></article><article class="card hero" data-marque="Ferrari" data-delta="999"
+ data-price="85000" data-ends="1785865800" data-bench="1" style="--i:4">
+ <a class="ph" href="https://bringatrailer.com/listing/2006-ferrari-f430-spider-77/" target="_blank" rel="noopener">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/DSC_2088-scaled-copy-2026-07-21-u7l-44493.jpg?w=470&h=318&crop=1" alt="" loading="lazy"><span class="clock" data-ends="1785865800">--:--:--</span><span class="chip early">5d out — too early to score</span>
+   <span class="tgt">F430</span></a>
+ <div class="body"><h3>9k-Mile 2006 Ferrari F430 Spider</h3>
+  <div class="prow"><span class="price">$85,000</span>
+   <span class="bench">$185,000 benchmark · 9 comps</span></div>
+  <div class="why">the 430 line you chased at $701,000</div></div></article><article class="card hero" data-marque="Ferrari" data-delta="999"
+ data-price="130000" data-ends="1785880260" data-bench="0" style="--i:5">
+ <a class="ph" href="https://bringatrailer.com/listing/1999-ferrari-360-modena-65/" target="_blank" rel="noopener">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/36A2486-scaled-copy-2026-07-22-04q-20486.jpg?w=470&h=318&crop=1" alt="" loading="lazy"><span class="clock" data-ends="1785880260">--:--:--</span><span class="chip early">5d out — too early to score</span>
+   <span class="tgt">360 Modena</span></a>
+ <div class="body"><h3>24k-Mile 1999 Ferrari 360 Modena 6-Speed</h3>
+  <div class="prow"><span class="price">$130,000</span>
+   <span class="bench">no comparable set</span></div>
+  <div class="why">same platform as your two 360 Spider runs</div></div></article><article class="card hero" data-marque="Ferrari" data-delta="999"
+ data-price="50500" data-ends="1785956640" data-bench="1" style="--i:6">
+ <a class="ph" href="https://bringatrailer.com/listing/2006-ferrari-f430-60/" target="_blank" rel="noopener">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/06/36A9780-scaled-copy-2026-07-27-abk-76385.jpg?w=470&h=318&crop=1" alt="" loading="lazy"><span class="clock" data-ends="1785956640">--:--:--</span><span class="chip early">6d out — too early to score</span>
+   <span class="tgt">F430</span></a>
+ <div class="body"><h3>2006 Ferrari F430 Spider</h3>
+  <div class="prow"><span class="price">$50,500</span>
+   <span class="bench">$185,000 benchmark · 9 comps</span></div>
+  <div class="why">the 430 line you chased at $701,000</div></div></article><article class="card hero" data-marque="Ferrari" data-delta="999"
+ data-price="50000" data-ends="1786047720" data-bench="1" style="--i:7">
+ <a class="ph" href="https://bringatrailer.com/listing/2001-ferrari-360-spider-102-2/" target="_blank" rel="noopener">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/DSC00164-scaled-copy-2026-07-24-m5v-20133.jpg?w=470&h=318&crop=1" alt="" loading="lazy"><span class="clock" data-ends="1786047720">--:--:--</span><span class="chip early">7d out — too early to score</span>
+   <span class="tgt">360 Spider</span></a>
+ <div class="body"><h3>40k-Mile 2001 Ferrari 360 Spider</h3>
+  <div class="prow"><span class="price">$50,000</span>
+   <span class="bench">$80,500 benchmark · 8 comps</span></div>
+  <div class="why">you bid on two — lost both by under $3,000</div></div></article></div>
+
+<span class="prov l">● LIVE — polled Jul 30, 17:34 PT</span>
 <div class="pd">Real auctions in progress right now. Clocks count down from the marketplace's own end
-timestamps, current bids and photographs are as-published. <b>1,222 live lots polled; 30 shown</b>
+timestamps, current bids and photographs are as-published. <b>1,222 live lots polled; 32 shown</b>
 after filtering to the desk profile. <b>The chip is a PROJECTION, not a raw comparison.</b> A mid-auction bid is not comparable to a
 final-sale benchmark — our corpus shows a lot sits at ~49% of its finish with 72h left and ~95%
 with five minutes left. Each bid is projected forward on that measured curve, then scored against
-comps (17 of 30 have a set of ≥4). Where there is no comparable set we say so
+comps (17 of 32 have a set of ≥4). Where there is no comparable set we say so
 rather than guess.</div>
 <div class="counters">
 <div class="ct a"><b>25</b><span>Ferrari live now</span></div>
 <div class="ct o"><b>0</b><span>closing under 6h</span></div>
-<div class="ct g"><b>1</b><span>under benchmark</span></div>
+<div class="ct g"><b>0</b><span>under benchmark</span></div>
 <div class="ct"><b>17</b><span>scored vs comps</span></div>
 </div>
 <div class="bar">
@@ -121,238 +247,190 @@ rather than guess.</div>
  <div class="body"><h3>1993 Ferrari 348 TB Serie Speciale</h3>
   <div class="prow"><span class="price">$101,000</span><span class="bench">proj. finish $171,700 · no comparable set</span></div>
   <div class="meta"><span class="tg nr">NO RESERVE</span><span class="tg pr">PREMIUM</span><span class="sel">US</span></div>
- </div></article><article class="card" data-marque="Ferrari" data-delta="20.9"
- data-price="162000" data-ends="1785527760" data-bench="1" style="--i:1">
- <a class="ph" href="https://bringatrailer.com/listing/2007-ferrari-f430-88/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/BAT_-_2007_F430-40-copy-2026-07-20-vc6-56803.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/1/800/520'">
-   <span class="clock" data-ends="1785527760">--:--:--</span><span class="chip fair">+21% projected</span></a>
- <div class="body"><h3>17k-Mile 2007 Ferrari F430</h3>
-  <div class="prow"><span class="price">$162,000</span><span class="bench">proj. finish $275,400 vs benchmark $227,750 · 4 comps</span></div>
-  <div class="meta"><span class="sel">US</span></div>
- </div></article><article class="card" data-marque="Ferrari" data-delta="-6.4"
- data-price="59328" data-ends="1785603600" data-bench="1" style="--i:2">
+ </div></article><article class="card" data-marque="Ferrari" data-delta="999"
+ data-price="59328" data-ends="1785603600" data-bench="1" style="--i:1">
  <a class="ph" href="https://bringatrailer.com/listing/1986-ferrari-328-gts-76/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/06/JX1A5271-63754.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/2/800/520'">
-   <span class="clock" data-ends="1785603600">--:--:--</span><span class="chip fair">-6% projected</span></a>
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/06/JX1A5271-63754.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/1/800/520'">
+   <span class="clock" data-ends="1785603600">--:--:--</span><span class="chip early">2d out — too early to score</span></a>
  <div class="body"><h3>1986 Ferrari 328 GTS</h3>
-  <div class="prow"><span class="price">$59,328</span><span class="bench">proj. finish $111,421 vs benchmark $119,000 · 8 comps</span></div>
+  <div class="prow"><span class="price">$59,328</span><span class="bench">$119,000 benchmark · 8 comps</span></div>
   <div class="meta"><span class="sel">US</span></div>
- </div></article><article class="card" data-marque="Ferrari" data-delta="46.8"
- data-price="170000" data-ends="1785609120" data-bench="1" style="--i:3">
+ </div></article><article class="card" data-marque="Ferrari" data-delta="999"
+ data-price="170000" data-ends="1785609120" data-bench="1" style="--i:2">
  <a class="ph" href="https://bringatrailer.com/listing/1997-ferrari-f355-spider-100/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/BaTRedF355-20v2-scaled-copy-2026-07-21-u57-56976.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/3/800/520'">
-   <span class="clock" data-ends="1785609120">--:--:--</span><span class="chip over">+47% projected</span></a>
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/BaTRedF355-20v2-scaled-copy-2026-07-21-u57-56976.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/2/800/520'">
+   <span class="clock" data-ends="1785609120">--:--:--</span><span class="chip early">2d out — too early to score</span></a>
  <div class="body"><h3>1997 Ferrari F355 Spider 6-Speed</h3>
-  <div class="prow"><span class="price">$170,000</span><span class="bench">proj. finish $319,268 vs benchmark $217,500 · 8 comps</span></div>
+  <div class="prow"><span class="price">$170,000</span><span class="bench">$217,500 benchmark · 8 comps</span></div>
   <div class="meta"><span class="sel">US</span></div>
- </div></article><article class="card" data-marque="Ferrari" data-delta="133.3"
- data-price="100000" data-ends="1785609600" data-bench="1" style="--i:4">
- <a class="ph" href="https://bringatrailer.com/listing/2004-ferrari-360-spider-111/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/2004_ferrari_360-spider_2004_ferrari_360-spider_2a258d2e-0c00-4149-9880-fefcf3c7192e-NbjtAN-38869-38870-scaled.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/4/800/520'">
-   <span class="clock" data-ends="1785609600">--:--:--</span><span class="chip over">+133% projected</span></a>
- <div class="body"><h3>14k-Mile 2004 Ferrari 360 Spider</h3>
-  <div class="prow"><span class="price">$100,000</span><span class="bench">proj. finish $187,805 vs benchmark $80,500 · 8 comps</span></div>
-  <div class="meta"><span class="tg nr">NO RESERVE</span><span class="sel">US</span></div>
- </div></article><article class="card" data-marque="Ferrari" data-delta="-7.6"
- data-price="48888" data-ends="1785778980" data-bench="1" style="--i:5">
- <a class="ph" href="https://bringatrailer.com/listing/2002-ferrari-360-modena-26/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/06/252702_360-98-scaled-copy-2026-06-29-h6e-56438.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/5/800/520'">
-   <span class="clock" data-ends="1785778980">--:--:--</span><span class="chip fair">-8% projected</span></a>
- <div class="body"><h3>2002 Ferrari 360 Modena</h3>
-  <div class="prow"><span class="price">$48,888</span><span class="bench">proj. finish $107,554 vs benchmark $116,360 · 5 comps</span></div>
-  <div class="meta"><span class="sel">US</span></div>
- </div></article><article class="card" data-marque="Ferrari" data-delta="120.0"
- data-price="250000" data-ends="1785784500" data-bench="1" style="--i:6">
- <a class="ph" href="https://bringatrailer.com/listing/2003-ferrari-360-spider-94/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/BaTYellow360Extra-scaled-copy-2026-07-23-f0u-18550.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/6/800/520'">
-   <span class="clock" data-ends="1785784500">--:--:--</span><span class="chip over">+120% projected</span></a>
- <div class="body"><h3>7k-Mile 2003 Ferrari 360 Spider 6-Speed</h3>
-  <div class="prow"><span class="price">$250,000</span><span class="bench">proj. finish $550,000 vs benchmark $250,000 · 4 comps</span></div>
-  <div class="meta"><span class="sel">US</span></div>
- </div></article><article class="card" data-marque="Ferrari" data-delta="11.6"
- data-price="85000" data-ends="1785865800" data-bench="1" style="--i:7">
- <a class="ph" href="https://bringatrailer.com/listing/2006-ferrari-f430-spider-77/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/DSC_2088-scaled-copy-2026-07-21-u7l-44493.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/7/800/520'">
-   <span class="clock" data-ends="1785865800">--:--:--</span><span class="chip fair">+12% projected</span></a>
- <div class="body"><h3>9k-Mile 2006 Ferrari F430 Spider</h3>
-  <div class="prow"><span class="price">$85,000</span><span class="bench">proj. finish $206,429 vs benchmark $185,000 · 9 comps</span></div>
-  <div class="meta"><span class="sel">US</span></div>
- </div></article><article class="card" data-marque="Ferrari" data-delta="-17.8"
- data-price="89000" data-ends="1785870180" data-bench="1" style="--i:8">
+ </div></article><article class="card" data-marque="Ferrari" data-delta="999"
+ data-price="89000" data-ends="1785870180" data-bench="1" style="--i:3">
  <a class="ph" href="https://bringatrailer.com/listing/2007-ferrari-599-gtb-fiorano-91/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/2007_ferrari_599-gtb-fiorano_2007_ferrari_599-gtb-fiorano_794f6eaa-88cc-4c4a-995b-b21d6ff147ec-kngTlJ-90975-90975-scaled.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/8/800/520'">
-   <span class="clock" data-ends="1785870180">--:--:--</span><span class="chip under">-18% projected</span></a>
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/2007_ferrari_599-gtb-fiorano_2007_ferrari_599-gtb-fiorano_794f6eaa-88cc-4c4a-995b-b21d6ff147ec-kngTlJ-90975-90975-scaled.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/3/800/520'">
+   <span class="clock" data-ends="1785870180">--:--:--</span><span class="chip early">5d out — too early to score</span></a>
  <div class="body"><h3>22k-Mile 2007 Ferrari 599 GTB Fiorano</h3>
-  <div class="prow"><span class="price">$89,000</span><span class="bench">proj. finish $216,143 vs benchmark $263,000 · 6 comps</span></div>
+  <div class="prow"><span class="price">$89,000</span><span class="bench">$263,000 benchmark · 6 comps</span></div>
   <div class="meta"><span class="sel">US</span></div>
  </div></article><article class="card" data-marque="Ferrari" data-delta="999"
- data-price="40308" data-ends="1785873660" data-bench="0" style="--i:9">
+ data-price="40308" data-ends="1785873660" data-bench="0" style="--i:4">
  <a class="ph" href="https://bringatrailer.com/listing/1979-ferrari-308-gts-38/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/IMG_6349-scaled-copy-2026-07-22-7be-43861.jpeg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/9/800/520'">
-   <span class="clock" data-ends="1785873660">--:--:--</span><span class="chip none">no benchmark</span></a>
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/IMG_6349-scaled-copy-2026-07-22-7be-43861.jpeg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/4/800/520'">
+   <span class="clock" data-ends="1785873660">--:--:--</span><span class="chip early">5d out — too early to score</span></a>
  <div class="body"><h3>1979 Ferrari 308 GTS</h3>
-  <div class="prow"><span class="price">$40,308</span><span class="bench">proj. finish $97,891 · no comparable set</span></div>
+  <div class="prow"><span class="price">$40,308</span><span class="bench">no comparable set</span></div>
   <div class="meta"><span class="sel">US</span></div>
  </div></article><article class="card" data-marque="Ferrari" data-delta="999"
- data-price="130000" data-ends="1785880260" data-bench="0" style="--i:10">
- <a class="ph" href="https://bringatrailer.com/listing/1999-ferrari-360-modena-65/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/36A2486-scaled-copy-2026-07-22-04q-20486.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/10/800/520'">
-   <span class="clock" data-ends="1785880260">--:--:--</span><span class="chip none">no benchmark</span></a>
- <div class="body"><h3>24k-Mile 1999 Ferrari 360 Modena 6-Speed</h3>
-  <div class="prow"><span class="price">$130,000</span><span class="bench">proj. finish $315,714 · no comparable set</span></div>
-  <div class="meta"><span class="sel">US</span></div>
- </div></article><article class="card" data-marque="Ferrari" data-delta="382.0"
- data-price="864000" data-ends="1785949200" data-bench="1" style="--i:11">
+ data-price="864000" data-ends="1785949200" data-bench="1" style="--i:5">
  <a class="ph" href="https://bringatrailer.com/listing/2021-ferrari-812-gts-27/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/06/DSC03447-scaled-copy-2026-07-07-8zf-41620.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/11/800/520'">
-   <span class="clock" data-ends="1785949200">--:--:--</span><span class="chip over">+382% projected</span></a>
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/06/DSC03447-scaled-copy-2026-07-07-8zf-41620.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/5/800/520'">
+   <span class="clock" data-ends="1785949200">--:--:--</span><span class="chip early">6d out — too early to score</span></a>
  <div class="body"><h3>1,500-Mile 2021 Ferrari 812 GTS</h3>
-  <div class="prow"><span class="price">$864,000</span><span class="bench">proj. finish $3,553,792 vs benchmark $737,373 · 5 comps</span></div>
+  <div class="prow"><span class="price">$864,000</span><span class="bench">$737,373 benchmark · 5 comps</span></div>
   <div class="meta"><span class="tg pr">PREMIUM</span><span class="sel">US</span></div>
  </div></article><article class="card" data-marque="Ferrari" data-delta="999"
- data-price="100000" data-ends="1785949800" data-bench="0" style="--i:12">
+ data-price="100000" data-ends="1785949800" data-bench="0" style="--i:6">
  <a class="ph" href="https://bringatrailer.com/listing/1980-ferrari-512-bb-6/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/DSC00760-copy-2026-07-20-fsi-88932.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/12/800/520'">
-   <span class="clock" data-ends="1785949800">--:--:--</span><span class="chip none">no benchmark</span></a>
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/DSC00760-copy-2026-07-20-fsi-88932.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/6/800/520'">
+   <span class="clock" data-ends="1785949800">--:--:--</span><span class="chip early">6d out — too early to score</span></a>
  <div class="body"><h3>1980 Ferrari 512 BB</h3>
-  <div class="prow"><span class="price">$100,000</span><span class="bench">proj. finish $411,319 · no comparable set</span></div>
+  <div class="prow"><span class="price">$100,000</span><span class="bench">no comparable set</span></div>
   <div class="meta"><span class="tg pr">PREMIUM</span><span class="sel">FR</span></div>
- </div></article><article class="card" data-marque="Ferrari" data-delta="44.7"
- data-price="70000" data-ends="1785949860" data-bench="1" style="--i:13">
+ </div></article><article class="card" data-marque="Ferrari" data-delta="999"
+ data-price="70000" data-ends="1785949860" data-bench="1" style="--i:7">
  <a class="ph" href="https://bringatrailer.com/listing/1998-ferrari-550-maranello-37/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/06/IMG_7163-scaled-copy-2026-07-01-krg-29625.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/13/800/520'">
-   <span class="clock" data-ends="1785949860">--:--:--</span><span class="chip over">+45% projected</span></a>
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/06/IMG_7163-scaled-copy-2026-07-01-krg-29625.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/7/800/520'">
+   <span class="clock" data-ends="1785949860">--:--:--</span><span class="chip early">6d out — too early to score</span></a>
  <div class="body"><h3>21k-Mile 1998 Ferrari 550 Maranello</h3>
-  <div class="prow"><span class="price">$70,000</span><span class="bench">proj. finish $287,923 vs benchmark $199,000 · 7 comps</span></div>
+  <div class="prow"><span class="price">$70,000</span><span class="bench">$199,000 benchmark · 7 comps</span></div>
   <div class="meta"><span class="sel">US</span></div>
  </div></article><article class="card" data-marque="Ferrari" data-delta="999"
- data-price="405000" data-ends="1785950760" data-bench="0" style="--i:14">
+ data-price="405000" data-ends="1785950760" data-bench="0" style="--i:8">
  <a class="ph" href="https://bringatrailer.com/listing/2015-ferrari-458-italia-17/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/DSC06156-scaled-copy-2026-07-27-pww-78545.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/14/800/520'">
-   <span class="clock" data-ends="1785950760">--:--:--</span><span class="chip none">no benchmark</span></a>
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/DSC06156-scaled-copy-2026-07-27-pww-78545.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/8/800/520'">
+   <span class="clock" data-ends="1785950760">--:--:--</span><span class="chip early">6d out — too early to score</span></a>
  <div class="body"><h3>1,200-Mile 2015 Ferrari 458 Italia</h3>
-  <div class="prow"><span class="price">$405,000</span><span class="bench">proj. finish $1,665,840 · no comparable set</span></div>
+  <div class="prow"><span class="price">$405,000</span><span class="bench">no comparable set</span></div>
   <div class="meta"><span class="tg pr">PREMIUM</span><span class="sel">US</span></div>
  </div></article><article class="card" data-marque="Ferrari" data-delta="999"
- data-price="255000" data-ends="1785953460" data-bench="0" style="--i:15">
+ data-price="255000" data-ends="1785953460" data-bench="0" style="--i:9">
  <a class="ph" href="https://bringatrailer.com/listing/2021-ferrari-sf90-stradale-40/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/IMG_4664-copy-2026-07-17-avr-11233.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/15/800/520'">
-   <span class="clock" data-ends="1785953460">--:--:--</span><span class="chip none">no benchmark</span></a>
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/IMG_4664-copy-2026-07-17-avr-11233.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/9/800/520'">
+   <span class="clock" data-ends="1785953460">--:--:--</span><span class="chip early">6d out — too early to score</span></a>
  <div class="body"><h3>2,900-Mile 2021 Ferrari SF90 Stradale Assetto Fiorano</h3>
-  <div class="prow"><span class="price">$255,000</span><span class="bench">proj. finish $1,048,862 · no comparable set</span></div>
-  <div class="meta"><span class="sel">US</span></div>
- </div></article><article class="card" data-marque="Ferrari" data-delta="12.3"
- data-price="50500" data-ends="1785956640" data-bench="1" style="--i:16">
- <a class="ph" href="https://bringatrailer.com/listing/2006-ferrari-f430-60/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/06/36A9780-scaled-copy-2026-07-27-abk-76385.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/16/800/520'">
-   <span class="clock" data-ends="1785956640">--:--:--</span><span class="chip fair">+12% projected</span></a>
- <div class="body"><h3>2006 Ferrari F430 Spider</h3>
-  <div class="prow"><span class="price">$50,500</span><span class="bench">proj. finish $207,716 vs benchmark $185,000 · 9 comps</span></div>
+  <div class="prow"><span class="price">$255,000</span><span class="bench">no comparable set</span></div>
   <div class="meta"><span class="sel">US</span></div>
  </div></article><article class="card" data-marque="Ferrari" data-delta="999"
- data-price="200000" data-ends="1785958920" data-bench="0" style="--i:17">
+ data-price="200000" data-ends="1785958920" data-bench="0" style="--i:10">
  <a class="ph" href="https://bringatrailer.com/listing/2010-ferrari-458-italia-41/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/DSC00628-2-scaled-copy-2026-07-22-c1d-78522.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/17/800/520'">
-   <span class="clock" data-ends="1785958920">--:--:--</span><span class="chip none">no benchmark</span></a>
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/DSC00628-2-scaled-copy-2026-07-22-c1d-78522.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/10/800/520'">
+   <span class="clock" data-ends="1785958920">--:--:--</span><span class="chip early">6d out — too early to score</span></a>
  <div class="body"><h3>2010 Ferrari 458 Italia</h3>
-  <div class="prow"><span class="price">$200,000</span><span class="bench">proj. finish $822,637 · no comparable set</span></div>
-  <div class="meta"><span class="sel">US</span></div>
- </div></article><article class="card" data-marque="Ferrari" data-delta="183.7"
- data-price="150000" data-ends="1785959340" data-bench="1" style="--i:18">
- <a class="ph" href="https://bringatrailer.com/listing/1996-ferrari-f355-spider-25/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/05/1996_ferrari_f355-spider_dsc09717-88172.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/18/800/520'">
-   <span class="clock" data-ends="1785959340">--:--:--</span><span class="chip over">+184% projected</span></a>
- <div class="body"><h3>14k-Mile 1996 Ferrari F355 Spider 6-Speed</h3>
-  <div class="prow"><span class="price">$150,000</span><span class="bench">proj. finish $616,978 vs benchmark $217,500 · 8 comps</span></div>
-  <div class="meta"><span class="sel">US</span></div>
- </div></article><article class="card" data-marque="Ferrari" data-delta="357.9"
- data-price="140000" data-ends="1785964320" data-bench="1" style="--i:19">
- <a class="ph" href="https://bringatrailer.com/listing/2015-ferrari-california-t-57/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/PAR-CALT-BAT-011-scaled-copy-2026-07-23-sc5-22844.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/19/800/520'">
-   <span class="clock" data-ends="1785964320">--:--:--</span><span class="chip over">+358% projected</span></a>
- <div class="body"><h3>2,500-Mile 2015 Ferrari California T</h3>
-  <div class="prow"><span class="price">$140,000</span><span class="bench">proj. finish $575,846 vs benchmark $125,750 · 4 comps</span></div>
+  <div class="prow"><span class="price">$200,000</span><span class="bench">no comparable set</span></div>
   <div class="meta"><span class="sel">US</span></div>
  </div></article><article class="card" data-marque="Ferrari" data-delta="999"
- data-price="416512" data-ends="1786036200" data-bench="0" style="--i:20">
+ data-price="150000" data-ends="1785959340" data-bench="1" style="--i:11">
+ <a class="ph" href="https://bringatrailer.com/listing/1996-ferrari-f355-spider-25/" target="_blank" rel="noopener">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/05/1996_ferrari_f355-spider_dsc09717-88172.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/11/800/520'">
+   <span class="clock" data-ends="1785959340">--:--:--</span><span class="chip early">6d out — too early to score</span></a>
+ <div class="body"><h3>14k-Mile 1996 Ferrari F355 Spider 6-Speed</h3>
+  <div class="prow"><span class="price">$150,000</span><span class="bench">$217,500 benchmark · 8 comps</span></div>
+  <div class="meta"><span class="sel">US</span></div>
+ </div></article><article class="card" data-marque="Ferrari" data-delta="999"
+ data-price="140000" data-ends="1785964320" data-bench="1" style="--i:12">
+ <a class="ph" href="https://bringatrailer.com/listing/2015-ferrari-california-t-57/" target="_blank" rel="noopener">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/PAR-CALT-BAT-011-scaled-copy-2026-07-23-sc5-22844.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/12/800/520'">
+   <span class="clock" data-ends="1785964320">--:--:--</span><span class="chip early">6d out — too early to score</span></a>
+ <div class="body"><h3>2,500-Mile 2015 Ferrari California T</h3>
+  <div class="prow"><span class="price">$140,000</span><span class="bench">$125,750 benchmark · 4 comps</span></div>
+  <div class="meta"><span class="sel">US</span></div>
+ </div></article><article class="card" data-marque="Ferrari" data-delta="999"
+ data-price="416512" data-ends="1786036200" data-bench="0" style="--i:13">
  <a class="ph" href="https://bringatrailer.com/listing/1992-ferrari-512-tr-52/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/36A1863-scaled-copy-2026-07-23-hww-15535.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/20/800/520'">
-   <span class="clock" data-ends="1786036200">--:--:--</span><span class="chip none">no benchmark</span></a>
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/36A1863-scaled-copy-2026-07-23-hww-15535.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/13/800/520'">
+   <span class="clock" data-ends="1786036200">--:--:--</span><span class="chip early">7d out — too early to score</span></a>
  <div class="body"><h3>23k-Mile 1992 Ferrari 512 TR</h3>
-  <div class="prow"><span class="price">$416,512</span><span class="bench">proj. finish $1,713,191 · no comparable set</span></div>
+  <div class="prow"><span class="price">$416,512</span><span class="bench">no comparable set</span></div>
   <div class="meta"><span class="tg pr">PREMIUM</span><span class="sel">US</span></div>
  </div></article><article class="card" data-marque="Ferrari" data-delta="999"
- data-price="101999" data-ends="1786037400" data-bench="0" style="--i:21">
+ data-price="101999" data-ends="1786037400" data-bench="0" style="--i:14">
  <a class="ph" href="https://bringatrailer.com/listing/2019-ferrari-488-spider-23/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/IMG_4428-scaled-copy-2026-07-22-bk7-01874.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/21/800/520'">
-   <span class="clock" data-ends="1786037400">--:--:--</span><span class="chip none">no benchmark</span></a>
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/IMG_4428-scaled-copy-2026-07-22-bk7-01874.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/14/800/520'">
+   <span class="clock" data-ends="1786037400">--:--:--</span><span class="chip early">7d out — too early to score</span></a>
  <div class="body"><h3>2019 Ferrari 488 Spider</h3>
-  <div class="prow"><span class="price">$101,999</span><span class="bench">proj. finish $419,541 · no comparable set</span></div>
+  <div class="prow"><span class="price">$101,999</span><span class="bench">no comparable set</span></div>
   <div class="meta"><span class="sel">US</span></div>
  </div></article><article class="card" data-marque="Ferrari" data-delta="999"
- data-price="90000" data-ends="1786042380" data-bench="0" style="--i:22">
+ data-price="90000" data-ends="1786042380" data-bench="0" style="--i:15">
  <a class="ph" href="https://bringatrailer.com/listing/2002-ferrari-575m-maranello-53/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/05/2002_ferrari_575m-maranello_img_4027-scaled-79588.jpeg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/22/800/520'">
-   <span class="clock" data-ends="1786042380">--:--:--</span><span class="chip none">no benchmark</span></a>
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/05/2002_ferrari_575m-maranello_img_4027-scaled-79588.jpeg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/15/800/520'">
+   <span class="clock" data-ends="1786042380">--:--:--</span><span class="chip early">7d out — too early to score</span></a>
  <div class="body"><h3>18k-Mile 2002 Ferrari 575M Maranello Fiorano Handling Package</h3>
-  <div class="prow"><span class="price">$90,000</span><span class="bench">proj. finish $370,187 · no comparable set</span></div>
-  <div class="meta"><span class="sel">US</span></div>
- </div></article><article class="card" data-marque="Ferrari" data-delta="155.5"
- data-price="50000" data-ends="1786047720" data-bench="1" style="--i:23">
- <a class="ph" href="https://bringatrailer.com/listing/2001-ferrari-360-spider-102-2/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/DSC00164-scaled-copy-2026-07-24-m5v-20133.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/23/800/520'">
-   <span class="clock" data-ends="1786047720">--:--:--</span><span class="chip over">+156% projected</span></a>
- <div class="body"><h3>40k-Mile 2001 Ferrari 360 Spider</h3>
-  <div class="prow"><span class="price">$50,000</span><span class="bench">proj. finish $205,659 vs benchmark $80,500 · 8 comps</span></div>
+  <div class="prow"><span class="price">$90,000</span><span class="bench">no comparable set</span></div>
   <div class="meta"><span class="sel">US</span></div>
  </div></article><article class="card" data-marque="Ferrari" data-delta="999"
- data-price="501000" data-ends="1786208400" data-bench="0" style="--i:24">
+ data-price="501000" data-ends="1786208400" data-bench="0" style="--i:16">
  <a class="ph" href="https://bringatrailer.com/listing/1973-ferrari-365-gtb-4-daytona-berlinetta-3/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/IMG-5799-scaled-copy-2026-07-24-m6k-28240.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/24/800/520'">
-   <span class="clock" data-ends="1786208400">--:--:--</span><span class="chip none">no benchmark</span></a>
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/IMG-5799-scaled-copy-2026-07-24-m6k-28240.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/16/800/520'">
+   <span class="clock" data-ends="1786208400">--:--:--</span><span class="chip early">9d out — too early to score</span></a>
  <div class="body"><h3>1971 Ferrari 365 GTB/4 Daytona Berlinetta</h3>
-  <div class="prow"><span class="price">$501,000</span><span class="bench">proj. finish $2,060,706 · no comparable set</span></div>
+  <div class="prow"><span class="price">$501,000</span><span class="bench">no comparable set</span></div>
   <div class="meta"><span class="tg pr">PREMIUM</span><span class="sel">US</span></div>
  </div></article><article class="card" data-marque="Porsche" data-delta="999"
- data-price="199270" data-ends="1785517500" data-bench="0" style="--i:25">
+ data-price="199270" data-ends="1785517500" data-bench="0" style="--i:17">
  <a class="ph" href="https://bringatrailer.com/listing/1973-porsche-911-carrera-rs-sport-3/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/06/IMG_6560-copy-2026-07-14-rik-scaled-46165.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/25/800/520'">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/06/IMG_6560-copy-2026-07-14-rik-scaled-46165.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/17/800/520'">
    <span class="clock" data-ends="1785517500">--:--:--</span><span class="chip none">no benchmark</span></a>
  <div class="body"><h3>1973 Porsche 911 Carrera RS Lightweight</h3>
   <div class="prow"><span class="price">$199,270</span><span class="bench">proj. finish $338,759 · no comparable set</span></div>
   <div class="meta"><span class="tg pr">PREMIUM</span><span class="sel">US</span></div>
  </div></article><article class="card" data-marque="Porsche" data-delta="999"
- data-price="125000" data-ends="1785518820" data-bench="0" style="--i:26">
+ data-price="125000" data-ends="1785518820" data-bench="0" style="--i:18">
  <a class="ph" href="https://bringatrailer.com/listing/1974-porsche-911-coupe-44/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/06/2025-08-21_19.20.43-scaled-copy-2026-07-03-cim-39129.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/26/800/520'">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/06/2025-08-21_19.20.43-scaled-copy-2026-07-03-cim-39129.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/18/800/520'">
    <span class="clock" data-ends="1785518820">--:--:--</span><span class="chip none">no benchmark</span></a>
  <div class="body"><h3>RSR-Style 1974 Porsche 911 Coupe 5-Speed</h3>
   <div class="prow"><span class="price">$125,000</span><span class="bench">proj. finish $212,500 · no comparable set</span></div>
   <div class="meta"><span class="sel">US</span></div>
  </div></article><article class="card" data-marque="Porsche" data-delta="91.6"
- data-price="275000" data-ends="1785520080" data-bench="1" style="--i:27">
+ data-price="275000" data-ends="1785520080" data-bench="1" style="--i:19">
  <a class="ph" href="https://bringatrailer.com/listing/2026-porsche-911-turbo-s/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/Porsche_Turbo_S_20260713-7-scaled-copy-2026-07-17-vde-22678.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/27/800/520'">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/Porsche_Turbo_S_20260713-7-scaled-copy-2026-07-17-vde-22678.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/19/800/520'">
    <span class="clock" data-ends="1785520080">--:--:--</span><span class="chip over">+92% projected</span></a>
  <div class="body"><h3>2026 Porsche 911 Turbo S Coupe</h3>
-  <div class="prow"><span class="price">$275,000</span><span class="bench">proj. finish $467,500 vs benchmark $244,000 · 10 comps</span></div>
+  <div class="prow"><span class="price">$275,000</span><span class="bench">proj. finish $467,500 vs $244,000 benchmark</span></div>
   <div class="meta"><span class="sel">US</span></div>
  </div></article><article class="card" data-marque="Porsche" data-delta="28.3"
- data-price="99999" data-ends="1785524400" data-bench="1" style="--i:28">
+ data-price="99999" data-ends="1785524400" data-bench="1" style="--i:20">
  <a class="ph" href="https://bringatrailer.com/listing/2020-porsche-911-carrera-4s-coupe-33/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/911-5-scaled-copy-2026-07-21-t4a-36705.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/28/800/520'">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/911-5-scaled-copy-2026-07-21-t4a-36705.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/20/800/520'">
    <span class="clock" data-ends="1785524400">--:--:--</span><span class="chip over">+28% projected</span></a>
  <div class="body"><h3>15k-Mile 2020 Porsche 911 Carrera 4S Coupe</h3>
-  <div class="prow"><span class="price">$99,999</span><span class="bench">proj. finish $169,998 vs benchmark $132,500 · 6 comps</span></div>
+  <div class="prow"><span class="price">$99,999</span><span class="bench">proj. finish $169,998 vs $132,500 benchmark</span></div>
   <div class="meta"><span class="sel">US</span></div>
  </div></article><article class="card" data-marque="Porsche" data-delta="61.6"
- data-price="77000" data-ends="1785524700" data-bench="1" style="--i:29">
+ data-price="77000" data-ends="1785524700" data-bench="1" style="--i:21">
  <a class="ph" href="https://bringatrailer.com/listing/2008-porsche-911-turbo-cabriolet-188/" target="_blank" rel="noopener">
-   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/DSC02978-scaled-copy-2026-07-22-l87-33192.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/29/800/520'">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/DSC02978-scaled-copy-2026-07-22-l87-33192.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/21/800/520'">
    <span class="clock" data-ends="1785524700">--:--:--</span><span class="chip over">+62% projected</span></a>
  <div class="body"><h3>14k-Mile 2008 Porsche 911 Turbo Cabriolet</h3>
-  <div class="prow"><span class="price">$77,000</span><span class="bench">proj. finish $130,900 vs benchmark $81,000 · 5 comps</span></div>
+  <div class="prow"><span class="price">$77,000</span><span class="bench">proj. finish $130,900 vs $81,000 benchmark</span></div>
   <div class="meta"><span class="sel">US</span></div>
+ </div></article><article class="card" data-marque="Porsche" data-delta="999"
+ data-price="160000" data-ends="1785525420" data-bench="0" style="--i:22">
+ <a class="ph" href="https://bringatrailer.com/listing/2022-porsche-911-gt3-153/" target="_blank" rel="noopener">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/IMG_1286-scaled-copy-2026-07-17-cfn-24311.jpeg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/22/800/520'">
+   <span class="clock" data-ends="1785525420">--:--:--</span><span class="chip none">no benchmark</span></a>
+ <div class="body"><h3>2022 Porsche 911 GT3</h3>
+  <div class="prow"><span class="price">$160,000</span><span class="bench">proj. finish $272,000 · no comparable set</span></div>
+  <div class="meta"><span class="sel">US</span></div>
+ </div></article><article class="card" data-marque="Porsche" data-delta="999"
+ data-price="47000" data-ends="1785525780" data-bench="0" style="--i:23">
+ <a class="ph" href="https://bringatrailer.com/listing/porsche-356-speedster-replica-19-2/" target="_blank" rel="noopener">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/IMG_5501-copy-2026-07-20-l3e-68843.jpg?w=470&h=318&crop=1" alt="" loading="lazy" onerror="this.src='https://picsum.photos/seed/23/800/520'">
+   <span class="clock" data-ends="1785525780">--:--:--</span><span class="chip none">no benchmark</span></a>
+ <div class="body"><h3>Porsche 356 Speedster Replica by Vintage Motorcars</h3>
+  <div class="prow"><span class="price">$47,000</span><span class="bench">proj. finish $79,900 · no comparable set</span></div>
+  <div class="meta"><span class="tg nr">NO RESERVE</span><span class="sel">US</span></div>
  </div></article></div>
 </section>
 
@@ -367,7 +445,93 @@ seller has already proven they want to sell and has published the exact number t
 published ahead of the sale, so the roster is knowable now and the consignors are reachable now.</p>
 <div class="src">source: goodingco.com published catalogue · robots Allow: /</div></div></div>
 
-<h2 class="sec">Failed to sell — the seller is still holding the car</h2>
+<h2 class="sec">Ferraris that failed to sell — the owner still has the car</h2>
+<div class="pd">Your marque, filtered to lots where the reserve was never met. <b>The 430 Scuderia at
+the top is the one you bid $701,000 on.</b> It did not sell, the seller is a known dealer, and the
+number they refused is public. These are private-approach targets, not auction lots.</div>
+<div class="grid" style="margin-bottom:34px"><article class="card" data-marque="Ferrari" data-price="901000.0" style="--i:0">
+ <a class="ph" href="https://bringatrailer.com/listing/2001-ferrari-550-barchetta-pininfarina-6/" target="_blank" rel="noopener">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/02/Concours-004_Chu_exp_web-e1692915562225-45684.jpg" alt="" loading="lazy">
+   <span class="clock pre">DID NOT SELL · 2026-07-03</span>
+   <span class="chip lead">SELLER REACHABLE</span></a>
+ <div class="body"><h3>2,200-Mile 2001 Ferrari 550 Barchetta Pininfarina</h3>
+  <div class="prow"><span class="price">$901,000</span>
+   <span class="bench">high bid the seller turned down</span></div>
+  <div class="meta"><span>6 bids</span>
+   <span>2,200 mi</span><span class="sel">collectiveauto</span></div>
+ </div></article><article class="card" data-marque="Ferrari" data-price="754000.0" style="--i:1">
+ <a class="ph" href="https://bringatrailer.com/listing/2008-ferrari-430-scuderia-41/" target="_blank" rel="noopener">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/05/430_Scud-7-copy-2026-06-17-8ho-18266-scaled.jpg" alt="" loading="lazy">
+   <span class="clock pre">DID NOT SELL · 2026-07-01</span>
+   <span class="chip lead">SELLER REACHABLE</span></a>
+ <div class="body"><h3>10k-Mile 2008 Ferrari 430 Scuderia</h3>
+  <div class="prow"><span class="price">$754,000</span>
+   <span class="bench">high bid the seller turned down</span></div>
+  <div class="meta"><span>67 bids</span>
+   <span>10,000 mi</span><span class="sel">elismotorcars</span></div>
+ </div></article><article class="card" data-marque="Ferrari" data-price="609000.0" style="--i:2">
+ <a class="ph" href="https://bringatrailer.com/listing/2023-ferrari-sf90-spider-6/" target="_blank" rel="noopener">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/2023_ferrari_sf90-spider_img_2599jpg_-_low_res-scaled-86286-16728.jpg" alt="" loading="lazy">
+   <span class="clock pre">DID NOT SELL · 2026-07-28</span>
+   <span class="chip lead">SELLER REACHABLE</span></a>
+ <div class="body"><h3>2023 Ferrari SF90 Spider</h3>
+  <div class="prow"><span class="price">$609,000</span>
+   <span class="bench">high bid the seller turned down</span></div>
+  <div class="meta"><span>45 bids</span>
+   <span></span><span class="sel">casciomotors</span></div>
+ </div></article><article class="card" data-marque="Ferrari" data-price="596000.0" style="--i:3">
+ <a class="ph" href="https://bringatrailer.com/listing/2025-ferrari-12cilindri-3/" target="_blank" rel="noopener">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/05/2025_ferrari_12cilindri_img_2293-88661.jpg" alt="" loading="lazy">
+   <span class="clock pre">DID NOT SELL · 2026-07-02</span>
+   <span class="chip lead">SELLER REACHABLE</span></a>
+ <div class="body"><h3>2025 Ferrari 12Cilindri</h3>
+  <div class="prow"><span class="price">$596,000</span>
+   <span class="bench">high bid the seller turned down</span></div>
+  <div class="meta"><span>24 bids</span>
+   <span></span><span class="sel">bentleyindy</span></div>
+ </div></article><article class="card" data-marque="Ferrari" data-price="560000.0" style="--i:4">
+ <a class="ph" href="https://bringatrailer.com/listing/2004-ferrari-360-challenge-stradale-46/" target="_blank" rel="noopener">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/05/7f8a2731_55155378795_o-92407-scaled.jpg" alt="" loading="lazy">
+   <span class="clock pre">DID NOT SELL · 2026-06-15</span>
+   <span class="chip lead">SELLER REACHABLE</span></a>
+ <div class="body"><h3>2004 Ferrari 360 Challenge Stradale</h3>
+  <div class="prow"><span class="price">$560,000</span>
+   <span class="bench">high bid the seller turned down</span></div>
+  <div class="meta"><span>13 bids</span>
+   <span></span><span class="sel">car_concierge</span></div>
+ </div></article><article class="card" data-marque="Ferrari" data-price="508000.0" style="--i:5">
+ <a class="ph" href="https://bringatrailer.com/listing/2025-ferrari-purosangue/" target="_blank" rel="noopener">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/07/DSC05885-scaled-copy-2026-07-13-s20-62933.jpg" alt="" loading="lazy">
+   <span class="clock pre">DID NOT SELL · 2026-07-24</span>
+   <span class="chip lead">SELLER REACHABLE</span></a>
+ <div class="body"><h3>2025 Ferrari Purosangue</h3>
+  <div class="prow"><span class="price">$508,000</span>
+   <span class="bench">high bid the seller turned down</span></div>
+  <div class="meta"><span>15 bids</span>
+   <span></span><span class="sel">p1miami</span></div>
+ </div></article><article class="card" data-marque="Ferrari" data-price="443500.0" style="--i:6">
+ <a class="ph" href="https://bringatrailer.com/listing/2023-ferrari-purosangue/" target="_blank" rel="noopener">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/05/2023_ferrari_purosangue_2023_ferrari_purosangue_c55df152-5832-4cdb-aba2-8e39f5b9816d-qovr6n-45609-45610-scaled.jpg" alt="" loading="lazy">
+   <span class="clock pre">DID NOT SELL · 2026-07-07</span>
+   <span class="chip lead">SELLER REACHABLE</span></a>
+ <div class="body"><h3>Celeste Metallic 2023 Ferrari Purosangue</h3>
+  <div class="prow"><span class="price">$443,500</span>
+   <span class="bench">high bid the seller turned down</span></div>
+  <div class="meta"><span>63 bids</span>
+   <span></span><span class="sel">maseratiofseattle</span></div>
+ </div></article><article class="card" data-marque="Ferrari" data-price="426000.0" style="--i:7">
+ <a class="ph" href="https://bringatrailer.com/listing/1966-ferrari-330-17/" target="_blank" rel="noopener">
+   <img src="https://bringatrailer.com/wp-content/uploads/2026/06/Edits-5540-5-scaled-copy-2026-07-06-6lc-15016.jpg" alt="" loading="lazy">
+   <span class="clock pre">DID NOT SELL · 2026-07-23</span>
+   <span class="chip lead">SELLER REACHABLE</span></a>
+ <div class="body"><h3>1966 Ferrari 330 GTC</h3>
+  <div class="prow"><span class="price">$426,000</span>
+   <span class="bench">high bid the seller turned down</span></div>
+  <div class="meta"><span>34 bids</span>
+   <span></span><span class="sel">otsandco</span></div>
+ </div></article></div>
+
+<h2 class="sec">Everything else that failed to sell</h2>
 <div class="pd">Real lots from our corpus that did not meet reserve. Each is a motivated owner with a
 published price expectation. Across the full window there are <b>1,781 of these worth $108M in
 unaccepted bids</b>; the 15 highest-value with photographs are shown.
@@ -678,7 +842,7 @@ until then treat nothing here as a real listing.</div>
 </section>
 </main>
 <footer>
-<b>LIVE</b> — 198 in-progress auctions polled 2026-07-30 15:19 PT; clocks, bids and photographs as published by the marketplace.<br>
+<b>LIVE</b> — 198 in-progress auctions polled 2026-07-30 17:34 PT; clocks, bids and photographs as published by the marketplace.<br>
 <b>VERIFIED</b> — benchmarks are medians of ≥4 comparable sales from a 9,695-lot / 267,790-bid corpus; failed-lot leads are real lots with real sellers; the auction-house event is a published catalogue (robots-permitted).<br>
 <b>ILLUSTRATIVE</b> — the Estates tab only. Nothing on this page asserts intent, coordination or identity about any person or business.
 </footer>
