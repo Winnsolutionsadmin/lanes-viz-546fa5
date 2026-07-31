@@ -65,6 +65,25 @@ select.f{border-radius:8px}
  font-weight:600;letter-spacing:.08em;background:var(--amber);color:#12161d;padding:4px 9px;border-radius:5px}
 .why{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--amber);margin-top:10px;padding-top:9px;
  border-top:1px solid var(--bezel2);line-height:1.55}
+.diag{background:linear-gradient(150deg,rgba(196,68,46,.10),var(--bezel2));border:1px solid var(--oxide);
+ border-radius:13px;padding:24px 26px;margin:18px 0 6px}
+.dtag{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;color:var(--oxide);
+ border:1px solid var(--oxide);padding:4px 10px;border-radius:5px}
+.dh h2{font-family:Archivo,sans-serif;font-stretch:78%;font-weight:800;font-size:clamp(19px,2.2vw,28px);
+ margin:12px 0 8px;letter-spacing:-.015em}
+.dh p{color:var(--parch2);font-size:14.5px;line-height:1.55;max-width:82ch}
+.dbars{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:20px}
+.db{background:rgba(8,11,17,.45);border:1px solid var(--hair);border-radius:9px;padding:13px}
+.dbt{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--parch);margin-bottom:16px}
+.dbl{position:relative;height:46px}
+.dbaxis{position:absolute;left:0;right:0;top:22px;height:1px;background:var(--steel2)}
+.dbx{position:absolute;transform:translateX(-50%);font-family:'IBM Plex Mono',monospace;
+ font-size:9px;white-space:nowrap;padding:2px 6px;border-radius:4px}
+.dbx.you{top:0} .dbx.win{top:26px}
+.dbx.you{background:var(--oxide);color:#fff} .dbx.win{background:var(--verd);color:#08211b}
+.dbg{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--oxide);margin-top:9px;font-weight:600}
+.dfoot{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--parch2);margin-top:18px;
+ padding-top:14px;border-top:1px solid var(--hair);line-height:1.7}
 .hxwrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:14px;margin:14px 0 6px}
 .hx{display:flex;gap:13px;background:var(--bezel);border:1px solid var(--hair);border-radius:11px;padding:13px;
  opacity:0;transform:translateY(12px);animation:in .5s ease forwards;animation-delay:calc(var(--i)*.06s)}
@@ -109,6 +128,36 @@ footer{border-top:1px solid var(--hair);padding:18px clamp(16px,2.5vw,34px);font
 <main>
 
 <section class="view on" id="board">
+<div class="diag">
+ <div class="dh"><span class="dtag">WHY YOU LOSE</span>
+  <h2>You stop bidding three minutes before the people who beat you.</h2>
+  <p>85% of winning bids land at exactly <b>2.00 minutes</b> before close — because
+  a bid inside the final two minutes <b>resets the clock to two minutes</b>. The auction ends when
+  everyone stops, not at the posted time. Your last bid has never once been inside that window.</p></div>
+ <div class="dbars"><div class="db"><div class="dbt">10k-Mile 2008 Ferrari 430 Scuderia</div>
+   <div class="dbl">
+   <span class="dbx you" style="left:88%">you · 19.4m</span>
+   <span class="dbx win" style="left:9%">winner · 2.0m</span>
+   <i class="dbaxis"></i></div>
+   <div class="dbg">did not sell — $53,000 below the high bid</div></div><div class="db"><div class="dbt">9k-Mile 2003 Ferrari 360 Spider 6-Speed</div>
+   <div class="dbl">
+   <span class="dbx you" style="left:17%">you · 3.8m</span>
+   <span class="dbx win" style="left:9%">winner · 2.0m</span>
+   <i class="dbaxis"></i></div>
+   <div class="dbg">lost by $2,500</div></div><div class="db"><div class="dbt">8k-Mile 2004 Ferrari 360 Spider</div>
+   <div class="dbl">
+   <span class="dbx you" style="left:14%">you · 3.0m</span>
+   <span class="dbx win" style="left:9%">winner · 2.0m</span>
+   <i class="dbaxis"></i></div>
+   <div class="dbg">lost by $3,000</div></div><div class="db"><div class="dbt">Ferrari Monza SP1 Driver Accessories by </div>
+   <div class="dbl">
+   <span class="dbx you" style="left:25%">you · 5.6m</span>
+   <span class="dbx win" style="left:9%">winner · 2.0m</span>
+   <i class="dbaxis"></i></div>
+   <div class="dbg">lost by $8,000</div></div></div>
+ <div class="dfoot">Median losing bidder stops <b>20 hours</b> out.
+ Median winner bids at <b>2.0 minutes</b>. Both your near-misses were a single increment.</div>
+</div>
 <div class="hxwrap"><div class="hx" style="--i:0">
  <div class="hxi"><img src="https://bringatrailer.com/wp-content/uploads/2026/05/430_Scud-7-copy-2026-06-17-8ho-18266-scaled.jpg" alt="" loading="lazy"></div>
  <div class="hxb"><div class="hxt">10k-Mile 2008 Ferrari 430 Scuderia</div>
@@ -242,7 +291,7 @@ have personally bid on. Amber-bordered cards are those matches; everything else 
    <span></span><span class="sel">marianetti_motors_inc</span></div>
   <div class="why">you bid $701,000 — it did not sell; the seller still holds it</div></div></article></div>
 
-<span class="prov l">● THE BOARD — 24 live · 12 off-market · polled Jul 30, 17:44 PT</span>
+<span class="prov l">● THE BOARD — 24 live · 12 off-market · polled Jul 30, 18:34 PT</span>
 <div class="pd">Live lots carry a running clock and a projected finish; off-market cars are lots whose
 reserve was never met — the owner still holds the car and the number they refused is public.
 <b>Scores are projections, not raw comparisons.</b> A mid-auction bid is not comparable to a
@@ -731,7 +780,7 @@ until then treat nothing here as a real listing.</div>
 </section>
 </main>
 <footer>
-<b>LIVE</b> — 198 in-progress auctions polled 2026-07-30 17:44 PT; clocks, bids and photographs as published by the marketplace.<br>
+<b>LIVE</b> — 198 in-progress auctions polled 2026-07-30 18:34 PT; clocks, bids and photographs as published by the marketplace.<br>
 <b>VERIFIED</b> — benchmarks are medians of ≥4 comparable sales from a 9,695-lot / 267,790-bid corpus; failed-lot leads are real lots with real sellers; the auction-house event is a published catalogue (robots-permitted).<br>
 <b>ILLUSTRATIVE</b> — the Estates tab only. Nothing on this page asserts intent, coordination or identity about any person or business.
 </footer>
